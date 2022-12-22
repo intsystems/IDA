@@ -44,6 +44,7 @@ Insert your name and direct link to materials. Each column must carry your name.
 * [Cross-correlation methods in the
 brain-computer interface problem](https://medium.com/@robohant/cross-correlation-methods-in-the-brain-computer-interface-problem-88d3aa048c19)
 * [GRAND](https://medium.com/@bishuk.ayu/diffusion-in-graph-neural-network-ac6aab517b98)
+* [How to Define Diffusion Model Using Energy-Based Approach](https://medium.com/@depinwhite/how-to-define-diffusion-model-using-energy-based-approach-32ffbb75b9cd)
 
 ## Examples and references
 ### Guidelines
