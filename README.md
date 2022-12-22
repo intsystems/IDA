@@ -40,7 +40,7 @@ Insert your name and direct link to materials. Each column must carry your name.
 * Applications of Lagrangian, Hamiltonian and Noetherian neural PDEs [colab Severilov] [or 2208.06120] 
 
 ## Results
-* [Shokorov Viacheslav](https://habr.com/ru/post/707146/)
+* [Свойства высокоразмерных пространств, которые применяются в машинном обучении](https://habr.com/ru/post/707146/)
 
 ## Examples and references
 ### Guidelines
