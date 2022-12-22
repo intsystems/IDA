@@ -43,6 +43,7 @@ Insert your name and direct link to materials. Each column must carry your name.
 * [Свойства высокоразмерных пространств, которые применяются в машинном обучении](https://habr.com/ru/post/707146/)
 * [Cross-correlation methods in the
 brain-computer interface problem](https://medium.com/@robohant/cross-correlation-methods-in-the-brain-computer-interface-problem-88d3aa048c19)
+* [GRAND](https://medium.com/@bishuk.ayu/diffusion-in-graph-neural-network-ac6aab517b98)
 
 ## Examples and references
 ### Guidelines
