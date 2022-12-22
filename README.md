@@ -51,6 +51,7 @@ brain-computer interface problem](https://medium.com/@robohant/cross-correlation
 * [TDS guidelines](https://towardsdatascience.com/questions-96667b06af5#dee8)
 * [N+1 samotek](https://nplus1.dev/blog/2022/04/01/samotek)
 * [DSC write](https://www.datasciencecentral.com/write-for-us/)
+* [Probabilistic TM survey](https://medium.com/@viktorpank.00/probabilistic-topic-modeling-survey-4a4523b212cd)
 
 ### Examples
 * [Bronstein, M. Temporal Graph Networks, Medium TDS](https://medium.com/towards-data-science/temporal-graph-networks-ab8f327f2efe)
