@@ -45,13 +45,14 @@ Insert your name and direct link to materials. Each column must carry your name.
 brain-computer interface problem](https://medium.com/@robohant/cross-correlation-methods-in-the-brain-computer-interface-problem-88d3aa048c19)
 * [GRAND](https://medium.com/@bishuk.ayu/diffusion-in-graph-neural-network-ac6aab517b98)
 * [How to Define Diffusion Model Using Energy-Based Approach](https://medium.com/@depinwhite/how-to-define-diffusion-model-using-energy-based-approach-32ffbb75b9cd)
+* [Probabilistic TM survey](https://medium.com/@viktorpank.00/probabilistic-topic-modeling-survey-4a4523b212cd)
 
 ## Examples and references
 ### Guidelines
 * [TDS guidelines](https://towardsdatascience.com/questions-96667b06af5#dee8)
 * [N+1 samotek](https://nplus1.dev/blog/2022/04/01/samotek)
 * [DSC write](https://www.datasciencecentral.com/write-for-us/)
-* [Probabilistic TM survey](https://medium.com/@viktorpank.00/probabilistic-topic-modeling-survey-4a4523b212cd)
+
 
 ### Examples
 * [Bronstein, M. Temporal Graph Networks, Medium TDS](https://medium.com/towards-data-science/temporal-graph-networks-ab8f327f2efe)
