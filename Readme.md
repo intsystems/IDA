@@ -1,6 +1,6 @@
 # Intelligent data analysis
 
-Classes: every Saturday, 10.00
+Classes: every Saturday, 11:15
 
 [Zoom link](m1p.org/go_zoom)
 
