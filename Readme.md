@@ -184,3 +184,15 @@ Assumptions
 7.  (risky) RL for time series scenario generation
 8.  (math) CCA Error functions and (tech) Autograd for seq2seq
     generative pipelines
+
+### Week 3. Topics to discuss
+Reason variations of models with a model descroption and a table of profs and cons. 
+*  CCA generative models: compare versions of generation techniques (variational, flow, and diffusion)
+*  Continous models for graph Laplacian: compare Riemmanian approcach and CGN
+*  D4 and variants: compare Kalman filter, S4 in discrete and continous time
+
+
+
+
+
+
