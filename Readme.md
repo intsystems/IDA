@@ -172,8 +172,8 @@ Assumptions
 |            | 25  | 11  | Project proposals                    | Project presentations                                         | Project descriptions                            |
 | December   | 2   | 12  | Project description review           | Discussion of the messages                                    | Published descriptions                          |
 
-### Week 1. Motivation and projects to select from
-* [Course motovation and projects](https://github.com/intsystems/IDA/blob/main-2023/week_1/Goals_and_topics.odt)
+### Week 1. Motivation and projects
+* [Course motivation and projects  to select from](https://github.com/intsystems/IDA/blob/main-2023/week_1/Goals_and_topics.odt)
 
 ### Week 2. Topics to discuss
 
