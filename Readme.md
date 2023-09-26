@@ -113,8 +113,7 @@ Any data that has
 To select from
 
 -   [List of datasets and tools](BCI "wikilink")
--   Scientific lessons from a catalog of 6674 brain recordings by A.D.J.
-    Makin
+-   Scientific lessons from a catalog of 6674 brain recordings by A.D.J. Makin
 
 ## The problem
 -----------
@@ -172,6 +171,9 @@ Assumptions
 |            | 18  | 10  | Analysis, testing, and applications  | Decomposition of the system                                   | List of possible projects                       |
 |            | 25  | 11  | Project proposals                    | Project presentations                                         | Project descriptions                            |
 | December   | 2   | 12  | Project description review           | Discussion of the messages                                    | Published descriptions                          |
+
+### Week 1. Motivation and projects to select from
+* [Course motovation and projects](https://github.com/intsystems/IDA/blob/main-2023/week_1/Goals_and_topics.odt)
 
 ### Week 2. Topics to discuss
 
