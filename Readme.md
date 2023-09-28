@@ -193,12 +193,13 @@ Reason variations of models with a model description and a table of pros and con
 *  Continous models for graph Laplacian: compare with Riemannian approach and CGN
 *  D4 and variants: compare Kalman filter, S4, HiPPO in discrete and continous time
   
-Examples of editorial-accepted comparisons:
+#### Examples of editorial-accepted comparisons:
+Just see Table 1 and its surrounding explanatory text only.
 1. Generation of simple structured Information Retrieval functions by genetic algorithm without stagnation by  A. Kulunchakov and V. Strijov. [DOI](https://doi.org/10.1016/j.eswa.2017.05.019), [PDF](http://strijov.com/papers/Kulunchakov2014RankingBySimpleFun.pdf)
 2. Multi-way feature selection for ECoG-based Brain-Computer Interface by A. Motrenko, V. Strijov. [DOI](https://doi.org/10.1016/j.eswa.2018.06.054), [PDF](http://strijov.com/papers/MotrenkoStrijov2017ECoG_HL_2.pdf)
 3. Quadratic programming feature selection for multicorrelated signal decoding with partial least squares by R. Isachenko, V. Strijov. [DOI](https://doi.org/10.1016/j.eswa.2022.117967), [PDF](http://strijov.com/papers/isachenko2022qpfs_decoding.pdf)
 
-Expected results:
+#### Expected results:
 1. Short review of the listed alternative models (and the other alternatives you may find)
 2. Comparative analysis; see Table 1 in the papers above for your inspiration
 
