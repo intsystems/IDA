@@ -4,10 +4,10 @@ Classes: every Saturday, 11:15
 
 [Zoom link](m1p.org/go_zoom)
 
-**Topic of this year:** Brain-Computer interface.
+**Topic of this year:** Brain-computer interface.
 
 Brain-computer interface with Functional data analysis Human behavioral
-analysis and forecasting requires models that have to predict target
+analysis and forecasting require models that have to predict the target
 variables of complex structures. We develop PLS and CCA (Projection to
 latent space and Canonic correlation analysis) methods towards the
 Multiview with continuous-time data representation.
@@ -19,13 +19,13 @@ Multiview with continuous-time data representation.
 2.  **The impact** is to boost the behavioral classification quality by
     decision-rejecting
 3.  **The principle** if a generated pattern does not belong to one of
-    the expected patterns (one-class classification) we reject the
+    the expected patterns (one-class classification), we reject the
     decision
 4.  **The plan**
     1.  create the simplest generative model for selected data
     2.  apply SSM (state-space model) principles to make CCA
         (canonic-correlation analysis)
-    3.  introduce classification model and decision-rejecting criterion
+    3.  introduce the classification model and decision-rejecting criterion
     4.  compare quality
 
 ### References
@@ -49,7 +49,7 @@ Multiview with continuous-time data representation.
     [DOI](https://doi.org/10.1016/j.jneumeth.2020.109006)
 7.  [Basic code
     D4](https://github.com/vadim-vic/Deep_Direct_Discriminative_Decoder-D4-)
-8.  Variational auto-encoded deep gaussian processes by Z. Dai et al.
+8.  Variational auto-encoded deep Gaussian processes by Z. Dai et al.
     2021 [ArXiv](https://arxiv.org/abs/1511.06455)
 9.  Parametric Gaussian process regressors by M. Jankowiak et al. 2020
     [ArXiv](https://arxiv.org/abs/1910.07123)
@@ -67,7 +67,7 @@ Multiview with continuous-time data representation.
     it is compatible with the generative models
 3.  **The principle** a dynamic system changes its state consequently,
     so we construct a metric state space that could be decomposed with
-    one of diffusion models
+    one of the diffusion models
 4.  **The plan**
     1.  select a metric model with continuous time
     2.  use Riemannian geometry and Graph-Laplacian approaches
@@ -143,7 +143,7 @@ Assumptions
 --------
 
 1.  Any sports game (exogenous, behavior to model, decisions)
-2.  Brain computer interfaces
+2.  Brain-computer interfaces
 3.  Risk management, stock market
 
 ### The challenge is to put
@@ -193,9 +193,9 @@ Reason variations of models with a model description and a table of pros and con
 *  Continous models for graph Laplacian: compare with Riemannian approach and CGN
 *  D4 and variants: compare Kalman filter, S4, HiPPO in discrete and continous time
   
-  Examples of editorial-accepted comparisons:
-2. Generation of simple structured Information Retrieval functions by genetic algorithm without stagnation by  A. Kulunchakov and V. Strijov. [DOI](https://doi.org/10.1016/j.eswa.2017.05.019), [PDF](http://strijov.com/papers/Kulunchakov2014RankingBySimpleFun.pdf)
-1. Multi-way feature selection for ECoG-based Brain-Computer Interface by A. Motrenko, V. Strijov. [DOI](https://doi.org/10.1016/j.eswa.2018.06.054), [PDF](http://strijov.com/papers/MotrenkoStrijov2017ECoG_HL_2.pdf)
+Examples of editorial-accepted comparisons:
+1. Generation of simple structured Information Retrieval functions by genetic algorithm without stagnation by  A. Kulunchakov and V. Strijov. [DOI](https://doi.org/10.1016/j.eswa.2017.05.019), [PDF](http://strijov.com/papers/Kulunchakov2014RankingBySimpleFun.pdf)
+2. Multi-way feature selection for ECoG-based Brain-Computer Interface by A. Motrenko, V. Strijov. [DOI](https://doi.org/10.1016/j.eswa.2018.06.054), [PDF](http://strijov.com/papers/MotrenkoStrijov2017ECoG_HL_2.pdf)
 3. Quadratic programming feature selection for multicorrelated signal decoding with partial least squares by R. Isachenko, V. Strijov. [DOI](https://doi.org/10.1016/j.eswa.2022.117967), [PDF](http://strijov.com/papers/isachenko2022qpfs_decoding.pdf)
 
 Expected results:
