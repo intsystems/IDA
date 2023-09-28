@@ -188,11 +188,18 @@ Assumptions
     generative pipelines
 
 ### Week 3. Topics to discuss
-Reason variations of models with a model descroption and a table of profs and cons. 
+Reason variations of models with a model description and a table of pros and cons. 
 *  CCA generative models: compare versions of generation techniques (variational, flow, and diffusion)
-*  Continous models for graph Laplacian: compare Riemmanian approcach and CGN
-*  D4 and variants: compare Kalman filter, S4 in discrete and continous time
-
+*  Continous models for graph Laplacian: compare with Riemannian approach and CGN
+*  D4 and variants: compare Kalman filter, S4, HiPPO in discrete and continous time
+  Examples of editorial-accepted comparisons are here
+1. Multi-way feature selection for ECoG-based Brain-Computer Interface
+Author links open overlay panel by A. Motrenko, V. Strijov. [DOI](https://doi.org/10.1016/j.eswa.2018.06.054), [PDF](http://strijov.com/papers/MotrenkoStrijov2017ECoG_HL_2.pdf)
+2. Generation of simple structured Information Retrieval functions by genetic algorithm without stagnation by  A. Kulunchakov and V. Strijov. [DOI](https://doi.org/10.1016/j.eswa.2017.05.019), [PDF](http://strijov.com/papers/Kulunchakov2014RankingBySimpleFun.pdf)
+Expected:
+1. Short review of the listed alternative models (and the other alternatives you may find)
+2. Comparative analysis; see table 1 in these two papers above
+   
 
 
 
