@@ -1,0 +1,87 @@
+\documentclass[aspectratio=169]{beamer}
+\usetheme{Madrid}
+\usecolortheme{default}
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.14}
+\usepackage{anyfontsize}
+\usepackage{xspace}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{algpseudocode}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\newcommand{\cev}[1]{\reflectbox{\ensuremath{\vec{\reflectbox{\ensuremath{#1}}}}}}
+
+
+\title[Week 2]
+{Improving Multimodal Joint Variational Autoencoders through Normalizing Flows and Correlation Analysis}
+
+\subtitle{Week 2}
+
+\author[] % (optional, for multiple authors)
+{
+Konstantin Yakovlev \inst{1} \and
+}
+
+\institute[] % (optional)
+{
+  \inst{1}%
+  MIPT \\
+  Moscow, Russia
+}
+
+\date[MIPT 2023] % (optional)
+{MIPT 2023}
+
+% \logo{\includegraphics[height=0.8cm]{logo_uoft}}
+
+\definecolor{uoftblue}{RGB}{6,41,88}
+\setbeamercolor{titlelike}{bg=uoftblue}
+\setbeamerfont{title}{series=\bfseries}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}{Background\footnote{\href{https://arxiv.org/pdf/2305.11832.pdf}{Senellart A. et. al, Improving Multimodal Joint Variational Autoencoders through Normalizing Flows and Correlation Analysis, 2023}}}
+    \textbf{Joint Multimodal Variational Autoencoders}
+    \begin{align*}
+        &p_\theta(x_1, x_2, z) = p(z)p_\theta(x_1|z)p_\theta(x_2|z), \\
+        &\log p(x_1, x_2) \geq \mathbb{E}_{q_\phi(z|x_1, x_2)}\log\frac{p(x_1, x_2|z)}{q_\phi(z|x_1, x_2)} = \mathcal{L}(x_1, x_2).
+    \end{align*}
+    If we want to generate one modality from the other: $z\sim q_{\phi_j}(z|x_j), \; x_i\sim p_\theta(x_i|z)$.
+    Auxiliary distributaions are optimized using:
+    \begin{align*}
+        \mathcal{L}_\text{JM}(x_1, x_2) = \sum_{i=1}^2\mathrm{KL}(q_\phi(z|x_1, x_2)||q_{\phi_i}(z|x_i)) \to \min_{\phi_{1,2}}
+    \end{align*}
+    The final objective: $\mathcal{L}(., .) - \alpha\mathcal{L}_\text{JM}(., .)$.
+\end{frame}
+
+\begin{frame}{The proposed model}
+    \textbf{Challenge 1}: $\alpha$ induces a trade-off between the reconstruction and conditional generation.\\
+    \textbf{Solution}: Two-stage training: 1) $q_\phi(z|x_1, \ldots, x_m)$. 2) $q_{\phi_i}(z|x_i)$. \\
+    \textbf{Challenge 2}: the unimodal postriors need a lot of flexibility \\
+    \textbf{Solution}: Enrich the unimodal posterior with Normalizng Flows. \\
+    \textbf{Observation 3}: A second observation is that to generate a modality from another one we only need
+    the information shared by both and not the entire data. \\
+    \textbf{Solution}: Extract the shared information using DCCA (trained with minimizing \textbf{the sum of the pairwise CCA} objectives).
+    As a nice bonus, we reduce the dimensionality of the modalities spaces which simplifies the task of modeling the unimodal posteriors.
+    \textbf{\textit{General DCCA embeddigns might be replaced by another data-specific method}}\\
+    \textbf{Challenge 4}: JMVAE is not scalabele to more than 2 modalities, since for each subset of modalities $S$ we need to
+    have its encoder $q_{\phi_i}(z|(x_i)_{i\in S})$.  \\
+    \textbf{Solution}: Product of experts:
+    \begin{align*}
+        q(z|(x_i)_{i\in S}) \propto p(z)^{1 - |S|}\prod_{i\in S}q_{\phi_i}(z|x_i) \Rightarrow \text{sampling with HMC}
+    \end{align*}
+
+    
+\end{frame}
+
+
+\end{document}
