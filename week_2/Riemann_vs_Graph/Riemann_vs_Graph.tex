@@ -1,0 +1,66 @@
+\documentclass{beamer}
+\usetheme{Boadilla}
+
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage{amsfonts}
+\usepackage{hyperref}
+\usepackage{biblatex}
+\graphicspath{ {./images/} }
+
+
+\title{Methods comparison for graphs}
+\author{Ksenofontov Gregory}
+\institute{MIPT}
+
+
+\begin{document}
+
+\begin{frame}
+    \titlepage
+\end{frame}
+
+\begin{frame}{Main idea of Riemannian approach}
+        Let we have EEG trial $X\in\mathbb{R}^{C\times T}$, a record of  $C$  electrodes with $T$ time samples. And the record follows multivariate normal model, i.e. $X \sim \mathcal{N}(0, \Sigma)$, where $\Sigma\in \mathbb{R}^{C\times C}$. \par
+        Information theory gives us metric, the Fisher information, for probability distributions. As probability distributions belong on Riemann manifold, with such metric we can define Riemann distance $\delta_R$ between distributions. Let we have $X_1 \sim \mathcal{N}(0, \Sigma_1)$ and $X_2 \sim \mathcal{N}(0, \Sigma_2)$ the distance would be:
+        \begin{equation}
+            \delta_R(\Sigma_1, \Sigma_2)=||\log(\Sigma_1^{-1/2}\Sigma_2\Sigma_1^{-1/2})||_F = \left[ \sum_{c=1}^C\log^2\lambda_c\right]^{1/2},
+    \end{equation}
+    where $\lambda_c$ - all eigenvalues of $\Sigma_1^{-1/2}\Sigma_2\Sigma_1^{-1/2}$
+\end{frame}
+\begin{frame}{Minimum Distance to Riemannian Mean (MDM)}
+    Let we have dataset $X_i \sim \mathcal{N}(0, \Sigma_i)$ and corresponding labels $y_i\in\{1:T_c\}$. The training process is computing the covariance matrix for each  $T_c$ classes using Riemann geometric mean:
+    \begin{equation}
+      \overline{\Sigma}_K = \mathcal{G}(\Sigma_i|y_i=K) = \arg\min_{\Sigma\in P(n)}\sum_i\delta_R^2(\Sigma, \Sigma_i),
+  \end{equation}
+  where $K\in [1:T_c]$ - class label \par
+  The inference is finding of minimum distance, i.e.
+  \begin{equation}
+   \hat y = \arg\min_K\delta_R(\overline{\Sigma}_K, \Sigma)   
+ \end{equation}
+ Other methods\footnote{\href{https://arxiv.org/pdf/1409.0107.pdf}{A Plug\&Play P300 BCI Using Information Geometry}} introduces more complex representation of covariance matrices. 
+\end{frame}
+\begin{frame}{Comparison}
+\begin{table}[]
+    \centering
+    \begin{tabular}{ | c | c | } 
+     \hline
+         Strengths & Weaknesses \\ 
+     \hline
+     \multicolumn{2}{| c |}{Riemannian approach}\\
+     \hline
+         Less data to learn  &  Complexity depends on $C$  \\ 
+         Easy to understand & No connection between electrodes  \\ 
+           & Only classification? \\ 
+     \hline
+     \multicolumn{2}{| c |}{Graph Laplacian approach}\\
+     \hline
+         Uses connection  & Uses diff equations  \\ 
+          & Complex inference  \\
+     \hline
+    \end{tabular}
+    \caption{Comparison of approaches}
+\end{table}
+    
+\end{frame}
+\end{document}
