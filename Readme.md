@@ -144,7 +144,7 @@ Assumptions
 
 1.  Any sports game (exogenous, behavior to model, decisions)
 2.  Brain-computer interfaces
-3.  Risk management, stock market
+3.  Risk management, stock market   
 
 ### The challenge is to put
 -----------------------
@@ -162,15 +162,15 @@ Assumptions
 | September  | 16  | 1   | Introduction and planning            | Topics for the next week                                      | Subscribed to the schedule                      |
 |            | 23  | 2   | Possible models                      | Introductions to models                                       | Slides, references, questions to reason         |
 |            | 30  | 3   | Model reasoning and selection        | Discussion of the questions, refined presentations of models  | Role of models in the system                    |
-| October    | 7   | 4   | System description                   | Variants of the system, code sources                          | List of code references, toolbox(es) selection  |
-|            | 14  | 5   | Architecture planning                | Variants of the pipelines                                     | Collection of pipelines, executable             |
-|            | 21  | 6   | Data collection                      | Discussion of the applications                                | Links to the data and downloaders               |
-|            | 28  | 7   | Minimum value system                 | Discussion of the tutorials                                   | Tutorial plan                                   |
-| November   | 4   | 8   | Examples and documents               | Tutorial presentation                                         | List of new models and challenges               |
-|            | 11  | 9   | New directions                       | Model presentation (week 2)                                   | List of challenges                              |
-|            | 18  | 10  | Analysis, testing, and applications  | Decomposition of the system                                   | List of possible projects                       |
-|            | 25  | 11  | Project proposals                    | Project presentations                                         | Project descriptions                            |
-| December   | 2   | 12  | Project description review           | Discussion of the messages                                    | Published descriptions                          |
+| October    | 14  | 4   | System description                   | Variants of the system, code sources                          | List of code references, toolbox(es) selection  |
+|            | 21  | 5   | Architecture planning                | Variants of the pipelines                                     | Collection of pipelines, executable             |
+|            | 28  | 6   | Data collection                      | Discussion of the applications                                | Links to the data and downloaders               |
+|            | 4   | 7   | Minimum value system                 | Discussion of the tutorials                                   | Tutorial plan                                   |
+| November   | 11  | 8   | Examples and documents               | Tutorial presentation                                         | List of new models and challenges               |
+|            | 18  | 9   | New directions                       | Model presentation (week 2)                                   | List of challenges                              |
+|            | 25  | 10  | Analysis, testing, and applications  | Decomposition of the system                                   | List of possible projects                       |
+| December   | 2   | 11  | Project proposals                    | Project presentations                                         | Project descriptions                            |
+|            | 9   | 12  | Project description review           | Discussion of the messages                                    | Published descriptions                          |
 
 ### Week 1. Motivation and projects
 * [Course motivation and projects  to select from](https://github.com/intsystems/IDA/blob/main-2023/week_1/Goals_and_topics.odt)
@@ -205,8 +205,33 @@ Just see Table 1 and its surrounding explanatory text only.
 
 (Note. Please think of possible model structure selection and dimensionality reduction, especially in the target space)
    
+### Week 4. Topics to discuss
+List of toolboxes and its readiness to use in pipelines
+
+Types of toolboxes to fill in
+1. Canonical correlation analysis (and generative)
+2. Generative models: 1) Normalizing flows and Autoregressive models, 2) Probabilistic diffusion models and Variational autoencoders
+3. Graph and dynamic barycenter models
+4. State-space models 1) discrete-time, 2) continous-time
+5. Cross-convergence mapping
+6. Generative Bayesian model selection
+7. Useful seq2seq models and transformers
+
+| Toolbox    | Doc, Demo | Pipeline | Comment on usability |
+|------------|-----------|----------|----------------------|
+| [pyRiemann: Biosignals classification with Riemannian geometry](https://pyriemann.readthedocs.io/en/latest/)       | Y, Y          | sk-learn         | Quick start with useful extensive demos and data ready to go.                     |
+|         |           |          |                      |
+|         |           |          |                      |
+|         |           |          |                      |
+|         |           |          |                      |
+|         |           |          |                      |
+|         |           |          |                      |
+|         |           |          |                      |
+|         |           |          |                      |
+|         |           |          |                      |
+|         |           |          |                      |
 
 
 
 
-
+ 
