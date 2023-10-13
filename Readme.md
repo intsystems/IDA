@@ -209,17 +209,17 @@ Just see Table 1 and its surrounding explanatory text only.
 List of toolboxes and its readiness to use in pipelines
 
 Types of toolboxes to fill in
-1. Canonical correlation analysis (and generative)
-2. Generative models: 1) Normalizing flows and Autoregressive models, 2) Probabilistic diffusion models and Variational autoencoders
-3. Graph and dynamic barycenter models
-4. State-space models 1) discrete-time, 2) continous-time
-5. Cross-convergence mapping
-6. Generative Bayesian model selection
-7. Useful seq2seq models and transformers
+1. CCA: Canonical correlation analysis (and generative)
+2. GEN: Generative models: 1) Normalizing flows and Autoregressive models, 2) Probabilistic diffusion models and Variational autoencoders
+3. GBM: Graph and dynamic barycenter models
+4. SSM: State-space models 1) discrete-time, 2) continous-time
+5. CCM: Cross-convergence mapping
+6. GMS: Generative Bayesian model selection
+7. USE: Useful seq2seq models and transformers
 
-| Toolbox    | Doc, Demo | Pipeline | Comment on usability |
-|------------|-----------|----------|----------------------|
-| [pyRiemann: Biosignals classification with Riemannian geometry](https://pyriemann.readthedocs.io/en/latest/)       | Y, Y          | sk-learn         | Quick start with useful extensive demos and data ready to go.                     |
+| Code | Toolbox    | Doc, Demo | Pipeline | Comment on usability |
+|------|------------|-----------|----------|----------------------|
+| CCM  | [pyRiemann: Biosignals classification with Riemannian geometry](https://pyriemann.readthedocs.io/en/latest/)       | Y, Y          | sk-learn         | Quick start with useful extensive demos and data ready to go.                     |
 |         |           |          |                      |
 |         |           |          |                      |
 |         |           |          |                      |
