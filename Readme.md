@@ -217,19 +217,18 @@ Types of toolboxes to fill in
 6. GMS: Generative Bayesian model selection
 7. USE: Useful seq2seq models and transformers
 
-| Code | Toolbox    | Doc, Demo | Pipeline | Comment on usability |
-|------|------------|-----------|----------|----------------------|
-| CCM  | [pyRiemann: Biosignals classification with Riemannian geometry](https://pyriemann.readthedocs.io/en/latest/)       | Y, Y          | sk-learn         | Quick start with useful extensive demos and data ready to go.                     |
-|         |           |          |                      |
-|         |           |          |                      |
-|         |           |          |                      |
-|         |           |          |                      |
-|         |           |          |                      |
-|         |           |          |                      |
-|         |           |          |                      |
-|         |           |          |                      |
-|         |           |          |                      |
-|         |           |          |                      |
+| Code | Toolbox                                                                                                      | Doc, Demo                                                            | Pipeline    | Comment on usability                                                                                                                  |
+|------|--------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------|-------------|---------------------------------------------------------------------------------------------------------------------------------------|
+| CCM  | [pyRiemann: Biosignals classification with Riemannian geometry](https://pyriemann.readthedocs.io/en/latest/) | Y, Y                                                                 | sk-learn    | Quick start with useful extensive demos and data ready to go.                                                                         |
+| GEN  | [pythae](https://github.com/clementchadebec/benchmark_VAE)                                                   | many tutorials in the original repo                                  | PyTorch     | Plug and play library. Potential applications to our research projects are questionable.                                              |
+| GEN  | [DeepCCA](https://github.com/Michaelvll/DeepCCA)                                                             | No docs                                                              | PyTorch     | A straightforward implementation that takes 50 lines of code. Potential applications are promising.                                   |
+| GBM  | [node2coords](https://github.com/ersisimou/node2coords/tree/master)                                          |                                                                      | PyTorch     | GitHub of the article [node2coords: Graph Representation Learning with Wasserstein Barycenters](https://arxiv.org/pdf/2007.16056.pdf) |
+| GBM  | [pytorch-geometric](https://github.com/pyg-team/pytorch_geometric)                                           | [Doc](https://pytorch-geometric.readthedocs.io/en/latest/index.html) | PyTorch     | PyG (PyTorch Geometric) is a library built to easily write and train GNNs                                                             |
+| GBM  | [Graph Convolutional Networks in PyTorch](https://github.com/tkipf/pygcn)                                    |                                                                      | PyTorch     | Good example of GCN implementation using PyTorch                                                                                      |
+| GBM  | [Graph Convolutional Networks](https://github.com/tkipf/gcn)                                                 |                                                                      | TensorFlow  | Good example of GCN implementation using TensorFlow                                                                                   |
+| GBM  | [GNN using PDE](https://github.com/kaist-silab/awesome-graph-pde)                                            |                                                                      | PyTorch/PyG | A collection of resources about partial differential equations, deep learning, graph neural networks, dynamic system simulation       |
+| GBM  | [DIFFormer](https://github.com/qitianwu/DIFFormer/tree/main)                                                 |                                                                      | PyTorch/PyG | GitHub of the article [DIFFormer: Diffusion-based (Graph) Transformers](https://arxiv.org/pdf/2301.09474.pdf)                         |
+
 
 
 
