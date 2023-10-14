@@ -235,7 +235,10 @@ Types of toolboxes to fill in
 | GBM  | [GNN using PDE](https://github.com/kaist-silab/awesome-graph-pde)                                            |                                                                      | PyTorch/PyG | A collection of resources about partial differential equations, deep learning, graph neural networks, dynamic system simulation       |
 | GBM  | [DIFFormer](https://github.com/qitianwu/DIFFormer/tree/main)                                                 |                                                                      | PyTorch/PyG | GitHub of the article [DIFFormer: Diffusion-based (Graph) Transformers](https://arxiv.org/pdf/2301.09474.pdf) 
 
-
+### Week 5. Topics to discuss
+1.	Graph continuously changes its structure. One has to forecast its structure given the past history of changes.
+2.	CNN tunes its parameters according to the categorial target. One needs to tune its parameters according to the source data manifold )or a manifold of some other data). The convolution goes over time and 2/3 dim space.
+3.	There given a set of time series to reconstruct. To reconstruct these time series (given the significant covariance hypothesis), one has to find distances between time series (points on their phase trajectories), construct SPD(t) distance matrix, prune graph (reducing dimensionality), and reconstruct time series.
 
 
  
