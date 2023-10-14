@@ -220,8 +220,8 @@ Types of toolboxes to fill in
 | Code | Toolbox    | Doc, Demo | Pipeline | Comment on usability |
 |------|------------|-----------|----------|----------------------|
 | CCM  | [pyRiemann: Biosignals classification with Riemannian geometry](https://pyriemann.readthedocs.io/en/latest/)       | Y, Y          | sk-learn         | Quick start with useful extensive demos and data ready to go.                     |
-|         |           |          |                      |
-|         |           |          |                      |
+|   GEN   |    [pythae](https://github.com/clementchadebec/benchmark_VAE)   |  many tutorials in the original repo   |    PyTorch      | Plug and play library. Potential applications to our research projects are questionable.
+|   GEN   |  [DeepCCA](https://github.com/Michaelvll/DeepCCA)  |  No docs   |     PyTorch      | A straightforward implementation that takes 50 lines of code. Potential applications are promising.
 |         |           |          |                      |
 |         |           |          |                      |
 |         |           |          |                      |
