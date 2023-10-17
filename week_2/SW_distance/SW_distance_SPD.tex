@@ -1,0 +1,328 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Beamer Presentation
+% LaTeX Template
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% This template has been altered after it was downloaded from the 
+% above link
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND THEMES
+
+
+\documentclass{beamer}
+
+\mode<presentation> {
+
+% The Beamer class comes with a number of default slide themes
+% which change the colors and layouts of slides. Below this is a list
+% of all the themes, uncomment each in turn to see what they look like.
+
+%\usetheme{default}
+%\usetheme{AnnArbor}
+%\usetheme{Antibes}
+%\usetheme{Bergen}
+%\usetheme{Berkeley}
+%\usetheme{Berlin}
+\usetheme{Boadilla}
+%\usetheme{CambridgeUS}
+%\usetheme{Copenhagen}
+%\usetheme{Darmstadt}
+%\usetheme{Dresden}
+%\usetheme{Frankfurt}
+%\usetheme{Goettingen}
+%\usetheme{Hannover}
+%\usetheme{Ilmenau}
+%\usetheme{JuanLesPins}
+%\usetheme{Luebeck}
+%\usetheme{Madrid}
+%\usetheme{Malmoe}
+%\usetheme{Marburg}
+%\usetheme{Montpellier}
+%\usetheme{PaloAlto}
+%\usetheme{Pittsburgh}
+%\usetheme{Rochester}
+%\usetheme{Singapore}
+%\usetheme{Szeged}
+%\usetheme{Warsaw}
+
+% As well as themes, the Beamer class has a number of color themes
+% for any slide theme. Uncomment each of these in turn to see how it
+% changes the colors of your current slide theme.
+
+%\usecolortheme{albatross}
+%\usecolortheme{beaver}
+%\usecolortheme{beetle}
+%\usecolortheme{crane}
+%\usecolortheme{dolphin}
+%\usecolortheme{dove}
+%\usecolortheme{fly}
+%\usecolortheme{lily}
+%\usecolortheme{orchid}
+%\usecolortheme{rose}
+\usecolortheme{seagull}
+%\usecolortheme{seahorse}
+%\usecolortheme{whale}
+%\usecolortheme{wolverine}
+
+% Here is an overview of possible theme and colortheme combinations:
+% https://hartwork.org/beamer-theme-matrix/
+
+%\setbeamertemplate{footline} % To remove the footer line in all slides uncomment this line
+%\setbeamertemplate{footline}[page number] % To replace the footer line in all slides with a simple slide count uncomment this line
+
+\setbeamertemplate{navigation symbols}{} % To remove the navigation symbols from the bottom of all slides uncomment this line
+}
+
+\usepackage{graphicx} % Allows including images
+\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+\usepackage{appendixnumberbeamer} % Allows use of \appendix. Slides appearing after will not be part of the frame counter or navigation panel
+\usepackage{todonotes} % Allows use of \missingfigure
+
+\newcommand\blfootnote[1]{%
+	\begingroup
+	\renewcommand\thefootnote{}\footnote{#1}%
+	\addtocounter{footnote}{-1}%
+	\endgroup
+}
+
+% Following lines makes a section overview at the beginning of each section 
+\setbeamertemplate{caption}{\raggedright\insertcaption\par}
+\AtBeginSection[]
+{
+ \begin{frame}<beamer>
+ %\frametitle{Plan}
+ \tableofcontents[currentsection]
+ \end{frame}
+}
+
+%----------------------------------------------------------------------------------------
+%   TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title[Week 3]{Sliced-Wasserstein on Symmetric Positive Definite Matrices for M/EEG Signals} % The short title appears at the bottom of every slide (dependent on theme), the full title is only on the title page
+
+\author{Artyom Matveev} % Your name
+\institute[MIPT] % Your institution as it will appear on every slide (dependent on theme), may be shorthand to save space
+{
+Moscow Institute of Physics and Technology \\ % Your institution for the title page
+\medskip
+\textit{matveev.as@phystech.edu} % Your email address
+}
+\date{\today} % Date, can be changed to a custom date
+
+\begin{document}
+
+{
+%\usebackgroundtemplate{\includegraphics[width=\paperwidth]{figures/background.jpg}} % background of first slide
+\begin{frame}
+\titlepage % Print the title page as the first slide
+\end{frame}
+}
+
+%\begin{frame}
+%\frametitle{Overview} % Table of contents slide, comment this block out to remove it
+%\tableofcontents % Throughout your presentation, if you choose to use \section{} and \subsection{} commands, these will automatically be printed on this slide as an overview of your presentation
+%\end{frame}
+
+%----------------------------------------------------------------------------------------
+%   PRESENTATION SLIDES
+%----------------------------------------------------------------------------------------
+
+%------------------------------------------------
+%\section{First Section} % Sections can be created in order to organize your presentation into discrete blocks, all sections and subsections are automatically printed in the table of contents as an overview of the talk
+%%------------------------------------------------
+%
+%\subsection{Subsection Example} % A subsection can be created just before a set of slides with a common theme to further break down your presentation into chunks
+
+\begin{frame}
+\frametitle{Background\footnote{\tiny{\textbf{Barachant, A.}, Bonnet, S., et al. Multiclass brain-computer interface classification by Riemannian geometry. 2012}}}
+\begin{itemize}
+\item Space of all symmetric matrices: $S(n) = \{\mathbf{S} \in M(n), \mathbf{S}^T = \mathbf{S}\}$
+
+\item Space of all SPD matrices: $P(n) = \{\mathbf{P} \in S(n), \mathbf{u}^T\mathbf{P}\mathbf{u} > 0, \forall \mathbf{u} \in \mathbb{R}^n\}$, $P(n) \equiv \mathcal{M}(n)$, $\mathcal{M}(n)$ is a differentiable Riemannian manifold
+
+\item Spatial Covariance Matrix: $\Sigma = \mathbb{E}\{(\mathbf{x_t} -\mathbb{E}\{\mathbf{x_t}\})(\mathbf{x_t} -\mathbb{E}\{\mathbf{x_t}\})^T\}$, $\mathbf{x_t} \in \mathbb{R}^n$
+
+\item Matrix of trials: $\mathbf{X_i} = [\mathbf{x_{t}}_{+T_i}, \dots, \mathbf{x_{t}}_{+T_i+T_s-1}]$, $\mathbf{X_i} \in \mathbb{R}^{n \times T_s}$
+
+\item Sample Covariance Matrix: $\mathbf{P_i} = \frac{1}{T_s - 1} \mathbf{X_i} \mathbf{X_i}^{T}$, $\mathbf{P_i} \in \mathbb{R}^{n \times n}$
+\end{itemize}
+
+Riemannian Geodesic distance: $\delta_R(\mathbf{P_1}, \mathbf{P_2}) = \lVert \log (\mathbf{P_1}^{-1} \mathbf{P_2})\rVert_F = \left[\sum\limits_{i=1}^n \log^2 \lambda_i\right]^{1/2}$
+
+%Euclidean mean: 
+%$$\mathfrak{A}(\mathbf{P}_1, \dots, \mathbf{P}_N) = \operatorname*{arg\,min}_{\mathbf{P} \in P(n)} \sum\limits_{i=1}^{N}{\delta^2_E(\mathbf{P}, \mathbf{P}_i)} = \frac{1}{N} \sum\limits_{i=1}^{N} \mathbf{P}_i$$
+%\vspace{-5mm}
+
+Riemannian mean: 
+$$\mathfrak{G}(\mathbf{P}_1, \dots, \mathbf{P}_N) = \operatorname*{arg\,min}_{\mathbf{P} \in P(n)} \sum\limits_{i=1}^{N}{\delta^2_R(\mathbf{P}, \mathbf{P}_i)}$$
+
+%\blfootnote{\tiny{\textbf{Barachant, A.}, Bonnet, S., et al. Multiclass brain-computer interface classification by Riemannian geometry. 2012}}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Euclidean Wasserstein distance\footnote{\tiny{\textbf{Bonet, C.}, Malézieux, B., et al. Sliced-Wasserstein on Symmetric Positive Definite Matrices for M/EEG Signals. 2023}}}
+For $\mu, \nu \in \mathcal{P}_p(\mathbb{R}^d)$ two measures with finite moments of order $p \ge 1$, the Wasserstein distance is defined as
+
+\begin{equation}
+W_p^p(\mu, \nu) = \inf_{\gamma \in \Pi(\mu, \nu)} \int \lVert x - y \rVert^p_2\; \mathrm{d} \gamma(x, y),
+\label{eq:EWd}
+\end{equation}
+
+where $\Pi(\mu, \nu) = \{\gamma \in \mathcal{P}(\mathbb{R}^d \times \mathbb{R}^d), \pi_{\#}^1 \gamma = \mu, \pi_{\#}^2 \gamma = \nu\}$ denotes the set of couplings between $\mu$ and $\nu$, $\pi^1 \colon (x, y) \mapsto x$ and $\pi^2 \colon (x, y) \mapsto y$ the projections on the first and
+second coordinate and $\#$ is the push-forward operator, defined as a mapping on all borelian $A \subset \mathbb{R}^d$, such that $T_{\# \mu}(A) = \mu(T^{-1}(A))$.
+
+The computation complexity of \eqref{eq:EWd} is $\mathcal{O}(n^3 \log n)$.
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Euclidean Sliced-Wasserstein distance}
+
+The average of the Wasserstein (SW) distance between one dimensional projections of the measures in all directions, i.e. for $\mu, \nu \in \mathcal{P}_p(\mathbb{R^d}),$
+
+\begin{equation}
+	SW_p^p(\mu, \nu) = \int_{S^{d-1}} W_p^p(t_{\#}^{\theta} \mu, t_{\#}^{\theta} \nu)\; \mathrm{d} \lambda(\theta),
+	\label{eq:ESWd}
+\end{equation}
+
+where $\lambda$ is the uniform distribution on the sphere $S^{d-1} = \{\theta \in \mathbb{R^d}, \lVert \theta \rVert_2 = 1\}$ and $t^{\theta}$ is the coordinate of the projection on the line $\text{span}(\theta),$ i.e. $t^{\theta}(x) = \langle x, \theta \rangle$ for $x \in \mathbb{R}^d,$ $\theta \in S^{d-1}$. Computation complexity here is $\mathcal{O}(L \cdot n \cdot (d + \log n))$ with $L$ projections using Monte-Carlo method.
+
+\begin{block}{Definition}
+	Let $\lambda_S$ be the uniform distribution on $\{A \in S_d(\mathbb{R}), \lVert A \rVert_F = 1\}$. Let $p \ge 1$ and $\mu, \nu \in \mathcal{P}_p(S_d^{++}(\mathbb{R})),$ then the SPDSW discrepancy is defined as
+	
+	\begin{equation}
+		SPDSW_p^p(\mu, \nu) = \int_{S_d(\mathbb{R})} W_p^p(t_{\#}^{A} \mu, t_{\#}^{A} \nu)\; \mathrm{d} \lambda_{S}(A)
+		\label{eq:ESWd}
+	\end{equation}
+\end{block}
+\end{frame}
+%%------------------------------------------------
+%
+%\begin{frame}
+%\frametitle{Multiple Columns}
+%\begin{columns}[c] % The "c" option specifies centered vertical alignment while the "t" option is used for top vertical alignment
+%
+%\column{.45\textwidth} % Left column and width
+%\textbf{Heading}
+%\begin{enumerate}
+%\item Statement
+%\item Explanation
+%\item Example
+%\end{enumerate}
+%
+%\column{.5\textwidth} % Right column and width
+%Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer lectus nisl, ultricies in feugiat rutrum, porttitor sit amet augue. Aliquam ut tortor mauris. Sed volutpat ante purus, quis accumsan dolor.
+%
+%\end{columns}
+%\end{frame}
+%
+%%------------------------------------------------
+%\section{Second Section}
+%%------------------------------------------------
+%
+%\begin{frame}
+%\frametitle{Table}
+%\begin{table}
+%\caption{Table caption}
+%\begin{tabular}{l l l}
+%\toprule
+%\textbf{Treatments} & \textbf{Response 1} & \textbf{Response 2}\\
+%\midrule
+%Treatment 1 & 0.0003262 & 0.562 \\
+%Treatment 2 & 0.0015681 & 0.910 \\
+%Treatment 3 & 0.0009271 & 0.296 \\
+%\bottomrule
+%\end{tabular}
+%\end{table}
+%\end{frame}
+%
+%%------------------------------------------------
+%
+%\begin{frame}
+%\frametitle{Theorem}
+%\begin{theorem}[Mass--energy equivalence]
+%$E = mc^2$
+%\end{theorem}
+%\end{frame}
+%
+%%------------------------------------------------
+%
+%\begin{frame}[fragile] % Need to use the fragile option when verbatim is used in the slide
+%\frametitle{Verbatim}
+%\begin{example}[Theorem Slide Code]
+%\begin{verbatim}
+%\begin{frame}
+%\frametitle{Theorem}
+%\begin{theorem}[Mass--energy equivalence]
+%$E = mc^2$
+%\end{theorem}
+%\end{frame}\end{verbatim}
+%\end{example}
+%\end{frame}
+%
+%%------------------------------------------------
+%
+%\begin{frame}
+%\frametitle{Figure}
+%\begin{figure}
+%\centering
+%\includegraphics[width=0.8\linewidth]{figures/example_figure.pdf}
+%\end{figure}
+%\end{frame}
+%
+%%------------------------------------------------
+%
+%\begin{frame}[fragile] % Need to use the fragile option when verbatim is used in the slide
+%\frametitle{Citation}
+%An example of the \verb|\cite| command to cite within the presentation:\\~
+%
+%This statement requires citation \cite{p1}.
+%\end{frame}
+%
+%%------------------------------------------------
+%
+%\begin{frame}
+%\frametitle{References}
+%\footnotesize{
+%\begin{thebibliography}{99} % Beamer does not support BibTeX so references must be inserted manually as below
+%\bibitem[Smith, 2012]{p1} John Smith (2012)
+%\newblock Title of the publication
+%\newblock \emph{Journal Name} 12(3), 45 -- 678.
+%\end{thebibliography}
+%}
+%\end{frame}
+%
+%%------------------------------------------------
+%
+%\begin{frame}
+%\Huge{\centerline{The End}}
+%\end{frame}
+
+%----------------------------------------------------------------------------------------
+%   SUPPLEMENTARY SLIDES
+%----------------------------------------------------------------------------------------
+%\appendix
+%
+%\begin{frame}{Supplementary figure}
+%This slide is not part of total slide count or the navigational panel.
+%\begin{figure}
+%    \centering
+%    \missingfigure{Insert supplementary figure here.}
+%\end{figure}
+%\end{frame}
+
+%----------------------------------------------------------------------------------------
+
+\end{document} 
