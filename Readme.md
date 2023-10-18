@@ -238,7 +238,7 @@ Types of toolboxes to fill in
 ### Week 6. Topics to discuss
 Collect datasets with the structures
 1. CCA
-2. GBM
+2. GBM2
 3. CCM
    
 | Code | Data       | Downloader | Comment on usability |
@@ -247,4 +247,19 @@ Collect datasets with the structures
 |      |            |            |                      |
 |      |            |            |                      |
 |      |            |            |                      |
- 
+
+
+## Table of contents  
+### Week 1
+1.
+2.
+
+### Week 2
+1.
+2.
+
+### Week 3
+1.
+2.
+
+
