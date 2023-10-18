@@ -217,11 +217,6 @@ Types of toolboxes to fill in
 6. GMS: Generative Bayesian model selection
 7. USE: Useful seq2seq models and transformers
 
-| Code | Toolbox                                                                                                      | Doc, Demo                                                            | Pipeline    | Comment on usability                                                                                                                  |
-|------|--------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------|-------------|---------------------------------------------------------------------------------------------------------------------------------------|
-| CCM  | [pyRiemann: Biosignals classification with Riemannian geometry](https://pyriemann.readthedocs.io/en/latest/) | Y, Y                                                                 | sk-learn    | Quick start with useful extensive demos and data ready to go.                                                                         |
-                        |
-
 | Code | Toolbox    | Doc, Demo | Pipeline | Comment on usability |
 |------|------------|-----------|----------|----------------------|
 | CCM  | [pyRiemann: Biosignals classification with Riemannian geometry](https://pyriemann.readthedocs.io/en/latest/)       | Y, Y          | sk-learn         | Quick start with useful extensive demos and data ready to go.                     |
@@ -240,5 +235,15 @@ Types of toolboxes to fill in
 2.	CNN tunes its parameters according to the categorial target. One needs to tune its parameters according to the source data manifold )or a manifold of some other data). The convolution goes over time and 2/3 dim space.
 3.	There given a set of time series to reconstruct. To reconstruct these time series (given the significant covariance hypothesis), one has to find distances between time series (points on their phase trajectories), construct SPD(t) distance matrix, prune graph (reducing dimensionality), and reconstruct time series.
 
-
+### Week 6. Topics to discuss
+Collect datasets with the structures
+1. CCA
+2. GBM
+3. CCM
+| Code | Data       | Downloader | Comment on usability |
+|------|------------|------------|----------------------|
+|CCM   |            |            |                      |
+|      |            |            |                      |
+|      |            |            |                      |
+|      |            |            |                      |
  
