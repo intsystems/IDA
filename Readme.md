@@ -251,15 +251,18 @@ Collect datasets with the structures
 
 ## Table of contents  
 ### Week 1
-1.
-2.
+1. [D4](week_1/D4/main.pdf)
+2. [Graph Laplacian](week_1/Graph_Laplacian/Graph%20Laplacian.pdf)
+3. [Variational CCA](week_1/Var_CCA/main.pdf)
 
 ### Week 2
-1.
-2.
+1. [Generative Alternatives](week_2/Generative_Alternatives/Generative_alternatives.pdf)
+2. [Joint VAEs with Normalizing Flows](week_2/JNF_DCCA/main.pdf)
+3. [Methods comparison for graphs](week_2/Riemann_vs_Graph/Riemann_vs_Graph.pdf)
+4. [Sliced-Wasserstein](week_2/SW_distance/SW_distance_SPD.pdf)
 
-### Week 3
-1.
+### Week 4
+1. [Score-based Multimodal Autoencoders](week_4/score_ae/main.pdf)
 2.
 
 
