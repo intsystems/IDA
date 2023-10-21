@@ -1,0 +1,92 @@
+\documentclass[aspectratio=169]{beamer}
+\usetheme{Madrid}
+\usecolortheme{default}
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.14}
+\usepackage{anyfontsize}
+\usepackage{xspace}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{algpseudocode}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\newcommand{\cev}[1]{\reflectbox{\ensuremath{\vec{\reflectbox{\ensuremath{#1}}}}}}
+
+
+\title[Week 1]
+{Score-Based Multimodal Autoencoders}
+
+\subtitle{Week 1}
+
+\author[] % (optional, for multiple authors)
+{
+Konstantin Yakovlev \inst{1} \and
+}
+
+\institute[] % (optional)
+{
+  \inst{1}%
+  MIPT \\
+  Moscow, Russia
+}
+
+\date[MIPT 2023] % (optional)
+{MIPT 2023}
+
+% \logo{\includegraphics[height=0.8cm]{logo_uoft}}
+
+\definecolor{uoftblue}{RGB}{6,41,88}
+\setbeamercolor{titlelike}{bg=uoftblue}
+\setbeamerfont{title}{series=\bfseries}
+
+\begin{document}
+
+\frame{\titlepage}
+
+
+\begin{frame}{Score-Based Multimodal Autoencoders}
+    \begin{minipage}{0.49\textwidth}
+        \textbf{Challenge}: conditioning on more modalities often reduces the quality of the generated modality. \\
+        \textbf{Solution}: instead of learning a joint posterior, try to model a joint prior $p_\theta(\mathbf{z}_{1:M})$.
+        This allows us to better model correlation among modalities. \\
+        \textbf{The Method}: Assume that
+        \begin{small}
+        \begin{align*}
+            &p(\mathbf{x}_{1:M}|\mathbf{z}_{1:M}) = \prod_{k=1}^Mp(\mathbf{x}_k|\mathbf{z}_k), \\
+            &q(\mathbf{z}_{1:M}|\mathbf{x}_{1:M}) = \prod_{k=1}^Mq(\mathbf{z}_k|\mathbf{x}_k).
+        \end{align*}
+        \end{small}
+        Then, $\mathrm{ELBO} = \sum_k\mathrm{ELBO}_k$ if the prior is decomposable.
+    \end{minipage}
+    \begin{minipage}{0.49\textwidth}
+        \textbf{Two-stage training}:
+        \begin{itemize}
+            \item Train the autoencoders separately, assuming that $p(\mathbf{z}_m) = \mathcal{N}(0, \mathbf{I})$.
+            \item Freeze the autoencoders and leran a joint prior $p(\mathbf{z}_{1:M})$.
+            More precisely, we need a score function $s_\theta(\mathbf{z}_{1:M})$ to sample from the prior.
+        \end{itemize}
+        Finally, it becomes trivial to sample from any subset of missing modalities using Langevin dynamics.
+    \end{minipage}
+    
+\end{frame}
+
+
+\begin{frame}{Selecting dependent modalities (proposed)}
+    \textbf{Task}: remove independent modalities from $\mathbf{x}_{1:M}$.
+    \textit{Are we really intended to solve it?} \\
+    \textbf{Solution}: learn the structure of $s_\theta(\mathbf{z}_{1:M}) = \sum_{i\in \mathcal{I}}s_\theta(\mathbf{z}_i) + 
+    s_\theta(\mathbf{z}_{i : i \in \mathcal{D}})$. \\
+    \textbf{The Method}: greedily remove modalities one by one, decreasing the score matching objective.
+    Initialize $\mathcal{D}_0$ with $\{1, \ldots, M\}$.
+    
+\end{frame}
+
+
+
+\end{document}
