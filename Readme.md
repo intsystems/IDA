@@ -263,6 +263,6 @@ Collect datasets with the structures
 
 ### Week 4
 1. [Score-based Multimodal Autoencoders](week_4/score_ae/main.pdf)
-2.
+2. [Graph Auto-regressive models](week_4/Graph_AR/Graph_AR.pdf)
 
 
