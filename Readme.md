@@ -236,7 +236,21 @@ Types of toolboxes to fill in
 3.	There given a set of time series to reconstruct. To reconstruct these time series (given the significant covariance hypothesis), one has to find distances between time series (points on their phase trajectories), construct SPD(t) distance matrix, prune graph (reducing dimensionality), and reconstruct time series.
 
 ### Week 6. Topics to discuss
-Collect datasets with the structures
+Pytorch keeps models in the pipeline without an error function. An example in the first lines of the Lightning example. In the encoder-decoder pipeline, an error common to all is determined. For CCA methods, it is important to include the error in an arbitrary module. The priors (according to Bayesian inference) are terms of the error function. Since in CCA, prior distributions are imposed on the generated samples (and participate in the optimization of the generative model, which operates in the latent space), the error function must appear in the latent space.
+
+We discuss the following questions:
+
+1. Composite pipelines suitable for use in CCA methods. Types of Examples of building pipelines in which .transform (with settings) appears inside .fit , and not before optimization?
+
+2. Optimization schedule in the context of CCA. How is this schedule implemented? Need technical information and code examples.
+
+For the first two points, it is advisable to discuss how to decompose CCA into a pipeline with four errors: 1) the left and right PCA matrices are adjusted to the minimum of the mean square error, 3) the latent space is constructed through the maximum of the covariance (as in the description of the method), 4) the predictive model, superposition 1 )-3) is constructed with an error in accuracy. In the linear case, such a decomposition is clearly redundant. Still, if we are talking about stacks of autoencoders, U-net, then such a decomposition is necessary to obtain a good initial approximation of the parameters.
+
+3. Scoring-based diffusion as applied to CCA.
+
+Please add suitable pieces of code and links to the slides. Let's discuss programming technologies.
+
+<!--- Collect datasets with the structures
 1. CCA
 2. GBM2
 3. CCM
@@ -247,7 +261,7 @@ Collect datasets with the structures
 |      |            |            |                      |
 |      |            |            |                      |
 |      |            |            |                      |
-
+-->
 
 ## Table of contents  
 ### Week 1
