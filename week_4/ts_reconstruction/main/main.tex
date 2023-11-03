@@ -1,0 +1,67 @@
+\documentclass{beamer}
+\usetheme{Boadilla}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{hyperref}
+
+\usepackage[style=verbose,backend=biber]{biblatex}
+\addbibresource{ref.bib}
+
+\title{Time series reconstruction}
+\author{Skorik Sergey}
+\institute{MIPT, 2023}
+
+
+\begin{document}
+
+\begin{frame}
+    \titlepage
+\end{frame}
+
+\begin{frame}
+    \tableofcontents
+\end{frame}
+
+\section{Decoding model}
+\begin{frame}{Graph Wavelet Neural Network}
+    \begin{block}{Motivation}
+        In masters \footcite{varenik2022} thesis examined the problem of decoding brain signals. As a decoder model, a graph neural network (GNN) was proposed, in which the graph Fourier transform is used as convolution. The disadvantage of this convolution is that the kernel does not have the property of being localized in space. 
+        
+        The study \footcite{hammond2011wavelets} introduces the wavelet transform on graphs.
+    \end{block}
+\end{frame}
+
+\begin{frame}{Graph Wavelet Neural Network}
+    \begin{block}{Graph Wavelet Neural Network}
+        Based on this transform, study \footcite{xu2019graph} presents graph wavelet neural network (GWNN).
+    \end{block}
+\end{frame}
+
+\section{Analytical graph diffusion framework}
+\begin{frame}{Analytic graph diffusion framework}
+    \begin{block}{Theory}
+        Let's consider a graph $\mathcal{G} = (\mathcal{V}, \mathcal{E})$. To model the spread of pathological tau species along the brain’s structural network, we represent the regional tau burden as a time-varying graph signal vector $\boldsymbol{x}(t) = [x(v_i, t), v_i \in\mathcal{V}]$, $\boldsymbol{x(t)} \in \mathbb{R}^N$, $|\mathcal{V}|=N$. $\boldsymbol{x}(t)$ is the solution to a first-order PDE, usually referred to as the network diffusion equation:
+        \begin{equation}\label{homo_PDE}
+            \dfrac{\partial\boldsymbol{x}(t)}{\partial t} = -\beta\boldsymbol{L}\boldsymbol{x}(t).
+        \end{equation}
+        Where $\boldsymbol{L} \in \mathbb{R}^{N\times N}$ is the normalized graph Laplacian matrix. To model active generation or clearance alongside passive spread, a source term, $\boldsymbol{s}(t)$, can be added to \eqref{homo_PDE} leading to an inhomogeneous PDE:
+        \begin{equation}\label{inhomo_PDE}
+            \dfrac{\partial\boldsymbol{x}(t)}{\partial t} = -\beta\boldsymbol{L}\boldsymbol{x}(t) + \boldsymbol{s}(t).
+        \end{equation}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Analytic graph diffusion framework \footcite{yang2021longitudinal}}
+    \begin{block}{Theory}
+        Modulate this source term $\boldsymbol{s}(t)$ we can build various models. 
+        \begin{itemize}
+            \item Linear source model $\boldsymbol{s}(t) = \boldsymbol{r}t$ with criterion $\Phi_{\text{LIN}}(\beta, \boldsymbol{r}) = \frac{1}{2}\|\boldsymbol{f}(\boldsymbol{x}_0, \beta, \boldsymbol{r}) - \boldsymbol{x}_t\|^2_2$
+            \item  Exponential source model $\boldsymbol{s}(t) = \boldsymbol{\alpha}(e^{\sigma t} - 1)$ and criterion $\Phi_{\text{EXP}}(\beta, \boldsymbol{\alpha}, \sigma) = \frac{1}{2}\|\boldsymbol{f}(\boldsymbol{x}_0, \beta, \boldsymbol{\alpha}, \sigma) - \boldsymbol{x}_t\|^2_2$
+        \end{itemize}
+        All gradients, $\boldsymbol{x}_0$ and other can be calculated analytically.
+    \end{block}
+\end{frame}
+
+
+\end{document}

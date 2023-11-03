@@ -278,5 +278,5 @@ Please add suitable pieces of code and links to the slides. Let's discuss progra
 ### Week 4
 1. [Score-based Multimodal Autoencoders](week_4/score_ae/main.pdf)
 2. [Graph Auto-regressive models](week_4/Graph_AR/Graph_AR.pdf)
-
+3. [Time series reconstruction](week_4/ts_reconstruction/main.pdf)
 
