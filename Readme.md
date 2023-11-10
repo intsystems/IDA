@@ -165,12 +165,12 @@ Assumptions
 | October    | 14  | 4   | System description                   | Variants of the system, code sources                          | List of code references, toolbox(es) selection  |
 |            | 21  | 5   | Architecture planning                | Variants of the pipelines                                     | Collection of pipelines, executable             |
 |            | 28  | 6   | Data collection                      | Discussion of the applications                                | Links to the data and downloaders               |
-|            | 4   | 7   | Minimum value system                 | Discussion of the tutorials                                   | Tutorial plan                                   |
-| November   | 11  | 8   | Examples and documents               | Tutorial presentation                                         | List of new models and challenges               |
-|            | 18  | 9   | New directions                       | Model presentation (week 2)                                   | List of challenges                              |
-|            | 25  | 10  | Analysis, testing, and applications  | Decomposition of the system                                   | List of possible projects                       |
-| December   | 2   | 11  | Project proposals                    | Project presentations                                         | Project descriptions                            |
-|            | 9   | 12  | Project description review           | Discussion of the messages                                    | Published descriptions                          |
+| November   | 11  | 7   | Minimum value system                 | Discussion of the tutorials                                   | Tutorial plan                                   |
+|            | 18  | 8   | Examples and documents               | Tutorial presentation                                         | List of new models and challenges               |
+|            | 25  | 9   | New directions                       | Model presentation (week 2)                                   | List of challenges                              |
+| December   | 2   | 10  | Analysis, testing, and applications  | Decomposition of the system                                   | List of possible projects                       |
+|            | 9   | 11  | Project proposals                    | Project presentations                                         | Project descriptions                            |
+|            | 16  | 12  | Project description review           | Discussion of the messages                                    | Published descriptions                          |
 
 ### Week 1. Motivation and projects
 * [Course motivation and projects  to select from](https://github.com/intsystems/IDA/blob/main-2023/week_1/Goals_and_topics.odt)
@@ -250,19 +250,37 @@ For the first two points, it is advisable to discuss how to decompose CCA into a
 
 Please add suitable pieces of code and links to the slides. Let's discuss programming technologies.
 
-<!--- Collect datasets with the structures
-1. CCA
-2. GBM2
-3. CCM
+### Week 7. Topics to discuss
+The paper in the field of 
+
+Collect datasets. The requirements for the links:
+1. The dataset matches one of the listed problems:
+    2. CCA with a vector or tensor source and target spaces
+    3. Behavioural data with the autoregressive state space as the target
+    4. Multimodal data with a simple structure
+    5. Graph data at least in one space, source, or target
+3. It has an explicit structure and description
+4. It has a downloader (really welcome) or a code for easy download
+
+Code in the table  
+1. Spatial-time series for CCA and multomodal problems 
+2. GEN, GEN2 stands for Generative models for CCA
+3. GBM, GBM2
+4. (BEH behavioral: state space for classification, sequence of classes)
+
+Applications and origins of data
+1. Brain-computer, high frequency: EEG, ECoG, iEEG, ..., low frequency: fMRI, eye, hand, tracking, ...
+2. Mechanical movements: accelerometer, gyroscope, ...
+3. Financial time series: the lowest frequency is daily time-stamps 
+4. Industrial time series: electricity consumption, device testing, production monitoring, ...
+5. Physics measurements, including weather forecasts, space research, high-energy physics, ...
    
 | Code | Data       | Downloader | Comment on usability |
 |------|------------|------------|----------------------|
-|CCM   |            |            |                      |
 |      |            |            |                      |
 |      |            |            |                      |
 |      |            |            |                      |
--->
-
+ 
 ## Table of contents  
 ### Week 1
 1. [D4](week_1/D4/main.pdf)
@@ -280,3 +298,8 @@ Please add suitable pieces of code and links to the slides. Let's discuss progra
 2. [Graph Auto-regressive models](week_4/Graph_AR/Graph_AR.pdf)
 3. [Time series reconstruction](week_4/ts_reconstruction/main.pdf)
 
+### Week 5
+
+### Week 6
+
+### Week 7
