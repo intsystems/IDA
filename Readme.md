@@ -277,7 +277,7 @@ Applications and origins of data
    
 | Code | Data       | Downloader | Comment on usability |
 |------|------------|------------|----------------------|
-|      |            |            |                      |
+|  GBM |    [OGB](https://ogb.stanford.edu)     |    Yes     | Own library, many datasets for different tasks, works with pytorch-geometric out of the box |
 |      |            |            |                      |
 |      |            |            |                      |
  
