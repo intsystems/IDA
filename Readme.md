@@ -280,7 +280,9 @@ Applications and origins of data
 |  GBM |    [OGB](https://ogb.stanford.edu)     |    Yes     | Own library, many datasets for different tasks, works with pytorch-geometric out of the box |
 | GBM  | [PyTorch Geometric Temporal](https://pytorch-geometric-temporal.readthedocs.io/en/latest/modules/dataset.html#module-torch_geometric_temporal.dataset.chickenpox) |  Yes    |            Fork of pytorch-geometric, works with temporal graphs, has a lot of implemented dataset classes  |
 |  GEN    |    [KU](http://gigadb.org/dataset/view/id/100542/File_page/7)        |    Yes      |  Extremely trivial to download and make spatial covariance matrices as was done in [Score-based EEG generation](https://arxiv.org/pdf/2302.11410.pdf)      |
-|      |            |            |                      |
+| STS  | [EEGEyeNet](https://paperswithcode.com/paper/eegeyenet-a-simultaneous)           | [Yes](https://osf.io/ktv7m/)           |       Has a [benchmark](https://github.com/ardkastrati/eegeyenet)  for evaluating gaze prediction consisting of three tasks.              |
+| STS  | [MotionSense](https://paperswithcode.com/dataset/motionsense)           | [Yes](https://github.com/mmalekzadeh/motion-sense/tree/master/data)           |       Has a [description](https://github.com/mmalekzadeh/motion-sense/tree/master#dataset-description)  with meta-information and [code](https://github.com/mmalekzadeh/motion-sense/tree/master#a-code-to-build-a-labeled-time-series-from-data-into-a-pandas-dataframe) to build train dataset.              |
+| STS  | [Multimodal datasets](https://github.com/drmuskangarg/Multimodal-datasets)           | No           |      A list that aggregates 100+ known multimodal datasets by category              |
  
 ## Table of contents  
 ### Week 1
