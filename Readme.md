@@ -279,6 +279,7 @@ Applications and origins of data
 |------|------------|------------|----------------------|
 |  GBM |    [OGB](https://ogb.stanford.edu)     |    Yes     | Own library, many datasets for different tasks, works with pytorch-geometric out of the box |
 | GBM  | [PyTorch Geometric Temporal](https://pytorch-geometric-temporal.readthedocs.io/en/latest/modules/dataset.html#module-torch_geometric_temporal.dataset.chickenpox) |  Yes    |            Fork of pytorch-geometric, works with temporal graphs, has a lot of implemented dataset classes  |
+|  GEN    |    [KU](http://gigadb.org/dataset/view/id/100542/File_page/7)        |    Yes      |  Extremely trivial to download and make spatial covariance matrices as was done in [Score-based EEG generation](https://arxiv.org/pdf/2302.11410.pdf)      |
 |      |            |            |                      |
  
 ## Table of contents  
