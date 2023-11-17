@@ -1,0 +1,69 @@
+\documentclass[aspectratio=169]{beamer}
+\usetheme{Madrid}
+\usecolortheme{default}
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.14}
+\usepackage{anyfontsize}
+\usepackage{xspace}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{algpseudocode}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\newcommand{\cev}[1]{\reflectbox{\ensuremath{\vec{\reflectbox{\ensuremath{#1}}}}}}
+
+
+\title[Week 1]
+{Dimension Reduction for Time Series with Score-based generative modeling}
+
+\subtitle{Week 9}
+
+\author[] % (optional, for multiple authors)
+{
+Konstantin Yakovlev \inst{1} \and
+}
+
+\institute[] % (optional)
+{
+  \inst{1}%
+  MIPT \\
+  Moscow, Russia
+}
+
+\date[MIPT 2023] % (optional)
+{MIPT 2023}
+
+% \logo{\includegraphics[height=0.8cm]{logo_uoft}}
+
+\definecolor{uoftblue}{RGB}{6,41,88}
+\setbeamercolor{titlelike}{bg=uoftblue}
+\setbeamerfont{title}{series=\bfseries}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}{Dimension reduction with score-based generative modeling}
+    \textbf{Problem}: Given a multivariate time series. The task is to perform dimensionality reduction
+    by removing the components that are independent of the other components. We also assume that most components
+    are pairwise dependent. \\
+    \textbf{Data}: synthetic dataset: MNIST (2 modalities) + CIFAR 10 \\
+    \textbf{References}: \href{https://arxiv.org/pdf/2204.11060.pdf}{DIMENSION REDUCTION FOR TIME SERIES WITH VARIATIONAL AUTOENCODERS, 2022} \\
+    \href{https://arxiv.org/abs/2305.15708}{Score-Based Multimodal Autoencoders, 2023} \\
+    \textbf{Base Solution}: pairwise CCA. Delete the component if it does not share the information between most of the components. \\
+    \textbf{Proposed Solution}: learn the structure of the score function $s(\mathbf{x}_{1:M}) = s(\mathbf{x}_{i \in \mathcal{I}}) + \sum_{i \not\in \mathcal{I}}s(\mathbf{x}_i)$
+    with heuristic Add-Del algorithm \\
+    \textbf{Novelty}: "However, the use of variational autoencoders on time series as a dimension reduction technique is not yet well studied or compared to other methodologies".
+    Precise contributions should be clearly formulated.
+    
+\end{frame}
+
+
+
+\end{document}
