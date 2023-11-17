@@ -192,7 +192,7 @@ Reason variations of models with a model description and a table of pros and con
 *  CCA generative models: compare versions of generation techniques (variational, flow, and diffusion)
 *  Continous models for graph Laplacian: compare with Riemannian approach and CGN
 *  D4 and variants: compare Kalman filter, S4, HiPPO in discrete and continous time
-  
+
 #### Examples of editorial-accepted comparisons:
 Just see Table 1 and its surrounding explanatory text only.
 1. Generation of simple structured Information Retrieval functions by genetic algorithm without stagnation by  A. Kulunchakov and V. Strijov. [DOI](https://doi.org/10.1016/j.eswa.2017.05.019), [PDF](http://strijov.com/papers/Kulunchakov2014RankingBySimpleFun.pdf)
@@ -204,7 +204,7 @@ Just see Table 1 and its surrounding explanatory text only.
 2. Comparative analysis; see Table 1 in the papers above for your inspiration
 
 (Note. Please think of possible model structure selection and dimensionality reduction, especially in the target space)
-   
+
 ### Week 4. Topics to discuss
 List of toolboxes and its readiness to use in pipelines
 
@@ -283,7 +283,8 @@ Applications and origins of data
 | STS  | [EEGEyeNet](https://paperswithcode.com/paper/eegeyenet-a-simultaneous)           | [Yes](https://osf.io/ktv7m/)           |       Has a [benchmark](https://github.com/ardkastrati/eegeyenet)  for evaluating gaze prediction consisting of three tasks.              |
 | STS  | [MotionSense](https://paperswithcode.com/dataset/motionsense)           | [Yes](https://github.com/mmalekzadeh/motion-sense/tree/master/data)           |       Has a [description](https://github.com/mmalekzadeh/motion-sense/tree/master#dataset-description)  with meta-information and [code](https://github.com/mmalekzadeh/motion-sense/tree/master#a-code-to-build-a-labeled-time-series-from-data-into-a-pandas-dataframe) to build train dataset.              |
 | STS  | [Multimodal datasets](https://github.com/drmuskangarg/Multimodal-datasets)           | No           |      A list that aggregates 100+ known multimodal datasets by category              |
- 
+| STS | [MOABB](https://neurotechx.github.io/moabb/index.html) | Yes | A library that allows you to build a benchmark of popular BCI algorithms applied on the most popular BCI datasets. You can easily choose algorithms you'd like to compare, download datasets from the [list](https://neurotechx.github.io/moabb/dataset_summary.html), set corresponding [paradigms](https://neurotechx.github.io/moabb/main_concepts.html#paradigm), and use `sklearn.pipeline` to create your pipelines. An example of such end-to-end process can be found [here](https://neurotechx.github.io/moabb/auto_tutorials/tutorial_3_benchmarking_multiple_pipelines.html#sphx-glr-auto-tutorials-tutorial-3-benchmarking-multiple-pipelines-py). |
+
 ### Week 9. Topics to discuss
 Prepare sheaves (ideas of the project) to discuss with slide 3 (the whole project in one slide with main notions and notations). The following four items are discussed:
 1. __Title__: Title
