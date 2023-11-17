@@ -284,6 +284,29 @@ Applications and origins of data
 | STS  | [MotionSense](https://paperswithcode.com/dataset/motionsense)           | [Yes](https://github.com/mmalekzadeh/motion-sense/tree/master/data)           |       Has a [description](https://github.com/mmalekzadeh/motion-sense/tree/master#dataset-description)  with meta-information and [code](https://github.com/mmalekzadeh/motion-sense/tree/master#a-code-to-build-a-labeled-time-series-from-data-into-a-pandas-dataframe) to build train dataset.              |
 | STS  | [Multimodal datasets](https://github.com/drmuskangarg/Multimodal-datasets)           | No           |      A list that aggregates 100+ known multimodal datasets by category              |
  
+### Week 9. Topics to discuss
+Prepare sheaves (ideas of the project) to discuss with slide 3 (the whole project in one slide with main notions and notations). The following four items are discussed:
+1. __Title__: Title
+2. __Problem__: Problem description
+3. __Data__: Data and __code__ description
+4. __Reference__: Links to the literature
+5. __Base solution__: Description of the  basic solution to start from
+6. __Proposed solution__: description of the idea to implement in the project
+7. __Novelty__: why the task is good and what does it bring to science?  (for the editorial board and reviewers)
+
+Project 1.
+SSM. For a given set of spatial time series, one has to make a convolution transform. To transform a Hankel (or another convenient multi-linear operator) shall be used. Find the optimal number of indexes and optimal dimensionality for each index. Reconstruct the initial spatial time series.
+
+Project 2.
+GBM. For a given set of time series, one has to make a dynamic graph, prune it, and reconstruct the initial time series (according to MSE or another convenient criterion).
+
+Project 3.
+GEN2. For several (two) modalities of (spatial) time series (of various nature) construct a generative model that reveals a (probabilistic) manifold in each modality. So that there is a (time-synchronized) map between the manifolds of modalities.
+
+Project 4. 
+GMS. The uncertainty of classification is estimated as a distance of two probability distributions. The first one is the distribution of the generative model, and the second one is the observed.
+
+
 ## Table of contents  
 ### Week 1
 1. [D4](week_1/D4/main.pdf)
@@ -301,8 +324,12 @@ Applications and origins of data
 2. [Graph Auto-regressive models](week_4/Graph_AR/Graph_AR.pdf)
 3. [Time series reconstruction](week_4/ts_reconstruction/main.pdf)
 
-### Week 5
+### Week 8
+1. [Riemannian model]
 
-### Week 6
+### Week 9
+1.
+2.
+3.
+4.
 
-### Week 7
