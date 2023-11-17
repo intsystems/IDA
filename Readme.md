@@ -331,6 +331,6 @@ GMS. The uncertainty of classification is estimated as a distance of two probabi
 ### Week 9
 1.
 2.
-3.
+3. [Dimension Reduction for Time Series with Score-based generative modeling](week_9/sb_dim_reduction/main.pdf)
 4.
 
