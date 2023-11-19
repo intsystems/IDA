@@ -295,16 +295,16 @@ Prepare sheaves (ideas of the project) to discuss with slide 3 (the whole projec
 6. __Proposed solution__: description of the idea to implement in the project
 7. __Novelty__: why the task is good and what does it bring to science?  (for the editorial board and reviewers)
 
-Project 1.
+__Project 1.__
 SSM. For a given set of spatial time series, one has to make a convolution transform. To transform a Hankel (or another convenient multi-linear operator) shall be used. Find the optimal number of indexes and optimal dimensionality for each index. Reconstruct the initial spatial time series.
 
-Project 2.
+__Project 2.__
 GBM. For a given set of time series, one has to make a dynamic graph, prune it, and reconstruct the initial time series (according to MSE or another convenient criterion).
 
-Project 3.
+__Project 3.__
 GEN2. For several (two) modalities of (spatial) time series (of various nature) construct a generative model that reveals a (probabilistic) manifold in each modality. So that there is a (time-synchronized) map between the manifolds of modalities.
 
-Project 4. 
+__Project 4.__
 GMS. The uncertainty of classification is estimated as a distance of two probability distributions. The first one is the distribution of the generative model, and the second one is the observed.
 
 ### Week 10. Topics to discuss
@@ -318,13 +318,13 @@ The same format with improvements:
    * prove that the proposed model is adequate using statistical methods (inference with a chosen informative prior)
 4. Describe new projects from the list or propose yours:
 
-Project 5.
+__Project 5.__
 SSM. Inverse problem (in BCI or CT): probabilistic versus deterministic approach (with application to a designated dataset)
 
-Project 6.
+__Project 6.__
 DBA. Probabilistic approach to DTW-DBA problem statement (with application to a designated dataset)
 
-Project 7.
+__Project 7.__
 GEN2. Probabilistic criteria of manifold-to-manifold mapping reconstruction in multimodal CCA
  
 ## Table of contents  
