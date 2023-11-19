@@ -307,7 +307,26 @@ GEN2. For several (two) modalities of (spatial) time series (of various nature) 
 Project 4. 
 GMS. The uncertainty of classification is estimated as a distance of two probability distributions. The first one is the distribution of the generative model, and the second one is the observed.
 
+### Week 10. Topics to discuss
+The same format with improvements:
+1. Draw the "all project" slide using languages:
+   * Category theory
+   * Plate notation
+2. Narrow the goal and problem statement so the plan of work is visible
+3. Express one of two discussed scientific criteria:
+   * find a non-investigated topic, an error, a new point-of-view
+   * prove that the proposed model is adequate using statistical methods (inference with a chosen informative prior)
+4. Describe new projects from the list or propose yours:
 
+Project 5.
+SSM. Inverse problem (in BCI or CT): probabilistic versus deterministic approach (with application to a designated dataset)
+
+Project 6.
+DBA. Probabilistic approach to DTW-DBA problem statement (with application to a designated dataset)
+
+Project 7.
+GEN2. Probabilistic criteria of manifold-to-manifold mapping reconstruction in multimodal CCA
+ 
 ## Table of contents  
 ### Week 1
 1. [D4](week_1/D4/main.pdf)
@@ -332,5 +351,6 @@ GMS. The uncertainty of classification is estimated as a distance of two probabi
 1.
 2.
 3. [Dimension Reduction for Time Series with Score-based generative modeling](week_9/sb_dim_reduction/main.pdf)
-4.
+
+### Week 10
 
