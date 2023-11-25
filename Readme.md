@@ -349,7 +349,7 @@ GEN2. Probabilistic criteria of manifold-to-manifold mapping reconstruction in m
 
 ### Week 9
 1.
-2.
+2. [Reconstruction of time series using pruning via sampling](week_9/dyn_graph_reconstruction/Dynamic%20graph%20pruning%20an%20reconstruction%20.pdf)
 3. [Dimension Reduction for Time Series with Score-based generative modeling](week_9/sb_dim_reduction/main.pdf)
 
 ### Week 10
