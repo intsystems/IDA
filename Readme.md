@@ -326,7 +326,28 @@ DBA. Probabilistic approach to DTW-DBA problem statement (with application to a 
 
 __Project 7.__
 GEN2. Probabilistic criteria of manifold-to-manifold mapping reconstruction in multimodal CCA
- 
+
+### Week 11. Topics to discuss
+
+__Project 8.__
+Geometric (Clifford) algebra-based tools to forecast spatial time series (to continue [these papers](https://link.springer.com/journal/6) and [this paper](https://arxiv.org/abs/2302.06594))
+
+__Project 9.__
+Continuous time and space memory networks ([this is an old paper](https://proceedings.neurips.cc/paper/2019/file/952285b9b7e7a1be5aa7849f32ffff05-Paper.pdf), what is next?)
+
+__Project 10.__
+Differential geometry connects continuous-time graph Laplacian and Riemannian metric tensor (after [GRAND](https://arxiv.org/abs/2106.10934), [Dutta]( https://doi.org/10.1016/j.neuroimage.2021.118126))
+
+__Project 11.__
+(a variant of 8) Application of De Rham's theorem (Green's, Stocks' theorem) in Physics-informed machine learning ([after this paper](https://www.nature.com/articles/s41467-021-26434-1))
+
+__Essay__
+My forecast of ML development in the next ten years (with approximate plan)
+1. What trends and topics will impact scientific research 
+2. What tools will be most useful in academic and industrial research
+3. What applications will be the most significant
+4. What is my role in the profession, how I will develop my career
+
 ## Table of contents  
 ### Week 1
 1. [D4](week_1/D4/main.pdf)
