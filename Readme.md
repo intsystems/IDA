@@ -341,7 +341,7 @@ Differential geometry connects continuous-time graph Laplacian and Riemannian me
 __Project 11.__
 (a variant of 8) Application of De Rham's theorem (Green's, Stocks' theorem) in Physics-informed machine learning ([after this paper](https://www.nature.com/articles/s41467-021-26434-1))
 
-__Essay__
+__Essay.__
 My forecast of ML development in the next ten years (with approximate plan)
 1. What trends and topics will impact scientific research 
 2. What tools will be most useful in academic and industrial research
