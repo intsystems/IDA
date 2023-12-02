@@ -355,7 +355,7 @@ A fully developed problem statement of high creativity with your authorship. The
 
 __A word of of inspiration.__
 
-Глядя на лошадиные морды и лица людей, на безбрежный живой поток, поднятый моей волей и мчащийся в никуда по багровой закатной степи, я часто думаю: где я в этом потоке? Чингиз-хан (В.П.,  ЧиП)
+Глядя на лошадиные морды и лица людей, на безбрежный живой поток, <!--поднятый моей волей и--> мчащийся в никуда по багровой закатной степи, я часто думаю: где я в этом потоке? <!--Чингиз-хан--> (В.П.,  ЧиП, цензура В.С.)
 
 Motivation: we could adhere to prevailing ML trends to be in our churchyard communion with the fashion of being strong. But our eternal search for a stronghold means our difficulties in providing one for ourselves and our companions.
 
