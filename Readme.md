@@ -372,6 +372,7 @@ My forecast of ML development in the next ten years (with approximate plan)
 1. [Reconstruction of time series using S4](week_9/SSM/S4.pdf)
 2. [Reconstruction of time series using pruning via sampling](week_9/dyn_graph_reconstruction/Dynamic%20graph%20pruning%20an%20reconstruction%20.pdf)
 3. [Dimension Reduction for Time Series with Score-based generative modeling](week_9/sb_dim_reduction/main.pdf)
+4. [Generative Modeling for EEG Classification via Signal Filtering](https://github.com/intsystems/IDA/blob/main-2023/week_9/GMS_EEG_classification/GMS_EEG_classification.pdf)
 
 ### Week 10
 
