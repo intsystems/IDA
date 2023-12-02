@@ -351,7 +351,7 @@ My forecast of ML development in the next ten years (with approximate plan)
 ### Week 12. Topics to deliver
 __Delivery.__
 
-A fully developed problem statement of high creativity with your authorship. An all-project-in-one slide
+A fully developed problem statement of high creativity with your authorship. The format is an m1p template plus an all-project-in-one slide
 
 __A word of of inspiration.__
 
