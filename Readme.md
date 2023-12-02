@@ -348,10 +348,8 @@ My forecast of ML development in the next ten years (with approximate plan)
 3. What applications will be the most significant
 4. What is my role in the profession, how I will develop my career
 
-### Week 12. Topics to deliver
-__Delivery.__
-
-A fully developed problem statement of high creativity with your authorship. The format is an m1p template plus an all-project-in-one slide
+### Week 12. The final 
+__delivery.__ A fully developed problem statement of high creativity with your authorship. The format is an m1p template plus an all-project-in-one slide
 
 __A word of of inspiration.__
 
@@ -359,7 +357,7 @@ __A word of of inspiration.__
 
 We adhere to prevailing ML trends to be in our churchyard communion with the fashion of being strong. But our eternal search for a stronghold means our difficulties in providing one for ourselves and our companions.
 
-So, please provide your message, yet unspoken by anybody. It comprises novelty that sounds like a surprising story.  This delivery stands on solid ground but is completely yours. The tale you are ready to fight and defend. 
+So, please provide your own message, yet unspoken by anybody. It comprises novelty that sounds like a surprising story.  This delivery stands on solid ground but is completely yours. The tale you are ready to fight and defend. 
 
 ## Table of contents  
 ### Week 1
