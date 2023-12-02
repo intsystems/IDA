@@ -348,6 +348,19 @@ My forecast of ML development in the next ten years (with approximate plan)
 3. What applications will be the most significant
 4. What is my role in the profession, how I will develop my career
 
+### Week 12. Topics to deliver
+__Delivery.__
+
+A fully developed problem statement of high creativity with your authorship. An all-project-in-one slide
+
+__A word of of inspiration.__
+
+Глядя на лошадиные морды и лица людей, на безбрежный живой поток, поднятый моей волей и мчащийся в никуда по багровой закатной степи, я часто думаю: где я в этом потоке? Чингиз-хан (В.П.,  ЧиП)
+
+Motivation: we could adhere to prevailing ML trends to be in our churchyard communion with the fashion of being strong. But our eternal search for a stronghold means our difficulties in providing one for ourselves and our companions.
+
+So, please provide your message, yet unspoken by anybody. It comprises novelty that sounds like a surprising story.  This delivery stands on solid ground but is completely yours. The tale you are ready to fight and defend. 
+
 ## Table of contents  
 ### Week 1
 1. [D4](week_1/D4/main.pdf)
