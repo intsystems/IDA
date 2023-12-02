@@ -366,7 +366,7 @@ My forecast of ML development in the next ten years (with approximate plan)
 3. [Time series reconstruction](week_4/ts_reconstruction/main.pdf)
 
 ### Week 8
-1. [Riemannian model]
+1. [Graph Neural Networks on SPD Manifolds for Motor Imagery Classification: A Perspective From the Time–Frequency Analysis [Riemannian model]](https://github.com/intsystems/IDA/blob/main-2023/week_7/Graph-CSPNet/Graph_CSPNet.pdf)
 
 ### Week 9
 1. [Reconstruction of time series using S4](week_9/SSM/S4.pdf)
