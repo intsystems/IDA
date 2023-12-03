@@ -385,5 +385,16 @@ So, please provide your own message, yet unspoken by anybody. It comprises novel
 3. [Dimension Reduction for Time Series with Score-based generative modeling](week_9/sb_dim_reduction/main.pdf)
 4. [Generative Modeling for EEG Classification via Signal Filtering](https://github.com/intsystems/IDA/blob/main-2023/week_9/GMS_EEG_classification/GMS_EEG_classification.pdf)
 
-### Week 10
+### Week 10 
+
+
+
+### Week 11
+
+1. Essays on the future of ML:
+   - [Artyom Matveev's essay](https://github.com/intsystems/IDA/blob/main-2023/week_11/Essay_Matveev/Essay_Matveev_Artyom.pdf)
+
+
+
+
 
