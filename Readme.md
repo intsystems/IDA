@@ -349,7 +349,7 @@ My forecast of ML development in the next ten years (with approximate plan)
 4. What is my role in the profession, how I will develop my career
 
 ### Week 12. The final 
-__delivery.__ A fully developed problem statement of high creativity with your authorship. The format is an m1p template plus an all-project-in-one slide
+__delivery.__ A fully developed project description of high creativity with your authorship. The format is an m1p template plus an all-project-in-one slide
 
 __A word of inspiration.__
 
