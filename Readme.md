@@ -351,7 +351,7 @@ My forecast of ML development in the next ten years (with approximate plan)
 ### Week 12. The final 
 __delivery.__ A fully developed problem statement of high creativity with your authorship. The format is an m1p template plus an all-project-in-one slide
 
-__A word of of inspiration.__
+__A word of inspiration.__
 
 Глядя на лошадиные морды и лица людей, на безбрежный живой поток, <!--поднятый моей волей и--> мчащийся в никуда по багровой закатной степи, я часто думаю: где я в этом потоке? <!--Чингиз-хан--> (В.П.,  ЧиП, сокр. В.С.)
 
