@@ -393,8 +393,11 @@ So, please provide your own message, yet unspoken by anybody. It comprises novel
 
 1. Essays on the future of ML:
    - [Artyom Matveev's essay](https://github.com/intsystems/IDA/blob/main-2023/week_11/Essay_Matveev/Essay_Matveev_Artyom.pdf)
+  
+   
+### Week 12
 
-
+1. [Score-based multimodal generative model](week_12/score_ae_dim_red/main.pdf)
 
 
 
