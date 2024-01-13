@@ -397,7 +397,7 @@ So, please provide your own message, yet unspoken by anybody. It comprises novel
    
 ### Week 12
 
-1. [Score-based multimodal generative model](week_12/score_ae_dim_red/main.pdf)
+1. [Score-based multimodal generative model](week_12/score_ae_dim_red/Yakovlev_2024_statement.pdf)
 2. [Variational Canonical Correlation Analysis](week_12/vcca_with_kernels/main.pdf)
 
 
