@@ -103,15 +103,17 @@ Konstantin Yakovlev \inst{1} \and
 
 
 \begin{frame}{Project description}
-    \textbf{Title}: Learning the correlation among the latent variables in the reduced latent space. \\
+    \textbf{Title}: Learning the correlation among modalities. \\
     \textbf{Problem}: Consider a multimodel generative modeling task. The goal of inference is to sample unobserved modalities
-    given the observed ones. \\
-    \textbf{Data}: PolyMnist, CelebAMask-HQ. \\
+    given the observed ones. The challenge is that Score-Based Multimodal Autoencoders do not select the dimension of the latent
+    space of each modality properly. Therefore, this makes it more difficult to learn correlations among the
+    modalities.\\
+    \textbf{Data}: \href{https://openreview.net/forum?id=5Y21V0RDBV}{PolyMnist},
+    \href{https://openaccess.thecvf.com/content_CVPR_2020/papers/Lee_MaskGAN_Towards_Diverse_and_Interactive_Facial_Image_Manipulation_CVPR_2020_paper.pdf}{CelebAMask-HQ}. \\
     \textbf{Reference}: (1) and (2). \\
-    \textbf{Basic solution}: Score-Based Multimodal AE. \\
-    \textbf{Proposed solution}: Score-Based Multimodal Autoencoders do not select the dimension of the latent
-    space of each modality properly. Therefore, this makes it more difficult to learn correlations
-    among the modalities. Thus, reduce the dimension of the latent space of each modality with Score Ratio Matching. \\
+    \textbf{Basic solution}: Score-Based Multimodal AE: instead of learning a joint posterior,
+     model a joint prior. This allows us to better capture the correlations among modalities. \\
+    \textbf{Proposed solution}: Reduce the dimension of the latent space of each modality with Score Ratio Matching. \\
     \textbf{Novelty}: we address the challenge of generative quality degradation when the number of modalities increases.
 \end{frame}
 
