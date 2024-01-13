@@ -1,7 +1,10 @@
 ### Title: 
-Pruning dynamic graph via sampling, Reconstruction of time series via sampling dynamic graph , Reconstruction of time series with pruned dynamic graph, Comparison of two pruning dynamic graph methods via sampling and low-rank decomposition
+Pruning dynamic graph via sampling, Reconstruction of time series via sampling dynamic graph, Reconstruction of time series with pruned dynamic graph, Comparison of two pruning dynamic graph methods via sampling and low-rank decomposition
 ### Problem:
-Let it is given time series. One has to make dynamic graph building pairwise distance matrix, compare methods of pruning: low-rank decomposition to sparce matirx, sampling (distance should be scaled from 0 to 1), and reconstruct obtained dynamic graph to initial time series according to MSE
+Let it is given time series. One has to:
+1. using neural network _f_ build sparse stochastic matrix, where vecotrs would be discrete pobabilty ditsribution of edges between two nodes (will look like pairwise distance matrix);
+2. get top p graph edges from these distribution (probably it could be skiped, because obtained stochastic matrix could already be used as adjenecy matrix);
+3. reconstruct obtained dynamic graph to initial time series according to MSE
 ### Data: 
 Motor Imagery datasets  from MOABB framework: 
 1. [AlexMI](https://neurotechx.github.io/moabb/generated/moabb.datasets.AlexMI.html#moabb.datasets.AlexMI) - for simple experiments
@@ -13,6 +16,6 @@ Motor Imagery datasets  from MOABB framework:
 1. implementation of methods without pruning;
 2. implementation from Varenik 2022
 ### Proposed solution:
-Add sparsity prior to sampling process
+The eaysiest way to make adjenecy matrices sparce is to make stochastic matrices sparce too. To do it we add regularizer for first neural network _f_, accordingly to a prior distirbution which mode is close to zero. 
 ### Novelty:
-New method pruning dense matrices using Bayesian approach
+This method gives ability to sample graphs from time series that are already sparced by the additional regularizers 
