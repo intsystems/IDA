@@ -16,6 +16,6 @@ Motor Imagery datasets  from MOABB framework:
 1. implementation of methods without pruning;
 2. implementation from Varenik 2022
 ### Proposed solution:
-The eaysiest way to make adjenecy matrices sparce is to make stochastic matrices sparce too. To do it we add regularizer for first neural network _f_, accordingly to a prior distirbution which mode is close to zero. 
+The eaysiest way to make adjenecy matrices sparse is to make stochastic matrices sparse too. To do it we add regularizer for first neural network _f_, accordingly to a prior distirbution which mode is close to zero. 
 ### Novelty:
-This method gives ability to sample graphs from time series that are already sparced by the additional regularizers 
+This method gives ability to sample graphs from time series that are already sparsed by the additional regularizers 
