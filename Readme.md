@@ -398,6 +398,18 @@ So, please provide your own message, yet unspoken by anybody. It comprises novel
 ### Week 12
 
 1. [Score-based multimodal generative model](week_12/score_ae_dim_red/Yakovlev_2024_statement.pdf)
+    1. __Title__: Learning the correlation among modalities.
+    2. __Problem__: Consider a multimodel generative modeling task. The goal of inference is to sample unobserved modalities
+    given the observed ones. The challenge is that Score-Based Multimodal Autoencoders do not select the dimension of the latent
+    space of each modality properly. Therefore, this makes it more difficult to learn correlations among the
+    modalities.
+    3. __Data__: [PolyMNIST](https://openreview.net/forum?id=5Y21V0RDBV), [CelebAMask-HQ](https://openaccess.thecvf.com/content_CVPR_2020/papers/Lee_MaskGAN_Towards_Diverse_and_Interactive_Facial_Image_Manipulation_CVPR_2020_paper.pdf)
+    4.__Reference__: [Score-Based Multimodal Autoencoders](https://arxiv.org/pdf/2305.15708.pdf), [Dimension reduction via score ratio matching](https://openreview.net/pdf?id=YAN97j2NmGT)
+    5. __Base solution__: Score-Based Multimodal AE: instead of learning a joint posterior,
+     model a joint prior. This allows us to better capture the correlations among modalities.
+    6. __Proposed solution__: First, reduce the dimension of the latent space of each modality with Score Ratio Matching. Second, learn the prior as it was done in the basic solution.
+    7. __Novelty__: we address the challenge of generative quality degradation when the number of modalities increases.
+
 2. [Variational Canonical Correlation Analysis](week_12/vcca_with_kernels/main.pdf)
 3. [Sparse Dynamic Graph Sampling](week_12/dynamic_graph_reconstruction/README.md)
 
