@@ -399,6 +399,7 @@ So, please provide your own message, yet unspoken by anybody. It comprises novel
 
 1. [Score-based multimodal generative model](week_12/score_ae_dim_red/Yakovlev_2024_statement.pdf)
 2. [Variational Canonical Correlation Analysis](week_12/vcca_with_kernels/main.pdf)
+3. [Sparse Dynamic Graph Sampling](week_12/dynamic_graph_reconstruction/README.md)
 
 
 
