@@ -41,6 +41,10 @@ f(x) = \sum_{i=1}^n \alpha_i k_X(x_i, x), \quad g(y) = \sum_{j=1}^m \beta_j k_Y(
 The problem then reduces to finding the coefficients \( \alpha \) and \( \beta \) that maximize the correlation between these functions.
 
 \includegraphics[scale=0.35]{tmp_example.png}
+
+\section{Implementation}
+One of the implementations of KCCA can be found in mvlearn 
+\href{https://github.com/mvlearn/mvlearn/blob/main/mvlearn/embed/kmcca.py}{library} by Theodore Lee and Ronan Perry. They also allow the use of Incomplete Cholesky Decomposition looks for a low rank approximation of the kernel matrix. This reduces storage requirements from $O(n^2)$ to $O(nm)$, where $n$ is the number of subjects (rows) and $m$ is the rank of the kernel matrix. This also reduces the run-time from $O(n^3)$ to $O(nm^2)$.
 \section{Application to \( L^2[a,b] \) Spaces}
 
 In functional data analysis, we often work with functions rather than finite-dimensional vectors. The space \( L^2[a,b] \) consists of square-integrable functions over the interval \( [a, b] \), equipped with the inner product
@@ -58,5 +62,25 @@ The kernel allows us to implicitly map functions from \( L^2[a,b] \) into a high
 \section{Conclusion}
 
 Kernel CCA is a versatile extension of classical CCA, capable of handling nonlinear relationships by operating in a reproducing kernel Hilbert space. When applied to function spaces such as \( L^2[a,b] \), it becomes a powerful tool for analyzing functional data, which is increasingly common in various scientific fields. The use of appropriate kernels tailored to the specific characteristics of the data is crucial for the success of Kernel CCA in these contexts.
+\begin{thebibliography}{9}
 
+\bibitem{hardoon2004cca}
+  Hardoon, D., Szedmak, S., and Shawe-Taylor, J.,
+  \emph{Canonical Correlation Analysis: An Overview with Application to Learning Methods}, 
+  Neural Computation, 
+  Volume 16, Number 12, pp. 2639--2664, 2004.
+
+\bibitem{bach2002kernelica}
+  Bach, F. and Jordan, M.,
+  \emph{Kernel Independent Component Analysis}, 
+  Journal of Machine Learning Research, 
+  Volume 3, pp. 1--48, 2002.
+
+\bibitem{kuss2003geometry}
+  Kuss, M. and Graepel, T., 
+  \emph{The Geometry of Kernel Canonical Correlation Analysis}, 
+  MPI Technical Report, 
+  Number 108, 2003.
+
+\end{thebibliography}
 \end{document}
