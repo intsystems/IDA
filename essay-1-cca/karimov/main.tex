@@ -1,0 +1,62 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+
+\title{Functional Principal Component Analysis (PCA): A Method for Dimensionality Reduction of Functional Data}
+\author{Parviz Karimov}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\abstract{ Functional Principal Component Analysis (PCA) is a statistical technique used to reduce the dimensionality of functional data, which are characterized by their dependence on a continuous variable, such as time. In this paper, we will discuss the functional PCA method, its applications, and its advantages over traditional PCA and describe how to apply functional PCA to a set of functional data. }
+
+\section{Introduction} Functional data analysis has become increasingly popular in recent years, particularly in the fields of engineering, economics, and medicine. This is due to the fact that many real-world phenomena, such as stock prices, temperatures, and brain activity, can be represented as functions of a continuous variable. Traditional PCA is a widely used dimensionality reduction technique that has been applied to multivariate data. However, traditional PCA is not suitable for functional data, as it assumes that the data are multivariate observations, not functions. Functional PCA, on the other hand, is a method that extends traditional PCA to functional data. \section{Theory} Let $\{X(t)\}$ be a functional data set, where $t \in \mathbb{R}$ is a continuous variable, and $X(t)$ is a random function that takes values in the \textbf{Hilbert space} $\mathcal{H} = L^2([0, T]) = \left\{ f \,|\, \int_{0}^{T} |f(t)|^2 dt < \infty \right\}$. The functional PCA method can be described as follows:
+
+1. \textbf{Standardization:} The functional data are standardized to have zero mean and unit variance, i.e., \[ \tilde{X}(t) = X(t) - \frac{1}{T} \int_{0}^{T} X(s)ds, \] where $T$ is the length of the observation interval.
+
+2. \textbf{Covariance Operator:} The covariance operator $C$ of the standardized functional data is defined as \[ C \tilde{X}(t) = \int_{0}^{T} R(s, t) \tilde{X}(s) ds, \] where $R(s,t) = \text{cov}(\tilde{X}(s), \tilde{X}(t))$ is the covariance function of the functional data, which is a \textbf{symmetric bilinear form} on the Hilbert space $\mathcal{H}$.
+
+
+3. \textbf{Eigenvalue and Eigenvector Computation:} The eigenvalues $\{\lambda_k\}$ and eigenvectors $\{\phi_k(t)\}$ of the covariance operator $C$ are obtained by solving the eigenvalue problem \[ C \phi_k(t) = \lambda_k \phi_k(t). \] The eigenvalues and eigenvectors of the covariance operator can be expressed in terms of the Karhunen-Loève expansion of the functional data: \[ X(t) = \sum_{k=1}^{\infty} \sqrt{\lambda_k} \phi_k(t) \xi_k, \] where $\{\xi_k\}$ is a sequence of independent and identically distributed random variables with values in the \textbf{real line} $\mathbb{R}$. 
+
+\section{Karhunen-Loève Expansion}
+
+The Karhunen-Loève expansion can be expressed as:
+\[ X(t) = \sum_{k=1}^{\infty} \sqrt{\lambda_k} \phi_k(t), \]
+where $\{\phi_k(t)\}$ are the eigenfunctions of the covariance operator, and $\{\lambda_k\}$ are the corresponding eigenvalues.
+
+The Karhunen-Loève expansion can be written in a more compact form as:
+\[ X(t) = \sum_{k=1}^{\infty} \phi_k(t) \left( \int_{0}^{T} \phi_k(s) X(s)ds \right) \]
+
+The terms $\{\phi_k(t) \left( \int_{0}^{T} \phi_k(s) X(s)ds \right)\}$ are the \textbf{principal components} of the functional data.
+
+\section{Advantages}
+
+Functional PCA has several advantages over traditional PCA:
+
+1. \textbf{Robustness to Noise:} Functional PCA is more robust to noise than traditional PCA, as it takes into account the variability of the functional data along the entire domain.
+
+2. \textbf{Interpretability:} The principal components obtained by functional PCA are interpretable as the directions of maximum variance of the functional data.
+
+3. \textbf{Dimensionality Reduction:} Functional PCA can reduce the dimensionality of the functional data while retaining most of the information.
+
+\section{Applications}
+
+Functional PCA has been applied in various fields, including:
+
+1. \textbf{Finance:} Functional PCA has been used to analyze the behavior of stock prices and other financial time series.
+
+2. \textbf{Medicine:} Functional PCA has been used to analyze the data from medical imaging studies, such as brain activity and heart rate variability.
+
+3. \textbf{Engineering:} Functional PCA has been used to analyze the behavior of mechanical systems, such as temperature and pressure data.
+
+\section{Conclusion}
+
+In conclusion, functional PCA is a powerful technique for dimensionality reduction of functional data. Its advantages over traditional PCA, such as robustness to noise and interpretability, make it a valuable tool in various fields. The Karhunen-Loève expansion provides a clear understanding of the functional PCA method and its applications.
+
+\begin{thebibliography}{9} \bibitem{Ramsay2005} Ramsay, J. O., & Silverman, B. W. (2005). Functional data analysis. Springer. \bibitem{Yao2005} Yao, F., Müller, H. G., & Wang, J. L. (2005). Functional linear regression analysis for longitudinal data. Annals of Statistics, 33(2), 635-665. \bibitem{Zhang2016} Zhang, D., & Wang, Y. (2016). Functional principal component analysis for high-dimensional functional data. Journal of the American Statistical Association, 111(514), 111-126. \bibitem{Hsing2003} Hsing, T., & Huang, B. (2003). The law of the iterated logarithm for the maximum of a Gaussian process. Annals of Probability, 31(3), 1353-1371. \end{thebibliography}
+
+\end{document}
