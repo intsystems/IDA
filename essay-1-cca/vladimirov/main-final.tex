@@ -275,17 +275,17 @@
 	
 	\begin{table}[bhtp]
 		\centering
-		\begin{tabulary}{\textwidth}{|C|C|C|C|C|}
+		\begin{tabulary}{\textwidth}{|C|C|C|C|C|C|}
 			\hline
-			\textbf{Attn} & \textbf{Self-attn} & \textbf{Cross-attn} & \textbf{CCA} & \textbf{CCA-X} \\
+			\textbf{Attn} & \textbf{Self-attn} & \textbf{Cross-attn} & \textbf{CCA} & \textbf{CCA-X} & \textbf{CCA-Y} \\
 			\hline
-			$Q$                & $W_Q\T X$                 & $W_Q\T X$                  & $A\T X$ & $S_{11}^{-\frac{1}{2}}X$    \\
+			$Q$                & $W_Q\T X$                 & $W_Q\T X$                  & $A\T X$ & $S_{11}^{-\frac{1}{2}}X$ & $S_{11}^{-\frac{1}{2}}X$  \\
 			\hline
-			$K$                & $W_K\T X$                 & $W_K\T Y$                  & $B\T Y$ & $S_{22}^{-\frac{1}{2}}Y$     \\
+			$K$                & $W_K\T X$                 & $W_K\T Y$                  & $B\T Y$ & $S_{22}^{-\frac{1}{2}}Y$ & $S_{22}^{-\frac{1}{2}}Y$    \\
 			\hline
-			$V$                & $W_V\T X$                 & $W_V\T Y$                  & I & $S_{11}^{-\frac{1}{2}}X$   \\
+			$V$                & $W_V\T X$                 & $W_V\T Y$                  & I & $S_{11}^{-\frac{1}{2}}X$ & $S_{22}^{-\frac{1}{2}}Y$  \\
 			\hline 
-			$\varphi$ & softmax & softmax & Id & $\text{SVD}_U$ \\
+			$\varphi$ & softmax & softmax & Id & $\text{SVD}_U$ & $\text{SVD}_V$ \\
 			\hline  
 		\end{tabulary}
 		\caption{United notation of CCA and attention}
