@@ -1,0 +1,307 @@
+\documentclass[a4paper,14pt]{article}
+
+%%% Работа с русским языком
+\usepackage{cmap}					% поиск в PDF
+\usepackage{mathtext} 				% русские буквы в формулах
+\usepackage[T2A]{fontenc}			% кодировка
+\usepackage[utf8]{inputenc}			% кодировка исходного текста
+\usepackage[english,russian]{babel}	% локализация и переносы
+\usepackage{indentfirst}
+\frenchspacing
+
+\newcommand{\bz}{\mathbf{z}}
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\by}{\mathbf{y}}
+\newcommand{\bv}{\mathbf{v}}
+\newcommand{\bw}{\mathbf{w}}
+\newcommand{\ba}{\mathbf{a}}
+\newcommand{\bb}{\mathbf{b}}
+\newcommand{\bp}{\mathbf{p}}
+\newcommand{\bq}{\mathbf{q}}
+\newcommand{\bt}{\mathbf{t}}
+\newcommand{\bu}{\mathbf{u}}
+\newcommand{\bT}{\mathbf{T}}
+\newcommand{\bX}{\mathbf{X}}
+\newcommand{\bZ}{\mathbf{Z}}
+\newcommand{\bS}{\mathbf{S}}
+\newcommand{\bH}{\mathbf{H}}
+\newcommand{\bW}{\mathbf{W}}
+\newcommand{\bY}{\mathbf{Y}}
+\newcommand{\bU}{\mathbf{U}}
+\newcommand{\bQ}{\mathbf{Q}}
+\newcommand{\bP}{\mathbf{P}}
+\newcommand{\bA}{\mathbf{A}}
+\newcommand{\bB}{\mathbf{B}}
+\newcommand{\bC}{\mathbf{C}}
+\newcommand{\bE}{\mathbf{E}}
+\newcommand{\bF}{\mathbf{F}}
+\newcommand{\bomega}{\boldsymbol{\omega}}
+\newcommand{\btheta}{\boldsymbol{\theta}}
+\newcommand{\bgamma}{\boldsymbol{\gamma}}
+\newcommand{\bdelta}{\boldsymbol{\delta}}
+\newcommand{\bPsi}{\boldsymbol{\Psi}}
+\newcommand{\bpsi}{\boldsymbol{\psi}}
+\newcommand{\bxi}{\boldsymbol{\xi}}
+\newcommand{\bchi}{\boldsymbol{\chi}}
+\newcommand{\bzeta}{\boldsymbol{\zeta}}
+\newcommand{\blambda}{\boldsymbol{\lambda}}
+\newcommand{\beps}{\boldsymbol{\varepsilon}}
+\newcommand{\bZeta}{\boldsymbol{Z}}
+% mathcal
+\newcommand{\cX}{\mathcal{X}}
+\newcommand{\cY}{\mathcal{Y}}
+\newcommand{\cW}{\mathcal{W}}
+
+\newcommand{\dH}{\mathbb{H}}
+\newcommand{\dR}{\mathbb{R}}
+% transpose
+\newcommand{\T}{^{\mathsf{T}}}
+
+\renewcommand{\epsilon}{\ensuremath{\varepsilon}}
+\renewcommand{\phi}{\ensuremath{\varphi}}
+\renewcommand{\kappa}{\ensuremath{\varkappa}}
+\renewcommand{\le}{\ensuremath{\leqslant}}
+\renewcommand{\leq}{\ensuremath{\leqslant}}
+\renewcommand{\ge}{\ensuremath{\geqslant}}
+\renewcommand{\geq}{\ensuremath{\geqslant}}
+\renewcommand{\emptyset}{\varnothing}
+
+%%% Дополнительная работа с математикой
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools} % AMS
+\usepackage{icomma} % "Умная" запятая: $0,2$ --- число, $0, 2$ --- перечисление
+
+%% Номера формул
+%\mathtoolsset{showonlyrefs=true} % Показывать номера только у тех формул, на которые есть \eqref{} в тексте.
+%\usepackage{leqno} % Нумереация формул слева
+
+%% Свои команды
+\DeclareMathOperator{\sgn}{\mathop{sgn}}
+
+%% Перенос знаков в формулах (по Львовскому)
+\newcommand*{\hm}[1]{#1\nobreak\discretionary{}
+	{\hbox{$\mathsurround=0pt #1$}}{}}
+
+%%% Работа с картинками
+\usepackage{graphicx}  % Для вставки рисунков
+\setlength\fboxsep{3pt} % Отступ рамки \fbox{} от рисунка
+\setlength\fboxrule{1pt} % Толщина линий рамки \fbox{}
+\usepackage{wrapfig} % Обтекание рисунков текстом
+
+%%% Работа с таблицами
+\usepackage{array,tabularx,tabulary,booktabs} % Дополнительная работа с таблицами
+\usepackage{longtable}  % Длинные таблицы
+\usepackage{multirow} % Слияние строк в таблице
+
+%%% Теоремы
+\theoremstyle{plain} % Это стиль по умолчанию, его можно не переопределять.
+\newtheorem{theorem}{Теорема}[section]
+\newtheorem{proposition}[theorem]{Утверждение}
+
+\theoremstyle{definition} % "Определение"
+\newtheorem{corollary}{Следствие}[theorem]
+\newtheorem{problem}{Задача}[section]
+
+\theoremstyle{remark} % "Примечание"
+\newtheorem*{nonum}{Решение}
+
+%%% Программирование
+\usepackage{etoolbox} % логические операторы
+
+%%% Страница
+\usepackage{extsizes} % Возможность сделать 14-й шрифт
+\usepackage{geometry} % Простой способ задавать поля
+\geometry{top=25mm}
+\geometry{bottom=35mm}
+\geometry{left=35mm}
+\geometry{right=20mm}
+%
+%\usepackage{fancyhdr} % Колонтитулы
+% 	\pagestyle{fancy}
+%\renewcommand{\headrulewidth}{0pt}  % Толщина линейки, отчеркивающей верхний колонтитул
+% 	\lfoot{Нижний левый}
+% 	\rfoot{Нижний правый}
+% 	\rhead{Верхний правый}
+% 	\chead{Верхний в центре}
+% 	\lhead{Верхний левый}
+%	\cfoot{Нижний в центре} % По умолчанию здесь номер страницы
+
+\usepackage{setspace} % Интерлиньяж
+%\onehalfspacing % Интерлиньяж 1.5
+%\doublespacing % Интерлиньяж 2
+%\singlespacing % Интерлиньяж 1
+
+\usepackage{lastpage} % Узнать, сколько всего страниц в документе.
+
+\usepackage{soul} % Модификаторы начертания
+
+\usepackage{hyperref}
+\usepackage[usenames,dvipsnames,svgnames,table,rgb]{xcolor}
+\hypersetup{				% Гиперссылки
+	unicode=true,           % русские буквы в раздела PDF
+	pdftitle={Заголовок},   % Заголовок
+	pdfauthor={Автор},      % Автор
+	pdfsubject={Тема},      % Тема
+	pdfcreator={Создатель}, % Создатель
+	pdfproducer={Производитель}, % Производитель
+	pdfkeywords={keyword1} {key2} {key3}, % Ключевые слова
+	colorlinks=true,       	% false: ссылки в рамках; true: цветные ссылки
+	linkcolor=red,          % внутренние ссылки
+	citecolor=black,        % на библиографию
+	filecolor=magenta,      % на файлы
+	urlcolor=cyan           % на URL
+}
+
+\usepackage{csquotes} % Еще инструменты для ссылок
+
+%\usepackage[style=authoryear,maxcitenames=2,backend=biber,sorting=nty]{biblatex}
+
+\usepackage{multicol} % Несколько колонок
+
+\usepackage{tikz} % Работа с графикой
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+
+
+\author{Vladimirov Eduard, group М05-304а}
+\title{\textbf{CCA vs Cross-Attention Transformers}}
+\date{\today}
+
+\begin{document}
+	\maketitle
+	
+	\section*{Introduction}
+	
+	Finding meaningful relationships between multiple sets of variables is an important problem.
+	Canonical Correlation Analysis (CCA) is a well-established statistical technique that addresses this challenge by identifying linear relationships between two multivariate datasets.
+	On the other hand, cross-attention mechanism, is designed to capture and leverage dependencies between different input sequences.
+	Both CCA and cross-attention are fundamentally concerned with learning projections that reveal underlying dependencies between distinct sets of data.
+	By examining their theoretical connections and differences, we explore how CCA and cross-attention can complement each other in understanding and modeling relationships in high-dimensional spaces.
+	
+	\section*{CCA}
+	
+	Given two sets of vectors $X \in \mathbb{R}^{n_1 \times m}$ and $Y \in \mathbb{R}^{n_2 \times m}$, where $m$ denotes the number of vectors, CCA learns two linear transformations $A \in \mathbb{R}^{n_1 \times r}$ and $B \in \mathbb{R}^{n_2 \times r}$ such that the correlation between $A^T X$ and $B^T Y$ is maximized.
+	
+	Note the covariances of $X$ and $Y$ as $S_{11} = \frac{1}{m} X X\T \in \dR^{n_1 \times n_1}, S_{22} = \frac{1}{m} Y Y\T \in \dR^{n_2 \times n_2}$, and the cross-covariance of $X, Y$ as $S_{12} = \frac{1}{m} X Y\T \in \dR^{n_1 \times n_2}$. The CCA objective is 
+	
+	\begin{equation}
+		\begin{aligned}
+			A^*, B^* &= \arg \max_{A,B} \text{corr}(A^T X, B^T Y) \\
+			&= \arg \max_{A,B} \frac{A^T S_{12} B}{\sqrt{A^T S_{11} A \cdot B^T S_{22} B}}
+		\end{aligned}
+		\label{cca:objective}
+	\end{equation}
+	
+	The solution of the above equation is fixed and can be solved in multiple ways. One method suggested by (Martin and Maes 1979) lets $U, S, V^T$ be the Singular Value Decomposition (\textit{SVD}) of the matrix $Z = S_{11}^{- \frac{1}{2}} S_{12} S_{22}^{- \frac{1}{2}}$. Then $A^*, B^*$ and the total maximum canonical correlation are 
+	
+	\begin{equation}
+		\begin{aligned}
+			&A^* = S_{11}^{-\frac{1}{2}} U = \left( \frac{1}{m} X X^T \right)^{-\frac{1}{2}} U \\
+			&B^* = S_{22}^{-\frac{1}{2}} V = \left( \frac{1}{m} Y Y^T \right)^{-\frac{1}{2}} V \\
+			&\text{corr}(A^{*T} X, B^{*T} Y) = \text{trace}(Z^T Z)^{\frac{1}{2}}.
+		\end{aligned}
+		\label{cca:solution}
+	\end{equation}
+	
+	One limitation of CCA is that it only considers linear transformations, which limits its expressive power. In contrast, deep learning models employ non-linear mappings such as self-attention and cross-attention to learn more complex representations.
+	
+	\section*{Self-attention and cross-attention}
+	
+	Attention mechanisms are used to determine the relevance of different parts of the input data.
+	
+	The self-attention mechanism is defined as follows:
+	
+	\begin{equation}
+		\begin{aligned}
+			&\text{attn}: \mathbb{R}^{m \times d} \times \mathbb{R}^{m \times d} \times \mathbb{R}^{m \times d} \longrightarrow \mathbb{R}^{m \times d} \\
+			&\text{attn}(Q, K, V) = \varphi\left(\frac{Q K^\top}{\sqrt{d}}\right) V
+		\end{aligned}
+		\label{attn}
+	\end{equation}
+	
+	where $Q, K, V \in \dR^{m \times d}$ represent the queries, keys, and values, respectively, and $\varphi: \dR^{m \times m} \longrightarrow \dR^{m \times m}$ is row-wise applied nonlinear function, usually softmax. The dot product between $Q$ and $K$ determines the attention weights, which are normalized using the softmax function. The result is then applied to the values $V$ to generate the output.
+	
+	Self-attention applied to the input $X \in \dR^{m \times n_1}$ is computed as:
+	
+	\begin{equation}
+		\begin{aligned}
+			&\text{self-attn}: \mathbb{R}^{m \times n_1} \longrightarrow \mathbb{R}^{m \times d} \\
+			&\text{self-attn}(X) = \text{attn}(X W_q, X W_k, X W_v)
+		\end{aligned}
+		\label{self-attn}
+	\end{equation}
+
+	
+	where $W_q, W_k, W_v \in \dR^{n_1 \times d}$ ~--- parameter matrices
+	
+	
+	In multihead attention, several attention heads are used in parallel, where each head computes its own attention weights and outputs. The outputs are then concatenated and linearly transformed by a weight matrix $W^Q \in \dR^{p \cdot d \times d}$:
+	
+	\begin{equation}
+		\text{multihead-attn}(Q, K, V) = [\text{head}_1, \ldots, \text{head}_p] W^Q,
+		\label{multihead-attn}
+	\end{equation}
+	
+	where $\text{head}_i = \text{self-attn}(X)$
+	
+	Cross-attention, in contrast, involves attention between two different sets of inputs. It computes attention by using one set of inputs for queries $X_1 \in \dR^{m \times d_1}$ and another set for keys and values $X_2 \in \dR^{m \times d_2}$:
+	
+	\begin{equation}
+		\text{cross-attn}(X_1, X_2) = \text{attn}(X_1 W_q, X_2 W_k, X_2 W_v) \label{cross-attn}
+	\end{equation}
+	
+	\section*{CCA and attention}
+	
+	Both CCA and attention mechanisms aim to find relationships between two sets of data. However, they differ significantly in their approach and applications:
+	
+	\setlength{\extrarowheight}{3mm}
+	
+	\begin{table}[bhtp]
+		\centering
+		\begin{tabulary}{\textwidth}{|C|C|C|}
+			\hline
+			\textbf{Aspect} & \textbf{Attention} & \textbf{Canonical Correlation Analysis (CCA)} \\ 
+			\hline
+			Goal & Identify relevant parts of input sequences & Receive embeddings in the same hidden space + dimensionality reduction \\
+			\hline
+			Similarity Measure & $A = \frac{1}{\sqrt{d}} Q K\T$ ~-- attention matrix & $\text{tr}(A\T S_{12} B), \text{ s.t. } A\T S_{11} A = B\T S_{22} B = I$ \\
+			\hline
+			Optimization Goal & Minimize task-specific loss & $\max_{A,B} \text{corr}(A^T X, B^T Y)$ \\
+			\hline
+		\end{tabulary}
+		\caption{Comparison of Attention Mechanisms and CCA}
+	\end{table}
+	
+	Note that $A\T S_{12} B = \frac{1}{m} A\T X Y\T B = \frac{1}{m} A\T X \left( B\T Y \right)\T = \frac{1}{m} \widehat{Q} \widehat{K}\T $. And it's quite similar to attention matrix formula $A = \dfrac{1}{\sqrt{d}} Q K\T$. Especially, in cross attention case, where $Q$ is a linear transformation of $X_1$ and $K$ is a linear transformation of $X_2$:
+	
+	\begin{table}[bhtp]
+		\centering
+		\begin{tabulary}{\textwidth}{|C|C|C|C|C|}
+			\hline
+			\textbf{Attn} & \textbf{Self-attn} & \textbf{Cross-attn} & \textbf{CCA} & \textbf{CCA-X} \\
+			\hline
+			$Q$                & $W_Q\T X$                 & $W_Q\T X$                  & $A\T X$ & $S_{11}^{-\frac{1}{2}}X$    \\
+			\hline
+			$K$                & $W_K\T X$                 & $W_K\T Y$                  & $B\T Y$ & $S_{22}^{-\frac{1}{2}}Y$     \\
+			\hline
+			$V$                & $W_V\T X$                 & $W_V\T Y$                  & I & $S_{11}^{-\frac{1}{2}}X$   \\
+			\hline 
+			$\varphi$ & softmax & softmax & Id & $\text{SVD}_U$ \\
+			\hline  
+		\end{tabulary}
+		\caption{United notation of CCA and attention}
+	\end{table}
+
+	Let's view in detail the CCA projection of $X$ to latent space:
+	\begin{equation}
+		\begin{aligned}
+			\text{CCA}_{XY}(X) &= U\T S_{11}^{-\frac{1}{2}}X = U\T X_1 \\
+			\text{CCA}_{XY}(Y) &= V\T S_{22}^{-\frac{1}{2}}Y = V\T Y_1 \\
+			Z &= S_{11}^{- \frac{1}{2}} S_{12} S_{22}^{- \frac{1}{2}} = \frac{1}{m} X_1 Y_1\T
+		\end{aligned}
+	\end{equation}
+
+	\section*{Conclusion}
+	CCA and attention mechanism are mechanisms for finding relationships between two datasets. They both exploit cross-correlation matrix $X\T Y$. However, while CCA focuses on linear transformations for maximizing correlations, attention mechanism uses non-linear mappings and is optimized using task-specific loss functions.
+	
+	
+\end{document}
