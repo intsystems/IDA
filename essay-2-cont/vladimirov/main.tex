@@ -1,15 +1,13 @@
-
-\documentclass[a4paper,12pt]{article}
+\documentclass[a4paper,14pt]{article}
 
 %%% Работа с русским языком
 \usepackage{cmap}					% поиск в PDF
 \usepackage{mathtext} 				% русские буквы в формулах
 \usepackage[T2A]{fontenc}			% кодировка
 \usepackage[utf8]{inputenc}			% кодировка исходного текста
-\usepackage[english]{babel}	% локализация и переносы
+\usepackage[english,russian]{babel}	% локализация и переносы
 \usepackage{indentfirst}
 \frenchspacing
-\usepackage{amsmath}
 
 \newcommand{\bz}{\mathbf{z}}
 \newcommand{\bx}{\mathbf{x}}
@@ -41,8 +39,8 @@
 \newcommand{\btheta}{\boldsymbol{\theta}}
 \newcommand{\bgamma}{\boldsymbol{\gamma}}
 \newcommand{\bdelta}{\boldsymbol{\delta}}
-%\newcommand{\bPsi}{\boldsymbol{\Psi}}
-%\newcommand{\bpsi}{\boldsymbol{\psi}}
+\newcommand{\bPsi}{\boldsymbol{\Psi}}
+\newcommand{\bpsi}{\boldsymbol{\psi}}
 \newcommand{\bxi}{\boldsymbol{\xi}}
 \newcommand{\bchi}{\boldsymbol{\chi}}
 \newcommand{\bzeta}{\boldsymbol{\zeta}}
@@ -60,7 +58,7 @@
 \newcommand{\T}{^{\mathsf{T}}}
 
 \renewcommand{\epsilon}{\ensuremath{\varepsilon}}
-%\renewcommand{\phi}{\ensuremath{\varphi}}
+\renewcommand{\phi}{\ensuremath{\varphi}}
 \renewcommand{\kappa}{\ensuremath{\varkappa}}
 \renewcommand{\le}{\ensuremath{\leqslant}}
 \renewcommand{\leq}{\ensuremath{\leqslant}}
@@ -155,7 +153,8 @@
 
 \usepackage{csquotes} % Еще инструменты для ссылок
 
-%\usepackage[style=authoryear,maxcitenames=2,backend=biber,sorting=nty]{biblatex}
+\usepackage[style=authoryear,maxcitenames=2,backend=biber,sorting=nty]{biblatex}
+\addbibresource{references.bib}
 
 \usepackage{multicol} % Несколько колонок
 
@@ -164,96 +163,223 @@
 \usepackage{pgfplotstable}
 
 
-\begin{document}
-
-\title{Adjoint Method in Neural ODE and Continuous Backpropagation}
-\author{Boeva Galina, group М05-304а}
+\author{Vladimirov Eduard, group М05-304а}
+\title{\textbf{Riemannian continuous models}}
 \date{\today}
 
-\maketitle
+\begin{document}
+	\maketitle
+	
+	\section{Introduction}
+	
+	Continuous models like Neural ODEs and normalizing flows have revolutionized machine learning by modeling complex data dynamics over continuous time. However, these models traditionally assume that data resides in Euclidean space, limiting their applicability to datasets with inherent non-Euclidean geometries. Many real-world datasets naturally lie on \emph{Riemannian manifolds} ~--- curved spaces that require specialized mathematical frameworks to capture their intrinsic geometry.
+	
+	Riemannian geometry extends calculus to curved spaces, providing tools like \emph{tangent spaces} and the \emph{exponential map} to navigate manifolds. Incorporating this geometry into continuous models allows for more accurate and efficient learning from manifold-valued data. This essay explores two significant advancements in this area:
+	
+	\begin{enumerate}
+		\item \textbf{Riemannian Continuous Normalizing Flows:} These models generalize normalizing flows to manifolds by defining flows via manifold ODEs, enabling the modeling of complex probability distributions while respecting geometric constraints.
+		
+		\item \textbf{Neural Manifold ODE:} Extending Neural ODEs to manifolds, these models utilize techniques like the \emph{dynamic chart method} to solve ODEs intrinsically on manifolds.
+	\end{enumerate}
+	
+	By leveraging the intrinsic geometry of manifolds, these Riemannian continuous models enhance performance in fields where data resides on curved spaces, such as robotics and medical imaging.
+	
+	\section{Background on Riemannian Geometry and Continuous Models}
+	
+	\subsection{Riemannian Geometry Fundamentals}
+	
+	Let $\mathcal{M}$ be a smooth manifold of dimension $n$. A \emph{smooth manifold} is a topological manifold equipped with an atlas of coordinate charts $\{(U_\alpha, \phi_\alpha)\}$, where each $U_\alpha$ is an open subset of $\mathcal{M}$, and $\phi_\alpha: U_\alpha \rightarrow \mathbb{R}^n$ is a homeomorphism onto its image, such that the transition maps $\phi_{\beta} \circ \phi_{\alpha}^{-1}: \phi_{\alpha}(U_\alpha \cap U_\beta) \rightarrow \phi_{\beta}(U_\alpha \cap U_\beta)$ are smooth whenever $U_\alpha \cap U_\beta \neq \emptyset$.
+	
+	At each point $p \in \mathcal{M}$, the \emph{tangent space} $T_p\mathcal{M}$ is a real vector space consisting of the equivalence classes of curves passing through $p$, or alternatively, the set of derivations at $p$. Elements of $T_p\mathcal{M}$ can be thought of as the possible directions in which one can tangentially pass through $p$.
+	
+	A \emph{Riemannian metric} on $\mathcal{M}$ is a smooth assignment of an inner product $g_p: T_p\mathcal{M} \times T_p\mathcal{M} \rightarrow \mathbb{R}$ for each $p \in \mathcal{M}$, such that for any smooth vector fields $X$ and $Y$ on $\mathcal{M}$, the function $p \mapsto g_p(X_p, Y_p)$ is smooth. This metric allows for the measurement of angles, lengths, and volumes on the manifold.
+	
+	Given a piecewise smooth curve $\gamma: [a, b] \rightarrow \mathcal{M}$, the \emph{length} of $\gamma$ is defined by
+	\[
+	L(\gamma) = \int_a^b \left\| \dot{\gamma}(t) \right\|_{g_{\gamma(t)}} \, dt,
+	\]
+	where $\dot{\gamma}(t)$ denotes the derivative of $\gamma$ at $t$, and $\left\| \dot{\gamma}(t) \right\|_{g_{\gamma(t)}} = \sqrt{ g_{\gamma(t)}(\dot{\gamma}(t), \dot{\gamma}(t)) }$ is the norm induced by the Riemannian metric.
+	
+	A \emph{geodesic} on $\mathcal{M}$ is a curve $\gamma: [a, b] \rightarrow \mathcal{M}$ that locally minimizes the length functional or, equivalently, satisfies the geodesic equation:
+	\[
+	\frac{D}{dt} \dot{\gamma}(t) = 0,
+	\]
+	where $\frac{D}{dt}$ is the covariant derivative along $\gamma$. Geodesics generalize the concept of straight lines to curved spaces and represent the paths of shortest distance between points on the manifold.
+	
+	The \emph{exponential map} at a point $p \in \mathcal{M}$ is a map
+	\[
+	\exp_p: T_p\mathcal{M} \rightarrow \mathcal{M},
+	\]
+	defined by $\exp_p(v) = \gamma_v(1)$, where $\gamma_v: [0,1] \rightarrow \mathcal{M}$ is the unique geodesic starting at $p$ with initial velocity $v$, i.e., $\gamma_v(0) = p$ and $\dot{\gamma}_v(0) = v$. The exponential map provides a diffeomorphism from a neighborhood of the origin in $T_p\mathcal{M}$ to a neighborhood of $p$ in $\mathcal{M}$.
+	
+	The exponential map is crucial in transferring linear structures from the tangent space to the manifold. It allows for operations such as adding a tangent vector to a point on the manifold, analogous to vector addition in Euclidean space. This property is essential for defining manifold-valued differential equations and for extending continuous models to Riemannian manifolds.
+	
+	\subsection{Continuous Models in Machine Learning}
+	
+	Continuous models in machine learning, such as Neural Ordinary Differential Equations (Neural ODEs) and normalizing flows, have gained prominence due to their ability to model complex, continuous-time dynamics and flexible probability distributions.
+	
+	\paragraph{Neural Ordinary Differential Equations (Neural ODEs).} Neural ODEs model the hidden states of a neural network as the solution to an ODE parameterized by a neural network function $f_\theta$:
+	\[
+	\frac{dh(t)}{dt} = f_\theta(h(t), t), \quad h(0) = h_0.
+	\]
+	This framework allows for adaptive computation and memory efficiency, as the continuous-depth model can be evaluated at arbitrary time points.
+	
+	\paragraph{Normalizing Flows.} Normalizing flows transform a simple base distribution $\pi(z)$ into a complex target distribution $p(x)$ by applying an invertible, differentiable mapping $f: \mathbb{R}^n \rightarrow \mathbb{R}^n$:
+	\[
+	x = f(z), \quad z \sim \pi(z).
+	\]
+	The change of variables formula computes the density of $x$:
+	\[
+	p(x) = \pi(z) \left| \det \left( \frac{\partial f^{-1}}{\partial x} \right) \right| = \pi(z) \left| \det \left( \frac{\partial f(z)}{\partial z} \right)^{-1} \right|.
+	\]
+	Taking the logarithm, the log-likelihood of $x$ is:
+	\[
+	\log p(x) = \log \pi(z) - \log \left| \det \left( \frac{\partial f(z)}{\partial z} \right) \right|,
+	\]
+	where $z = f^{-1}(x)$.
+	
+	Computing the determinant of the Jacobian $\frac{\partial f(z)}{\partial z}$ can be challenging, especially in high dimensions, leading to the development of continuous normalizing flows (CNFs), which use Neural ODEs to define $f$.
+	
+	\section{Riemannian Continuous Normalizing Flows}
+	
+	Normalizing flows transform a simple base distribution $\pi(z)$ into a complex target distribution $p(x)$ using an invertible, differentiable mapping $f: \mathcal{M} \rightarrow \mathcal{M}$ on a manifold $\mathcal{M}$. To generalize normalizing flows to Riemannian manifolds, flows are defined via time-dependent vector fields and the solutions to manifold ordinary differential equations (ODEs).
+	
+	Let $\mathcal{M}$ be a $d$-dimensional Riemannian manifold with metric tensor $G(z)$. Consider a time-dependent vector field $f_\theta: \mathcal{M} \times [0, T] \rightarrow T\mathcal{M}$, parameterized by $\theta$, where $T\mathcal{M}$ denotes the tangent bundle of $\mathcal{M}$. The flow $\phi_t: \mathcal{M} \rightarrow \mathcal{M}$ induced by $f_\theta$ is obtained by solving the manifold ODE:
+	\begin{equation}
+		\frac{dz(t)}{dt} = f_\theta(z(t), t), \quad z(0) = z_0 \in \mathcal{M},
+		\label{eq:manifold_ode}
+	\end{equation}
+	where $z(t) \in \mathcal{M}$ for all $t \in [0, T]$. Under appropriate conditions on $f_\theta$, the flow $\phi_t$ is a diffeomorphism at each time $t$.
+	
+	The change in log-density along the flow is given by the continuity equation on the manifold. The derivative of the log-density $p_t(z(t))$ with respect to time is:
+	\begin{equation}
+		\frac{d}{dt} \log p_t(z(t)) = -\operatorname{div}(f_\theta)(z(t), t),
+		\label{eq:log_density_derivative}
+	\end{equation}
+	where $\operatorname{div}(f_\theta)$ is the Riemannian divergence of the vector field $f_\theta$.
+	
+	Integrating Equation \eqref{eq:log_density_derivative} over time from $t = 0$ to $t = T$, the log-density at time $T$ is:
+	\begin{equation}
+		\log p_T(z(T)) = \log p_0(z(0)) - \int_0^T \operatorname{div}(f_\theta)(z(t), t) \, dt.
+		\label{eq:log_density}
+	\end{equation}
+	
+	The Riemannian divergence of the vector field $f_\theta$ at point $z \in \mathcal{M}$ is defined as:
+	\begin{equation}
+		\operatorname{div}(f_\theta)(z) = \frac{1}{\sqrt{\det G(z)}} \frac{\partial}{\partial z^i} \left( \sqrt{\det G(z)} \, f_\theta^i(z) \right),
+		\label{eq:riemannian_divergence}
+	\end{equation}
+	where $\det G(z)$ is the determinant of the metric tensor $G(z)$, $f_\theta^i(z)$ are the components of $f_\theta$ in local coordinates, and the Einstein summation convention is used over repeated indices.
+	
+	Computing the divergence directly requires evaluating the divergence of the vector field in the manifold's local coordinates, which involves computing derivatives of $f_\theta$ and the metric tensor. To facilitate computation, the divergence can be expressed in terms of the trace of the covariant derivative:
+	\begin{equation}
+		\operatorname{div}(f_\theta)(z) = \operatorname{Tr} \left( \nabla f_\theta(z) \right ),
+		\label{eq:divergence_trace}
+	\end{equation}
+	where $\nabla f_\theta$ denotes the covariant derivative of $f_\theta$.
+	
+	In practice, to avoid computing the full Jacobian matrix, stochastic trace estimation methods such as the Hutchinson estimator can be employed:
+	\begin{equation}
+		\operatorname{div}(f_\theta)(z) = \mathbb{E}_{\epsilon \sim \mathcal{N}(0, I)} \left[ \epsilon^\top \left( \nabla f_\theta(z) \, \epsilon \right) \right],
+		\label{eq:hutchinson_estimator}
+	\end{equation}
+	where $\epsilon$ is a random vector sampled from a standard normal distribution, and $I$ is the identity matrix.
+	
+	To ensure that the vector field $f_\theta(z, t)$ lies in the tangent space $T_z\mathcal{M}$ at each point $z$, it can be defined using a projection:
+	\begin{equation}
+		f_\theta(z, t) = P_z \, \tilde{f}_\theta(z, t),
+		\label{eq:vector_field_projection}
+	\end{equation}
+	where $\tilde{f}_\theta$ is an unconstrained vector field in the ambient space, and $P_z$ is the orthogonal projection onto $T_z\mathcal{M}$.
+	
+	Alternatively, $f_\theta$ can be directly parameterized using operations intrinsic to the manifold. For instance, in embedded manifolds, the vector field can be constructed to automatically satisfy the tangent space constraint.
+	
+	Solving the manifold ODE \eqref{eq:manifold_ode} requires numerical integration methods that preserve the manifold structure. One approach is to use the exponential map:
+	\begin{equation}
+		z(t + \Delta t) = \exp_{z(t)} \left( \Delta t \, f_\theta(z(t), t) \right),
+		\label{eq:exponential_map_update}
+	\end{equation}
+	where $\exp_{z}$ is the exponential map at point $z$.
+	
+	The total log-likelihood of a sample $x \in \mathcal{M}$ is given by:
+	\begin{equation}
+		\log p(x) = \log \pi(z(0)) - \int_0^T \operatorname{div}(f_\theta)(z(t), t) \, dt,
+		\label{eq:log_likelihood}
+	\end{equation}
+	with $z(T) = x$.
+	
+	In summary, Riemannian Continuous Normalizing Flows extend normalizing flows to Riemannian manifolds by defining continuous-time flows via manifold ODEs. The key components are the vector field $f_\theta$ constrained to the tangent space, the computation of the Riemannian divergence for the change in log-density, and the use of manifold-aware numerical integration methods to solve the ODE.
 
-\section{Introduction}
-
-In recent years, Neural Ordinary Differential Equations (Neural ODEs) have become a popular tool in the field of machine learning and artificial intelligence. They allow for the modeling of continuous processes and provide new opportunities for training deep neural networks. The Adjoint Method and Continuous Backpropagation play a crucial role in the optimization and training of such models. In this essay, we will explore these methods, their mathematical descriptions, and their interconnections, as well as their impact on the training process of Neural ODEs.
-
-\section{Mathematical Description and Connections}
-
-\subsection{Neural Ordinary Differential Equations (Neural ODEs)}
-
-Neural ODEs represent a model where the state of the system is described by an ordinary differential equation. Let \( \mathbf{z}(t) \) be the state of the system at time \( t \), and \( f_\theta(\mathbf{z}(t), t) \) be a function depending on parameters \( \theta \). Then, the dynamics of the system are described by the following equation:
-
-\[ \frac{d\mathbf{z}(t)}{dt} = f_\theta(\mathbf{z}(t), t) \]
-
-To solve this equation, numerical integration methods such as the Runge-Kutta method are used.
-
-\subsection{Adjoint Method}
-
-The Adjoint Method is used for the efficient computation of gradients of the loss function in Neural ODEs. The main idea of the method is to introduce an adjoint equation that describes the dynamics of the gradients. Let \( L(\mathbf{z}(T)) \) be the loss function depending on the final state of the system \( \mathbf{z}(T) \). Then, the adjoint equation is given by:
-
-\[ \frac{d\mathbf{a}(t)}{dt} = -\mathbf{a}(t)^\top \frac{\partial f_\theta(\mathbf{z}(t), t)}{\partial \mathbf{z}} \]
-
-where \( \mathbf{a}(t) \) is the adjoint state, and \( \frac{\partial f_\theta(\mathbf{z}(t), t)}{\partial \mathbf{z}} \) is the Jacobian of the function \( f_\theta \) with respect to the state \( \mathbf{z} \).
-
-The gradients of the parameters \( \theta \) can be computed as follows:
-
-\[ \frac{dL}{d\theta} = \int_0^T \mathbf{a}(t)^\top \frac{\partial f_\theta(\mathbf{z}(t), t)}{\partial \theta} dt \]
-
-\subsection{Derivation of the Adjoint Method}
-
-To derive the Adjoint Method, consider the loss function \( L(\mathbf{z}(T)) \). We want to find the gradient of this function with respect to the parameters \( \theta \). Let \( \mathbf{z}(t) \) be the solution to the equation \( \frac{d\mathbf{z}(t)}{dt} = f_\theta(\mathbf{z}(t), t) \). Then:
-
-\[ \frac{dL}{d\theta} = \frac{\partial L}{\partial \mathbf{z}(T)} \frac{\partial \mathbf{z}(T)}{\partial \theta} \]
-
-To compute \( \frac{\partial \mathbf{z}(T)}{\partial \theta} \), we use the chain rule:
-
-\[ \frac{\partial \mathbf{z}(T)}{\partial \theta} = \int_0^T \frac{\partial \mathbf{z}(t)}{\partial \theta} \frac{\partial f_\theta(\mathbf{z}(t), t)}{\partial \theta} dt \]
-
-Now, introduce the adjoint state \( \mathbf{a}(t) \) that satisfies the equation:
-
-\[ \frac{d\mathbf{a}(t)}{dt} = -\mathbf{a}(t)^\top \frac{\partial f_\theta(\mathbf{z}(t), t)}{\partial \mathbf{z}} \]
-
-with the initial condition \( \mathbf{a}(T) = \frac{\partial L}{\partial \mathbf{z}(T)} \).
-
-Then, the gradient of the loss function with respect to the parameters \( \theta \) can be expressed as:
-
-\[ \frac{dL}{d\theta} = \int_0^T \mathbf{a}(t)^\top \frac{\partial f_\theta(\mathbf{z}(t), t)}{\partial \theta} dt \]
-
-\subsection{Continuous Backpropagation}
-
-Continuous Backpropagation is an extension of the classical backpropagation algorithm for continuous systems. In the context of Neural ODEs, Continuous Backpropagation can be described as follows. Let \( L(t) \) be the loss function at time \( t \), and \( \theta(t) \) be the vector of parameters of the neural network. Then, the dynamics of the parameter updates are described by the differential equation:
-
-\[ \frac{d\theta(t)}{dt} = -\eta \nabla_\theta L(t) \]
-
-where \( \eta \) is the learning rate, and \( \nabla_\theta L(t) \) is the gradient of the loss function with respect to the parameters \( \theta \).
-
-\subsection{Example of Continuous Backpropagation on a More Complex Function}
-
-Consider a more complex loss function \( L(\theta) = \frac{1}{2} \theta^4 \). Let \( \theta(t) \) be the parameter we want to minimize. Then, the dynamics of the parameter updates are described by the following equation:
-
-\[ \frac{d\theta(t)}{dt} = -\eta \nabla_\theta L(t) = -\eta \cdot 2\theta(t)^3 \]
-
-The solution to this equation is:
-
-\[ \theta(t) = \theta(0) \left(1 + 6\eta \theta(0)^2 t\right)^{-\frac{1}{2}} \]
-
-where \( \theta(0) \) is the initial value of the parameter. It can be seen that the parameter \( \theta \) decreases over time, corresponding to the minimization of the loss function.
-
-\section{Interconnections Between Methods}
-
-The Adjoint Method and Continuous Backpropagation are closely related. Both methods use the gradients of the loss function to update the parameters, but they do so in different contexts. The Adjoint Method focuses on computing gradients through the introduction of an adjoint equation, while Continuous Backpropagation views the training process as a continuous differential equation.
-
-The interconnection between these methods can be seen in the fact that both use the gradient of the loss function to update the parameters. In the Adjoint Method, the gradient is used to determine the direction of search, while in Continuous Backpropagation, the gradient is used to determine the rate of change of the parameters.
-
-\section{Question: Is Time T Real Time?}
-
-In the context of Neural ODEs and optimization methods such as the Adjoint Method and Continuous Backpropagation, time \( T \) is not necessarily real time. Instead, \( T \) represents a parameter that defines the length of the integration interval or the time horizon over which the system dynamics are considered. This parameter can be chosen arbitrarily depending on the task and may not correspond to real time.
-
-For example, in tasks such as time series prediction or physical process modeling, time \( T \) may correspond to real time. However, in other tasks such as image classification or text processing, time \( T \) may be an abstract parameter that defines the depth or complexity of the model.
-
-Thus, time \( T \) in Neural ODEs and related optimization methods is a flexible parameter that can be tuned depending on the specific task and does not necessarily correspond to real time.
-
-\section{Conclusion}
-
-The Adjoint Method and Continuous Backpropagation are two powerful tools for the optimization and training of Neural ODEs. Both methods use the gradient of the loss function to update the parameters, but they do so in different contexts: the Adjoint Method focuses on computing gradients through the introduction of an adjoint equation, while Continuous Backpropagation views the training process as a continuous differential equation. Understanding and utilizing these methods allows for significant improvements in the efficiency and accuracy of machine learning models based on Neural ODEs.
-
+	\section{Neural Manifold ODE}
+	
+	Let $\mathcal{M}$ be a smooth manifold, and consider a time-dependent vector field $f_\theta: \mathcal{M} \times [0, T] \rightarrow T\mathcal{M}$, parameterized by $\theta$, where $T\mathcal{M}$ denotes the tangent bundle of $\mathcal{M}$.
+	
+	The \emph{Neural Manifold Ordinary Differential Equation} is defined as:
+	\begin{equation}
+		\frac{dz(t)}{dt} = f_\theta(z(t), t), \quad z(0) = z_0 \in \mathcal{M},
+		\label{eq:nmode}
+	\end{equation}
+	where $z(t) \in \mathcal{M}$ for all $t \in [0, T]$, and $f_\theta(z(t), t) \in T_{z(t)}\mathcal{M}$.
+	
+	To solve the ODE \eqref{eq:nmode}, we utilize local coordinate charts. Let $\phi: U \subset \mathbb{R}^n \rightarrow V \subset \mathcal{M}$ be a coordinate chart such that $z(t) \in V$. The inverse chart maps $z(t)$ to local coordinates:
+	\begin{equation}
+		y(t) = \phi^{-1}(z(t)) \in U.
+		\label{eq:local_coordinates}
+	\end{equation}
+	
+	In local coordinates, the ODE \eqref{eq:nmode} becomes:
+	\begin{equation}
+		\frac{dy(t)}{dt} = D\phi^{-1}_{z(t)} \left( f_\theta(z(t), t) \right),
+		\label{eq:local_ode}
+	\end{equation}
+	where $D\phi^{-1}_{z(t)}: T_{z(t)}\mathcal{M} \rightarrow \mathbb{R}^n$ is the derivative of $\phi^{-1}$ at $z(t)$.
+	
+	By solving \eqref{eq:local_ode} in $\mathbb{R}^n$, we obtain $y(t)$, and map back to the manifold via $z(t) = \phi(y(t))$.
+	
+	To ensure $z(t)$ remains within the domain of the chart, we may need to update the chart during integration. This leads to the \emph{dynamic chart method}, where a sequence of charts $\{\phi_i\}$ is used to cover the trajectory of $z(t)$:
+	\begin{equation}
+		\text{If } z(t) \notin V_i, \text{ select a new chart } \phi_{i+1}: U_{i+1} \rightarrow V_{i+1} \text{ such that } z(t) \in V_{i+1}.
+		\label{eq:dynamic_chart}
+	\end{equation}
+	
+	For gradient computation with respect to parameters $\theta$, we employ the adjoint sensitivity method. Define the adjoint state $a(t) \in T_{z(t)}^*\mathcal{M}$, which satisfies:
+	\begin{equation}
+		\frac{da(t)}{dt} = - D_{z(t)} f_\theta(z(t), t)^\top a(t),
+		\label{eq:adjoint}
+	\end{equation}
+	with the terminal condition $a(T) = \nabla_{z(T)} L$, where $L$ is a scalar loss function dependent on $z(T)$.
+	
+	The gradient of the loss with respect to $\theta$ is given by:
+	\begin{equation}
+		\frac{dL}{d\theta} = - \int_0^T a(t)^\top \frac{\partial f_\theta(z(t), t)}{\partial \theta} \, dt.
+		\label{eq:gradient_theta}
+	\end{equation}
+	
+	To ensure that the vector field $f_\theta(z(t), t)$ lies in the tangent space $T_{z(t)}\mathcal{M}$ at each point $z(t)$, we can define $f_\theta$ using a projection:
+	\begin{equation}
+		f_\theta(z(t), t) = P_{z(t)} \, \tilde{f}_\theta(z(t), t),
+		\label{eq:vector_field_projection}
+	\end{equation}
+	where $\tilde{f}_\theta: \mathcal{M} \times [0, T] \rightarrow \mathbb{R}^d$ is an unconstrained vector field in the ambient space, and $P_{z(t)}: \mathbb{R}^d \rightarrow T_{z(t)}\mathcal{M}$ is the projection onto the tangent space at $z(t)$.
+	
+	Alternatively, $f_\theta$ can be parameterized intrinsically using manifold-specific operations to ensure it remains in $T_{z(t)}\mathcal{M}$ without the need for projection.
+	
+	When integrating the ODE \eqref{eq:nmode}, the numerical solver must account for the manifold structure. One approach is to use the exponential map:
+	\begin{equation}
+		z(t + \Delta t) = \exp_{z(t)} \left( \Delta t \, f_\theta(z(t), t) \right),
+		\label{eq:exponential_map_update}
+	\end{equation}
+	where $\exp_{z(t)}: T_{z(t)}\mathcal{M} \rightarrow \mathcal{M}$ maps a tangent vector to the manifold along a geodesic starting at $z(t)$.
+	
+	In practice, solving the ODE in local coordinates as in \eqref{eq:local_ode} can leverage standard ODE solvers in Euclidean space, while the dynamic chart method ensures the solution remains consistent with the manifold's topology.
+	
+	Integrating Neural Manifold ODEs allows for modeling continuous-time dynamics on manifolds, generalizing Neural ODEs to accommodate data with intrinsic geometric structures.
+	
+	\section{Conclusion}
+	
+	Riemannian continuous models extend traditional continuous frameworks, such as Neural Ordinary Differential Equations and normalizing flows, to data residing on Riemannian manifolds. By leveraging the intrinsic geometry of manifolds, these models provide a principled approach to modeling manifold-valued data
+	
+	\nocite{*}
+	\printbibliography
+	
 \end{document}
