@@ -1,0 +1,80 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{geometry}
+
+\geometry{a4paper, margin=1in}
+
+\title{Continuous State Space Models}
+\author{Bair Mikhailov}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+Continuous state space models (CSSMs) form a powerful framework for modeling dynamical systems that evolve over time in a continuous state space. These models are widely used in various fields such as control theory, economics, biology, and machine learning. Unlike discrete state space models, where the system's state takes values in a discrete set, continuous state space models allow the state to vary smoothly over a continuous domain. This article provides a brief overview of the core concepts behind CSSMs, focusing on their mathematical formulation and applications.
+
+\section{Mathematical Formulation}
+
+A continuous state space model describes the evolution of a system using a set of differential equations. The system's state at any time \( t \) is represented by a vector \( \mathbf{x}(t) \in \mathbb{R}^n \), where \( n \) is the dimension of the state space. The general form of a CSSM is given by two equations:
+
+\begin{align}
+    \dot{\mathbf{x}}(t) &= f(\mathbf{x}(t), \mathbf{u}(t), t) + \mathbf{w}(t), \label{eq:state_equation}\\
+    \mathbf{y}(t) &= g(\mathbf{x}(t), \mathbf{u}(t), t) + \mathbf{v}(t), \label{eq:output_equation}
+\end{align}
+
+where:
+\begin{itemize}
+    \item \( \mathbf{x}(t) \in \mathbb{R}^n \) is the state vector,
+    \item \( \mathbf{u}(t) \in \mathbb{R}^m \) is the control input (or external input),
+    \item \( \mathbf{y}(t) \in \mathbb{R}^p \) is the observed output,
+    \item \( f: \mathbb{R}^n \times \mathbb{R}^m \times \mathbb{R} \rightarrow \mathbb{R}^n \) is a nonlinear function that governs the state dynamics,
+    \item \( g: \mathbb{R}^n \times \mathbb{R}^m \times \mathbb{R} \rightarrow \mathbb{R}^p \) is a nonlinear function that relates the state to the output,
+    \item \( \mathbf{w}(t) \) and \( \mathbf{v}(t) \) are process and measurement noise terms, often modeled as Gaussian white noise with covariance matrices \( Q \) and \( R \), respectively.
+\end{itemize}
+
+Equation \eqref{eq:state_equation} represents the state evolution, while equation \eqref{eq:output_equation} links the state to the observations. In many practical applications, these equations are linearized around an operating point, leading to the well-known linear state space representation.
+
+\subsection{Linear Continuous State Space Models}
+
+In the case where the functions \( f \) and \( g \) are linear, the CSSM reduces to a linear state space model, which is easier to analyze and solve. The linear form is given by:
+
+\begin{align}
+    \dot{\mathbf{x}}(t) &= A\mathbf{x}(t) + B\mathbf{u}(t) + \mathbf{w}(t), \label{eq:linear_state_equation} \\
+    \mathbf{y}(t) &= C\mathbf{x}(t) + D\mathbf{u}(t) + \mathbf{v}(t), \label{eq:linear_output_equation}
+\end{align}
+
+where \( A \in \mathbb{R}^{n \times n} \), \( B \in \mathbb{R}^{n \times m} \), \( C \in \mathbb{R}^{p \times n} \), and \( D \in \mathbb{R}^{p \times m} \) are matrices that define the system's dynamics and output. This linear form is widely used in control systems, signal processing, and estimation theory, such as in the Kalman filter.
+
+\section{Key Concepts}
+
+\subsection{State Transition and Stability}
+
+The state transition of a continuous state space model is governed by the function \( f \), which describes how the state evolves over time. The stability of the system is an important property, often determined by the eigenvalues of the matrix \( A \) in linear models. If all eigenvalues of \( A \) have negative real parts, the system is stable and will return to equilibrium after disturbances.
+
+\subsection{Observability and Controllability}
+
+Two critical concepts in CSSMs are observability and controllability:
+\begin{itemize}
+    \item \textbf{Controllability} refers to the ability to drive the state \( \mathbf{x}(t) \) to any desired value using the control input \( \mathbf{u}(t) \). For linear systems, the system is controllable if the controllability matrix \( [B \, AB \, A^2B \, \dots \, A^{n-1}B] \) has full rank.
+    \item \textbf{Observability} describes whether the state \( \mathbf{x}(t) \) can be inferred from the output \( \mathbf{y}(t) \). The system is observable if the observability matrix \( [C^\top \, A^\top C^\top \, \dots \, (A^\top)^{n-1}C^\top]^\top \) has full rank.
+\end{itemize}
+
+% \subsection{Applications}
+
+% Continuous state space models are widely used in various domains:
+% \begin{itemize}
+%     \item \textbf{Control Systems}: CSSMs are the backbone of modern control theory, used in the design of feedback controllers in systems such as aircraft autopilots and robotic control.
+%     \item \textbf{Economics}: In econometrics, these models are used to describe the evolution of macroeconomic variables, such as inflation or interest rates.
+%     \item \textbf{Machine Learning}: Recently, CSSMs have been incorporated into machine learning frameworks, such as continuous-time recurrent neural networks (CTRNNs), which model time-evolving data.
+% \end{itemize}
+
+\section{Conclusion}
+
+Continuous state space models provide a versatile and mathematically rich framework for describing systems that evolve over time. Their ability to handle both linear and nonlinear dynamics, coupled with the powerful tools available for analyzing stability, controllability, and observability, make them essential in many areas of engineering, science, and economics. Despite their complexity, the mathematical foundations of CSSMs offer deep insights into how continuous systems behave and interact with their environments.
+
+\end{document}
