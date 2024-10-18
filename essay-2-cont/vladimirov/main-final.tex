@@ -1,0 +1,513 @@
+\documentclass[a4paper,14pt]{article}
+
+%%% Работа с русским языком
+\usepackage{cmap}					% поиск в PDF
+\usepackage{mathtext} 				% русские буквы в формулах
+\usepackage[T2A]{fontenc}			% кодировка
+\usepackage[utf8]{inputenc}			% кодировка исходного текста
+\usepackage[english,russian]{babel}	% локализация и переносы
+\usepackage{indentfirst}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+\frenchspacing
+
+\newcommand{\bz}{\mathbf{z}}
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\by}{\mathbf{y}}
+\newcommand{\bv}{\mathbf{v}}
+\newcommand{\bw}{\mathbf{w}}
+\newcommand{\ba}{\mathbf{a}}
+\newcommand{\bb}{\mathbf{b}}
+\newcommand{\bp}{\mathbf{p}}
+\newcommand{\bq}{\mathbf{q}}
+\newcommand{\bt}{\mathbf{t}}
+\newcommand{\bu}{\mathbf{u}}
+\newcommand{\bT}{\mathbf{T}}
+\newcommand{\bX}{\mathbf{X}}
+\newcommand{\bZ}{\mathbf{Z}}
+\newcommand{\bS}{\mathbf{S}}
+\newcommand{\bH}{\mathbf{H}}
+\newcommand{\bW}{\mathbf{W}}
+\newcommand{\bY}{\mathbf{Y}}
+\newcommand{\bU}{\mathbf{U}}
+\newcommand{\bQ}{\mathbf{Q}}
+\newcommand{\bP}{\mathbf{P}}
+\newcommand{\bA}{\mathbf{A}}
+\newcommand{\bB}{\mathbf{B}}
+\newcommand{\bC}{\mathbf{C}}
+\newcommand{\bE}{\mathbf{E}}
+\newcommand{\bF}{\mathbf{F}}
+\newcommand{\bomega}{\boldsymbol{\omega}}
+\newcommand{\btheta}{\boldsymbol{\theta}}
+\newcommand{\bgamma}{\boldsymbol{\gamma}}
+\newcommand{\bdelta}{\boldsymbol{\delta}}
+\newcommand{\bPsi}{\boldsymbol{\Psi}}
+\newcommand{\bpsi}{\boldsymbol{\psi}}
+\newcommand{\bxi}{\boldsymbol{\xi}}
+\newcommand{\bchi}{\boldsymbol{\chi}}
+\newcommand{\bzeta}{\boldsymbol{\zeta}}
+\newcommand{\blambda}{\boldsymbol{\lambda}}
+\newcommand{\beps}{\boldsymbol{\varepsilon}}
+\newcommand{\bZeta}{\boldsymbol{Z}}
+% mathcal
+\newcommand{\cX}{\mathcal{X}}
+\newcommand{\cY}{\mathcal{Y}}
+\newcommand{\cW}{\mathcal{W}}
+
+\newcommand{\dH}{\mathbb{H}}
+\newcommand{\dR}{\mathbb{R}}
+% transpose
+\newcommand{\T}{^{\mathsf{T}}}
+
+\renewcommand{\epsilon}{\ensuremath{\varepsilon}}
+\renewcommand{\phi}{\ensuremath{\varphi}}
+\renewcommand{\kappa}{\ensuremath{\varkappa}}
+\renewcommand{\le}{\ensuremath{\leqslant}}
+\renewcommand{\leq}{\ensuremath{\leqslant}}
+\renewcommand{\ge}{\ensuremath{\geqslant}}
+\renewcommand{\geq}{\ensuremath{\geqslant}}
+\renewcommand{\emptyset}{\varnothing}
+
+%%% Дополнительная работа с математикой
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools} % AMS
+\usepackage{icomma} % "Умная" запятая: $0,2$ --- число, $0, 2$ --- перечисление
+
+%% Номера формул
+%\mathtoolsset{showonlyrefs=true} % Показывать номера только у тех формул, на которые есть \eqref{} в тексте.
+%\usepackage{leqno} % Нумереация формул слева
+
+%% Свои команды
+\DeclareMathOperator{\sgn}{\mathop{sgn}}
+
+%% Перенос знаков в формулах (по Львовскому)
+\newcommand*{\hm}[1]{#1\nobreak\discretionary{}
+	{\hbox{$\mathsurround=0pt #1$}}{}}
+
+%%% Работа с картинками
+\usepackage{graphicx}  % Для вставки рисунков
+\setlength\fboxsep{3pt} % Отступ рамки \fbox{} от рисунка
+\setlength\fboxrule{1pt} % Толщина линий рамки \fbox{}
+\usepackage{wrapfig} % Обтекание рисунков текстом
+
+%%% Работа с таблицами
+\usepackage{array,tabularx,tabulary,booktabs} % Дополнительная работа с таблицами
+\usepackage{longtable}  % Длинные таблицы
+\usepackage{multirow} % Слияние строк в таблице
+
+%%% Теоремы
+\theoremstyle{plain} % Это стиль по умолчанию, его можно не переопределять.
+\newtheorem{theorem}{Теорема}[section]
+\newtheorem{proposition}[theorem]{Утверждение}
+
+\theoremstyle{definition} % "Определение"
+\newtheorem{corollary}{Следствие}[theorem]
+\newtheorem{problem}{Задача}[section]
+
+\theoremstyle{remark} % "Примечание"
+\newtheorem*{nonum}{Решение}
+
+%%% Программирование
+\usepackage{etoolbox} % логические операторы
+
+%%% Страница
+\usepackage{extsizes} % Возможность сделать 14-й шрифт
+\usepackage{geometry} % Простой способ задавать поля
+\geometry{top=25mm}
+\geometry{bottom=35mm}
+\geometry{left=35mm}
+\geometry{right=20mm}
+%
+%\usepackage{fancyhdr} % Колонтитулы
+% 	\pagestyle{fancy}
+%\renewcommand{\headrulewidth}{0pt}  % Толщина линейки, отчеркивающей верхний колонтитул
+% 	\lfoot{Нижний левый}
+% 	\rfoot{Нижний правый}
+% 	\rhead{Верхний правый}
+% 	\chead{Верхний в центре}
+% 	\lhead{Верхний левый}
+%	\cfoot{Нижний в центре} % По умолчанию здесь номер страницы
+
+\usepackage{setspace} % Интерлиньяж
+%\onehalfspacing % Интерлиньяж 1.5
+%\doublespacing % Интерлиньяж 2
+%\singlespacing % Интерлиньяж 1
+
+\usepackage{lastpage} % Узнать, сколько всего страниц в документе.
+
+\usepackage{soul} % Модификаторы начертания
+
+\usepackage{hyperref}
+\usepackage[usenames,dvipsnames,svgnames,table,rgb]{xcolor}
+\hypersetup{				% Гиперссылки
+	unicode=true,           % русские буквы в раздела PDF
+	pdftitle={Заголовок},   % Заголовок
+	pdfauthor={Автор},      % Автор
+	pdfsubject={Тема},      % Тема
+	pdfcreator={Создатель}, % Создатель
+	pdfproducer={Производитель}, % Производитель
+	pdfkeywords={keyword1} {key2} {key3}, % Ключевые слова
+	colorlinks=true,       	% false: ссылки в рамках; true: цветные ссылки
+	linkcolor=red,          % внутренние ссылки
+	citecolor=black,        % на библиографию
+	filecolor=magenta,      % на файлы
+	urlcolor=cyan           % на URL
+}
+
+\usepackage{csquotes} % Еще инструменты для ссылок
+\usepackage{tikz} % Работа с графикой
+
+\usepackage[style=authoryear,maxcitenames=2,backend=biber,sorting=nty]{biblatex}
+\addbibresource{references.bib}
+
+\usepackage{multicol} % Несколько колонок
+
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+
+
+\author{Vladimirov Eduard, group М05-304а}
+\title{\textbf{Riemannian continuous models}}
+\date{\today}
+
+\begin{document}
+	\maketitle
+	
+	\section{Introduction}
+	
+	Continuous models like Neural ODEs and normalizing flows have revolutionized machine learning by modeling complex data dynamics over continuous time. However, these models traditionally assume that data resides in Euclidean space, limiting their applicability to datasets with inherent non-Euclidean geometries. Many real-world datasets naturally lie on \emph{Riemannian manifolds} ~--- curved spaces that require specialized mathematical frameworks to capture their intrinsic geometry.
+	
+	Riemannian geometry extends calculus to curved spaces, providing tools like \emph{tangent spaces} and the \emph{exponential map} to navigate manifolds. Incorporating this geometry into continuous models allows for more accurate and efficient learning from manifold-valued data. This essay explores two significant advancements in this area:
+	
+	\begin{enumerate}
+		\item \textbf{Riemannian Continuous Normalizing Flows:} These models generalize normalizing flows to manifolds by defining flows via manifold ODEs, enabling the modeling of complex probability distributions while respecting geometric constraints.
+		
+		\item \textbf{Neural Manifold ODE:} Extending Neural ODEs to manifolds, these models utilize techniques like the \emph{dynamic chart method} to solve ODEs intrinsically on manifolds.
+	\end{enumerate}
+	
+	By leveraging the intrinsic geometry of manifolds, these Riemannian continuous models enhance performance in fields where data resides on curved spaces, such as robotics and medical imaging.
+	
+	\section{Background on Riemannian Geometry and Continuous Models}
+	
+	\subsection{Riemannian Geometry Fundamentals}
+	
+	Let $\mathcal{M}$ be a smooth manifold of dimension $n$. A \emph{smooth manifold} is a topological manifold equipped with an atlas of coordinate charts $\{(U_\alpha, \phi_\alpha)\}$, where each $U_\alpha$ is an open subset of $\mathcal{M}$, and $\phi_\alpha: U_\alpha \rightarrow \mathbb{R}^n$ is a homeomorphism onto its image, such that the transition maps $\phi_{\beta} \circ \phi_{\alpha}^{-1}: \phi_{\alpha}(U_\alpha \cap U_\beta) \rightarrow \phi_{\beta}(U_\alpha \cap U_\beta)$ are smooth whenever $U_\alpha \cap U_\beta \neq \emptyset$.
+	
+	At each point $p \in \mathcal{M}$, the \emph{tangent space} $T_p\mathcal{M}$ is a real vector space consisting of the equivalence classes of curves passing through $p$, or alternatively, the set of derivations at $p$. Elements of $T_p\mathcal{M}$ can be thought of as the possible directions in which one can tangentially pass through $p$.
+	
+	A \emph{Riemannian metric} on $\mathcal{M}$ is a smooth assignment of an inner product $g_p: T_p\mathcal{M} \times T_p\mathcal{M} \rightarrow \mathbb{R}$ for each $p \in \mathcal{M}$, such that for any smooth vector fields $X$ and $Y$ on $\mathcal{M}$, the function $p \mapsto g_p(X_p, Y_p)$ is smooth. This metric allows for the measurement of angles, lengths, and volumes on the manifold.
+	
+	Given a piecewise smooth curve $\gamma: [a, b] \rightarrow \mathcal{M}$, the \emph{length} of $\gamma$ is defined by
+	\[
+	L(\gamma) = \int_a^b \left\| \dot{\gamma}(t) \right\|_{g_{\gamma(t)}} \, dt,
+	\]
+	where $\dot{\gamma}(t)$ denotes the derivative of $\gamma$ at $t$, and $\left\| \dot{\gamma}(t) \right\|_{g_{\gamma(t)}} = \sqrt{ g_{\gamma(t)}(\dot{\gamma}(t), \dot{\gamma}(t)) }$ is the norm induced by the Riemannian metric.
+	
+	A \emph{geodesic} on $\mathcal{M}$ is a curve $\gamma: [a, b] \rightarrow \mathcal{M}$ that locally minimizes the length functional or, equivalently, satisfies the geodesic equation:
+	\[
+	\frac{D}{dt} \dot{\gamma}(t) = 0,
+	\]
+	where $\frac{D}{dt}$ is the covariant derivative along $\gamma$. Geodesics generalize the concept of straight lines to curved spaces and represent the paths of shortest distance between points on the manifold.
+	
+	The \emph{exponential map} at a point $p \in \mathcal{M}$ is a map
+	\[
+	\exp_p: T_p\mathcal{M} \rightarrow \mathcal{M},
+	\]
+	defined by $\exp_p(v) = \gamma_v(1)$, where $\gamma_v: [0,1] \rightarrow \mathcal{M}$ is the unique geodesic starting at $p$ with initial velocity $v$, i.e., $\gamma_v(0) = p$ and $\dot{\gamma}_v(0) = v$. The exponential map provides a diffeomorphism from a neighborhood of the origin in $T_p\mathcal{M}$ to a neighborhood of $p$ in $\mathcal{M}$.
+	
+	The exponential map is crucial in transferring linear structures from the tangent space to the manifold. It allows for operations such as adding a tangent vector to a point on the manifold, analogous to vector addition in Euclidean space. This property is essential for defining manifold-valued differential equations and for extending continuous models to Riemannian manifolds.
+	
+	\subsection{Continuous Models in Machine Learning}
+	
+	Continuous models in machine learning, such as Neural Ordinary Differential Equations (Neural ODEs) and normalizing flows, have gained prominence due to their ability to model complex, continuous-time dynamics and flexible probability distributions.
+	
+	\paragraph{Neural Ordinary Differential Equations (Neural ODEs).} Neural ODEs model the hidden states of a neural network as the solution to an ODE parameterized by a neural network function $f_\theta$:
+	\[
+	\frac{dh(t)}{dt} = f_\theta(h(t), t), \quad h(0) = h_0.
+	\]
+	This framework allows for adaptive computation and memory efficiency, as the continuous-depth model can be evaluated at arbitrary time points.
+	
+	\paragraph{Normalizing Flows.} Normalizing flows transform a simple base distribution $\pi(z)$ into a complex target distribution $p(x)$ by applying an invertible, differentiable mapping $f: \mathbb{R}^n \rightarrow \mathbb{R}^n$:
+	\[
+	x = f(z), \quad z \sim \pi(z).
+	\]
+	The change of variables formula computes the density of $x$:
+	\[
+	p(x) = \pi(z) \left| \det \left( \frac{\partial f^{-1}}{\partial x} \right) \right| = \pi(z) \left| \det \left( \frac{\partial f(z)}{\partial z} \right)^{-1} \right|.
+	\]
+	Taking the logarithm, the log-likelihood of $x$ is:
+	\[
+	\log p(x) = \log \pi(z) - \log \left| \det \left( \frac{\partial f(z)}{\partial z} \right) \right|,
+	\]
+	where $z = f^{-1}(x)$.
+	
+	Computing the determinant of the Jacobian $\frac{\partial f(z)}{\partial z}$ can be challenging, especially in high dimensions, leading to the development of continuous normalizing flows (CNFs), which use Neural ODEs to define $f$.
+	
+	\section{Riemannian Continuous Normalizing Flows}
+	
+	Normalizing flows are powerful tools for constructing complex probability distributions by transforming a simple base distribution through a sequence of invertible and differentiable mappings. When dealing with data that resides on a Riemannian manifold \(\mathcal{M}\), it is essential to incorporate the manifold's intrinsic geometry into the model. \textit{Riemannian Continuous Normalizing Flows} (RCNFs) extend continuous normalizing flows to Riemannian manifolds by defining flows via manifold ordinary differential equations (ODEs).
+	
+	\subsection{Theoretical Framework}
+	
+	\subsubsection{Manifold ODEs}
+	
+	Let \(\mathcal{M}\) be a \(d\)-dimensional Riemannian manifold with metric tensor \(G(z)\). Consider a time-dependent vector field \(f_\theta: \mathcal{M} \times [0, T] \rightarrow T\mathcal{M}\), parameterized by \(\theta\), where \(T\mathcal{M}\) denotes the tangent bundle of \(\mathcal{M}\). The flow \(\phi_t: \mathcal{M} \rightarrow \mathcal{M}\) induced by \(f_\theta\) is obtained by solving the manifold ODE:
+	
+	\begin{equation}
+		\frac{dz(t)}{dt} = f_\theta(z(t), t), \quad z(0) = z_0 \in \mathcal{M},
+	\end{equation}
+	
+	where \(z(t) \in \mathcal{M}\) for all \(t \in [0, T]\). Under appropriate conditions on \(f_\theta\), the flow \(\phi_t\) is a diffeomorphism at each time \(t\).
+	
+	\subsubsection{Change in Log-Density}
+	
+	The change in the log-density along the flow is governed by the continuity equation on the manifold. The derivative of the log-density \(p_t(z(t))\) with respect to time is:
+	
+	\begin{equation}
+		\frac{d}{dt} \log p_t(z(t)) = -\operatorname{div}(f_\theta)(z(t), t),
+	\end{equation}
+	
+	where \(\operatorname{div}(f_\theta)\) is the \textit{Riemannian divergence} of the vector field \(f_\theta\).
+	
+	Integrating over time from \(t = 0\) to \(t = T\), we obtain:
+	
+	\begin{equation}
+		\log p_T(z(T)) = \log p_0(z(0)) - \int_0^T \operatorname{div}(f_\theta)(z(t), t) \, dt.
+	\end{equation}
+	
+	This equation allows us to compute the log-density of the transformed variable \(z(T)\) given the base density \(p_0(z(0))\).
+	
+	\subsubsection{Riemannian Divergence}
+	
+	The Riemannian divergence of a vector field \(f_\theta\) at point \(z \in \mathcal{M}\) is defined as:
+	
+	\begin{equation}
+		\operatorname{div}(f_\theta)(z) = \frac{1}{\sqrt{\det G(z)}} \frac{\partial}{\partial z^i} \left( \sqrt{\det G(z)} \, f_\theta^i(z) \right),
+	\end{equation}
+	
+	where:
+	
+	\begin{itemize}
+		\item \(\det G(z)\) is the determinant of the metric tensor \(G(z)\).
+		\item \(f_\theta^i(z)\) are the components of \(f_\theta\) in local coordinates.
+		\item The Einstein summation convention is used over repeated indices \(i\).
+		\item \(d\) represents the dimensionality of the manifold \(\mathcal{M}\), i.e., \(f_\theta(z) \in \mathbb{R}^d\).
+	\end{itemize}
+	
+	Computing the divergence directly involves calculating derivatives of both the vector field components and the metric tensor, which can be computationally intensive, especially as the dimensionality \(d\) increases.
+	
+	To avoid computing the full Jacobian matrix \(\nabla_z f_\theta(z, t) \in \mathbb{R}^{d \times d}\), we can use \textit{Hutchinson's estimator} to stochastically estimate the divergence:
+	
+	\begin{equation}
+		\operatorname{div}(f_\theta)(z) \approx \frac{1}{K} \sum_{k=1}^K \epsilon_k^\top \left( \nabla_z f_\theta(z, t) \, \epsilon_k \right),
+	\end{equation}
+	
+	where:
+	
+	\begin{itemize}
+		\item \(K\) is the number of random samples used for the estimation (typically \(K=1\) for efficiency).
+		\item \(\epsilon_k \in \mathbb{R}^d\) are random vectors sampled from a distribution with zero mean and identity covariance, usually \(\epsilon_k \sim \mathcal{N}(0, I_d)\).
+		\item \(\nabla_z f_\theta(z, t) \in \mathbb{R}^{d \times d}\) is the Jacobian matrix of \(f_\theta\) with respect to \(z\), representing the gradient in the ambient space \(\mathbb{R}^d\).
+	\end{itemize}
+	
+	Since \(f_\theta(z, t)\) is defined in the tangent space \(T_z\mathcal{M}\) but expressed in ambient coordinates, its Jacobian is naturally a \(d \times d\) matrix in \(\mathbb{R}^d\).
+	
+	This stochastic approximation reduces computational complexity from \(O(d^2)\) to \(O(Kd)\), where \(K\) is typically small.
+	
+	\subsubsection{Ensuring Tangency}
+	
+	To ensure that the vector field \(f_\theta(z, t)\) lies in the tangent space \(T_z \mathcal{M}\) at each point \(z\), we define it using a projection:
+	
+	\begin{equation}
+		f_\theta(z, t) = P_z \, \tilde{f}_\theta(z, t),
+	\end{equation}
+	
+	where:
+	
+	\begin{itemize}
+		\item \(\tilde{f}_\theta(z, t) \in \mathbb{R}^d\) is an unconstrained vector field in the ambient space.
+		\item \(P_z \in \mathbb{R}^{d \times d}\) is the orthogonal projection matrix onto \(T_z \mathcal{M}\).
+	\end{itemize}
+	
+	\subsubsection{Solving the Manifold ODE}
+	
+	Solving the manifold ODE requires numerical integration methods that preserve the manifold structure. One approach is to use the \textit{exponential map}:
+	
+	\begin{equation}
+		z(t + \Delta t) = \exp_{z(t)} \left( \Delta t \, f_\theta(z(t), t) \right),
+	\end{equation}
+	
+	where \(\exp_{z}\) is the exponential map at point \(z\).
+	
+	
+	\paragraph{Alternative Numerical Methods}
+	
+	- Projection-Based Solvers: Use standard ODE solvers in \(\mathbb{R}^d\) and project the solution back onto \(\mathcal{M}\) at each step.
+	
+	- Manifold-Specific Solvers: Utilize integrators designed for manifolds, which intrinsically respect the manifold constraints.
+	
+	\subsubsection{Log-Likelihood Computation}
+	
+	The total log-likelihood of a sample \(x \in \mathcal{M}\) is given by:
+	
+	\begin{equation}
+		\log p(x) = \log \pi(z(0)) - \int_0^T \operatorname{div}(f_\theta)(z(t), t) \, dt,
+	\end{equation}
+	
+	with \(z(T) = x\).
+		
+	\subsection{RCNF for Earthquake Density Estimation on the Sphere}
+	
+	\includegraphics[width=\linewidth]{rcnf_vs_baseline}
+	
+	\begin{enumerate}
+		\item \textbf{Data Preparation}
+		\begin{itemize}
+			\item Convert latitude and longitude from degrees to radians:
+			\[
+			\phi_i \leftarrow \phi_i \times \frac{\pi}{180}, \quad \lambda_i \leftarrow \lambda_i \times \frac{\pi}{180}
+			\]
+			\item Convert spherical coordinates to Cartesian coordinates on \(\mathbb{S}^2\):
+			\[
+			\begin{cases}
+				x_i = \cos(\phi_i) \cos(\lambda_i), \\
+				y_i = \cos(\phi_i) \sin(\lambda_i), \\
+				z_i = \sin(\phi_i)
+			\end{cases}
+			\]
+			\item Form data points \( z_i = [x_i, y_i, z_i]^\top \in \mathbb{R}^3 \).
+			\item Ensure each \( z_i \) lies on the unit sphere:
+			\[
+			z_i \leftarrow \frac{z_i}{\| z_i \|_2}
+			\]
+		\end{itemize}
+		
+		\item \textbf{Initialize Base Distribution}
+		\begin{itemize}
+			\item Set the base distribution to the uniform distribution on \(\mathbb{S}^2\):
+			\[
+			p_0(z(0)) = \frac{1}{4\pi}, \quad \forall z(0) \in \mathbb{S}^2
+			\]
+		\end{itemize}
+		
+		\item \textbf{Define Vector Field \( f_\theta(z, t) \)}
+		\begin{enumerate}
+			\item \textbf{Neural Network Parameterization}
+			\begin{itemize}
+				\item \textbf{Input Layer}: For each point \( z \), compute geodesic distances to a set of anchor points \( \{ a_j \} \subset \mathbb{S}^2 \):
+				\[
+				d_j(z) = \arccos(z^\top a_j)
+				\]
+				\item \textbf{Neural Network Architecture}:
+				\begin{itemize}
+					\item Inputs: \( [d_1(z), d_2(z), \dots, d_m(z), t] \)
+					\item Hidden Layers: 3 layers with 64 units each, activation function \( \tanh \)
+					\item Output Layer: Unconstrained vector \( \tilde{f}_\theta(z, t) \in \mathbb{R}^3 \)
+				\end{itemize}
+			\end{itemize}
+			\item \textbf{Ensuring Tangency}
+			\begin{itemize}
+				\item Project \( \tilde{f}_\theta(z, t) \) onto the tangent space \( T_z \mathbb{S}^2 \):
+				\[
+				f_\theta(z, t) = \left( I_3 - z z^\top \right) \tilde{f}_\theta(z, t)
+				\]
+				where \( I_3 \) is the \( 3 \times 3 \) identity matrix.
+			\end{itemize}
+		\end{enumerate}
+		
+		\item \textbf{Set Up Manifold ODE}
+		
+		\begin{enumerate}
+			\item \textbf{Define the manifold ODE governing the flow}
+			\[
+			\frac{dz(t)}{dt} = f_\theta(z(t), t), \quad z(0) \sim p_0(z(0))
+			\]
+			
+			\item \textbf{Use the Change of Variables Formula}
+			\[
+			\frac{d}{dt} \log p_t(z(t)) = -\operatorname{div}(f_\theta)(z(t), t)
+			\]
+			\item \textbf{Compute Riemannian Divergence}
+			\begin{itemize}
+				\item Since \(\mathbb{S}^2\) has constant metric determinant, simplify divergence to:
+				\[
+				\operatorname{div}(f_\theta)(z) = \nabla_z \cdot f_\theta(z, t)
+				\]
+			\end{itemize}
+			\item \textbf{Approximate Divergence using Hutchinson's Estimator}
+			\begin{itemize}
+				\item Generate \( K \) random vectors \( \epsilon_k \sim \mathcal{N}(0, I_3) \).
+				\item Approximate divergence:
+				\[
+				\operatorname{div}(f_\theta)(z) \approx \frac{1}{K} \sum_{k=1}^K \epsilon_k^\top \left( \nabla_z f_\theta(z, t) \, \epsilon_k \right)
+				\]
+			\end{itemize}
+			\item \textbf{Integrate Log-Density}
+			\[
+			\log p_T(z(T)) = \log p_0(z(0)) - \int_0^T \operatorname{div}(f_\theta)(z(t), t) \, dt
+			\]
+		\end{enumerate}
+		
+		\item \textbf{Numerical Integration}
+		\begin{enumerate}
+			\item Use an ODE solver (e.g., Runge-Kutta method) to integrate \( z(t) \) and \( \log p_t(z(t)) \) from \( t = 0 \) to \( t = T \).
+			\item After each integration step, normalize \( z(t) \) to ensure it 
+		\end{enumerate}
+		
+		\item \textbf{Compute Loss Function}
+		We minimize the \textit{negative log-likelihood (NLL)} over the observed data \(\{ z_i \}_{i=1}^N\):
+		
+		\begin{equation}
+			L(\theta) = -\frac{1}{N} \sum_{i=1}^N \log p_T(z_i),
+		\end{equation}
+		
+		\item \textbf{Compute Gradients}
+		Use the adjoint sensitivity method to compute gradients with respect to \( \theta \).
+		
+		\begin{itemize}
+			\item \textbf{Adjoint State Evolution}
+			\begin{itemize}
+				\item Initialize adjoint state at \( t = T \):
+				\[
+				a(T) = \frac{\partial L}{\partial z(T)} = 0
+				\]
+				\item Integrate backward in time:
+				\[
+				\frac{da(t)}{dt} = - \left( \nabla_{z(t)} f_\theta(z(t), t) \right)^\top a(t) - \nabla_{z(t)} \operatorname{div}(f_\theta)(z(t), t)
+				\]
+			\end{itemize}
+			\item \textbf{Gradient with Respect to Parameters}
+			\[
+			\frac{dL}{d\theta} = - \int_0^T a(t)^\top \frac{\partial f_\theta(z(t), t)}{\partial \theta} \, dt
+			\]
+		\end{itemize}
+		
+		\item \textbf{Baseline Comparison with Stereographic Projection}
+			\begin{itemize}
+				\item {Forward Projection to Plane}:
+				\[
+				\begin{cases}
+					u_i = \dfrac{x_i}{1 - z_i}, \\
+					v_i = \dfrac{y_i}{1 - z_i}
+				\end{cases}
+				\]
+				\item {Apply Euclidean CNF in \(\mathbb{R}^2\)}.
+				\item {Inverse Projection to Sphere}:
+				\[
+				\begin{cases}
+					x = \dfrac{2u}{u^2 + v^2 + 1}, \\
+					y = \dfrac{2v}{u^2 + v^2 + 1}, \\
+					z = \dfrac{u^2 + v^2 - 1}{u^2 + v^2 + 1}
+				\end{cases}
+				\]
+			\end{itemize}
+	\end{enumerate}
+	
+	\section{Conclusion}
+	
+	Riemannian continuous models extend traditional continuous frameworks, such as Neural Ordinary Differential Equations and normalizing flows, to data residing on Riemannian manifolds. By leveraging the intrinsic geometry of manifolds, these models provide a principled approach to modeling manifold-valued data
+	
+	\nocite{*}
+	\printbibliography
+	
+\end{document}
