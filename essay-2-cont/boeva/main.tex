@@ -238,6 +238,77 @@ The solution to this equation is:
 
 where \( \theta(0) \) is the initial value of the parameter. It can be seen that the parameter \( \theta \) decreases over time, corresponding to the minimization of the loss function.
 
+\subsection{Example of Continuous Backpropagation with Mutual Information}
+Consider a more complex loss function based on mutual information. Let $L(t) = -I(\mathbf{X}; \mathbf{z}(t))$ be the loss function at time $t$, where $I(\mathbf{X}; \mathbf{z}(t))$ is the mutual information between the input data $\mathbf{X}$ and the representation $\mathbf{z}(t)$. The mutual information is defined as:
+
+$$ I(\mathbf{X}; \mathbf{z}(t)) = \int p(x, \mathbf{z}(t)) \log \frac{p(x, \mathbf{z}(t))}{p(x) p(\mathbf{z}(t))} \, dx \, d\mathbf{z}(t) $$
+
+where $p(x, \mathbf{z}(t))$ is the joint probability density, and $p(x)$ and $p(\mathbf{z}(t))$ are the marginal probability densities.
+
+
+The dynamics of the parameter updates are described by the following equation:
+
+\[ \frac{d\theta(t)}{dt} = -\eta \nabla_\theta L(t) \]
+
+To compute the gradient $\nabla_\theta L(t)$, we start with the expression for the loss function:
+
+\[ L(t) = -I(X; \mathbf{z}(t)) = -\int p(x, \mathbf{z}(t)) \log \frac{p(x, \mathbf{z}(t))}{p(x) p(\mathbf{z}(t))} \, dx \, d\mathbf{z}(t) \]
+
+The gradient of the loss function with respect to the parameters $\theta$ can be expressed as:
+
+\[ \frac{dL(t)}{d\theta} = -\frac{d}{d\theta} \int p(x, \mathbf{z}(t)) \log \frac{p(x, \mathbf{z}(t))}{p(x) p(\mathbf{z}(t))} \, dx \, d\mathbf{z}(t) \]
+
+Using the chain rule, we get:
+
+\[ \frac{dL(t)}{d\theta} = -\int \frac{\partial p(x, \mathbf{z}(t))}{\partial \theta} \log \frac{p(x, \mathbf{z}(t))}{p(x) p(\mathbf{z}(t))} \, dx \, d\mathbf{z}(t) - \int p(x, \mathbf{z}(t)) \frac{\partial}{\partial \theta} \log \frac{p(x, \mathbf{z}(t))}{p(x) p(\mathbf{z}(t))} \, dx \, d\mathbf{z}(t) \]
+
+The first term can be simplified using the logarithm derivative rule:
+
+\[ \frac{dL(t)}{d\theta} = -\int \frac{\partial p(x, \mathbf{z}(t))}{\partial \theta} \log \frac{p(x, \mathbf{z}(t))}{p(x) p(\mathbf{z}(t))} \, dx \, d\mathbf{z}(t) - \int p(x, \mathbf{z}(t)) \frac{1}{p(x, \mathbf{z}(t))} \frac{\partial p(x, \mathbf{z}(t))}{\partial \theta} \, dx \, d\mathbf{z}(t) \]
+
+Simplifying the expression, we get:
+
+\[ \frac{dL(t)}{d\theta} = -\int \frac{\partial p(x, \mathbf{z}(t))}{\partial \theta} \left( \log \frac{p(x, \mathbf{z}(t))}{p(x) p(\mathbf{z}(t))} + 1 \right) \, dx \, d\mathbf{z}(t) \]
+
+This expression shows how the gradient of the loss function, based on mutual information, depends on the parameters $\theta$ and the state of the system $\mathbf{z}(t)$.
+
+\subsection{Example of Continuous Backpropagation with Euclidean Distance}
+
+Consider a more complex loss function based on the Euclidean distance. Let $L(t) = \frac{1}{2} \|\mathbf{z}(t) - \mathbf{y}\|^2$ be the loss function at time $t$, where $\mathbf{z}(t)$ is the state of the system at time $t$, and $\mathbf{y}$ is the target vector. The Euclidean distance is defined as:
+
+\[ L(t) = \frac{1}{2} \|\mathbf{z}(t) - \mathbf{y}\|^2 \]
+
+The dynamics of the parameter updates are described by the following equation:
+
+\[ \frac{d\theta(t)}{dt} = -\eta \nabla_\theta L(t) \]
+
+To compute the gradient $\nabla_\theta L(t)$, we start with the expression for the loss function:
+
+\[ L(t) = \frac{1}{2} \|\mathbf{z}(t) - \mathbf{y}\|^2 \]
+
+The gradient of the loss function with respect to the parameters $\theta$ can be expressed as:
+
+\[ \frac{dL(t)}{d\theta} = \frac{d}{d\theta} \left( \frac{1}{2} \|\mathbf{z}(t) - \mathbf{y}\|^2 \right) \]
+
+Using the chain rule, we get:
+
+\[ \frac{dL(t)}{d\theta} = (\mathbf{z}(t) - \mathbf{y})^\top \frac{\partial \mathbf{z}(t)}{\partial \theta} \]
+
+Now, to compute $\frac{\partial \mathbf{z}(t)}{\partial \theta}$, we use the adjoint equation:
+
+\[ \frac{d\mathbf{a}(t)}{dt} = -\mathbf{a}(t)^\top \frac{\partial f_\theta(\mathbf{z}(t), t)}{\partial \mathbf{z}} \]
+
+with the initial condition:
+
+\[ \mathbf{a}(T) = \mathbf{z}(T) - \mathbf{y} \]
+
+Then, the gradient of the loss function with respect to the parameters $\theta$ can be expressed as:
+
+\[ \frac{dL}{d\theta} = \int_0^T \mathbf{a}(t)^\top \frac{\partial f_\theta(\mathbf{z}(t), t)}{\partial \theta} \, dt \]
+
+
+
+
 \section{Interconnections Between Methods}
 
 The Adjoint Method and Continuous Backpropagation are closely related. Both methods use the gradients of the loss function to update the parameters, but they do so in different contexts. The Adjoint Method focuses on computing gradients through the introduction of an adjoint equation, while Continuous Backpropagation views the training process as a continuous differential equation.
