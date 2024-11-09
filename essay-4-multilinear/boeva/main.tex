@@ -6,10 +6,12 @@
 \usepackage{mathtext} 				% русские буквы в формулах
 \usepackage[T2A]{fontenc}			% кодировка
 \usepackage[utf8]{inputenc}			% кодировка исходного текста
-\usepackage[english]{babel}	% локализация и переносы
+\usepackage[english, russian]{babel}	% локализация и переносы
 \usepackage{indentfirst}
 \frenchspacing
-\usepackage{amsmath}
+\usepackage{amsmath} 
+\usepackage{amsfonts}
+\usepackage{amssymb}
 
 \newcommand{\bz}{\mathbf{z}}
 \newcommand{\bx}{\mathbf{x}}
@@ -166,165 +168,221 @@
 
 \begin{document}
 
-\title{Adjoint Method in Neural ODE and Continuous Backpropagation}
-\author{Boeva Galina, group М05-304а}
+\title{Machine learning models for Navier-Stocks}
+\author{Боева Галина, группа М05-304а}
 \date{\today}
 
 \maketitle
-
-\section{Introduction}
-
-In recent years, Neural Ordinary Differential Equations (Neural ODEs) have become a popular tool in the field of machine learning and artificial intelligence. They allow for the modeling of continuous processes and provide new opportunities for training deep neural networks. The Adjoint Method and Continuous Backpropagation play a crucial role in the optimization and training of such models. In this essay, we will explore these methods, their mathematical descriptions, and their interconnections, as well as their impact on the training process of Neural ODEs.
-
-\section{Mathematical Description and Connections}
-
-\subsection{Neural Ordinary Differential Equations (Neural ODEs)}
-
-Neural ODEs represent a model where the state of the system is described by an ordinary differential equation. Let \( \mathbf{z}(t) \) be the state of the system at time \( t \), and \( f_\theta(\mathbf{z}(t), t) \) be a function depending on parameters \( \theta \). Then, the dynamics of the system are described by the following equation:
-
-\[ \frac{d\mathbf{z}(t)}{dt} = f_\theta(\mathbf{z}(t), t) \]
-
-To solve this equation, numerical integration methods such as the Runge-Kutta method are used.
-
-\subsection{Adjoint Method}
-
-The Adjoint Method is used for the efficient computation of gradients of the loss function in Neural ODEs. The main idea of the method is to introduce an adjoint equation that describes the dynamics of the gradients. Let \( L(\mathbf{z}(T)) \) be the loss function depending on the final state of the system \( \mathbf{z}(T) \). Then, the adjoint equation is given by:
-
-\[ \frac{d\mathbf{a}(t)}{dt} = -\mathbf{a}(t)^\top \frac{\partial f_\theta(\mathbf{z}(t), t)}{\partial \mathbf{z}} \]
-
-where \( \mathbf{a}(t) \) is the adjoint state, and \( \frac{\partial f_\theta(\mathbf{z}(t), t)}{\partial \mathbf{z}} \) is the Jacobian of the function \( f_\theta \) with respect to the state \( \mathbf{z} \).
-
-The gradients of the parameters \( \theta \) can be computed as follows:
-
-\[ \frac{dL}{d\theta} = \int_0^T \mathbf{a}(t)^\top \frac{\partial f_\theta(\mathbf{z}(t), t)}{\partial \theta} dt \]
-
-\subsection{Derivation of the Adjoint Method}
-
-To derive the Adjoint Method, consider the loss function \( L(\mathbf{z}(T)) \). We want to find the gradient of this function with respect to the parameters \( \theta \). Let \( \mathbf{z}(t) \) be the solution to the equation \( \frac{d\mathbf{z}(t)}{dt} = f_\theta(\mathbf{z}(t), t) \). Then:
-
-\[ \frac{dL}{d\theta} = \frac{\partial L}{\partial \mathbf{z}(T)} \frac{\partial \mathbf{z}(T)}{\partial \theta} \]
-
-To compute \( \frac{\partial \mathbf{z}(T)}{\partial \theta} \), we use the chain rule:
-
-\[ \frac{\partial \mathbf{z}(T)}{\partial \theta} = \int_0^T \frac{\partial \mathbf{z}(t)}{\partial \theta} \frac{\partial f_\theta(\mathbf{z}(t), t)}{\partial \theta} dt \]
-
-Now, introduce the adjoint state \( \mathbf{a}(t) \) that satisfies the equation:
-
-\[ \frac{d\mathbf{a}(t)}{dt} = -\mathbf{a}(t)^\top \frac{\partial f_\theta(\mathbf{z}(t), t)}{\partial \mathbf{z}} \]
-
-with the initial condition \( \mathbf{a}(T) = \frac{\partial L}{\partial \mathbf{z}(T)} \).
-
-Then, the gradient of the loss function with respect to the parameters \( \theta \) can be expressed as:
-
-\[ \frac{dL}{d\theta} = \int_0^T \mathbf{a}(t)^\top \frac{\partial f_\theta(\mathbf{z}(t), t)}{\partial \theta} dt \]
-
-\subsection{Continuous Backpropagation}
-
-Continuous Backpropagation is an extension of the classical backpropagation algorithm for continuous systems. In the context of Neural ODEs, Continuous Backpropagation can be described as follows. Let \( L(t) \) be the loss function at time \( t \), and \( \theta(t) \) be the vector of parameters of the neural network. Then, the dynamics of the parameter updates are described by the differential equation:
-
-\[ \frac{d\theta(t)}{dt} = -\eta \nabla_\theta L(t) \]
-
-where \( \eta \) is the learning rate, and \( \nabla_\theta L(t) \) is the gradient of the loss function with respect to the parameters \( \theta \).
-
-\subsection{Example of Continuous Backpropagation on a More Complex Function}
-
-Consider a more complex loss function \( L(\theta) = \frac{1}{2} \theta^4 \). Let \( \theta(t) \) be the parameter we want to minimize. Then, the dynamics of the parameter updates are described by the following equation:
-
-\[ \frac{d\theta(t)}{dt} = -\eta \nabla_\theta L(t) = -\eta \cdot 2\theta(t)^3 \]
-
-The solution to this equation is:
-
-\[ \theta(t) = \theta(0) \left(1 + 6\eta \theta(0)^2 t\right)^{-\frac{1}{2}} \]
-
-where \( \theta(0) \) is the initial value of the parameter. It can be seen that the parameter \( \theta \) decreases over time, corresponding to the minimization of the loss function.
-
-\subsection{Example of Continuous Backpropagation with Mutual Information}
-Consider a more complex loss function based on mutual information. Let $L(t) = -I(\mathbf{X}; \mathbf{z}(t))$ be the loss function at time $t$, where $I(\mathbf{X}; \mathbf{z}(t))$ is the mutual information between the input data $\mathbf{X}$ and the representation $\mathbf{z}(t)$. The mutual information is defined as:
-
-$$ I(\mathbf{X}; \mathbf{z}(t)) = \int p(x, \mathbf{z}(t)) \log \frac{p(x, \mathbf{z}(t))}{p(x) p(\mathbf{z}(t))} \, dx \, d\mathbf{z}(t) $$
-
-where $p(x, \mathbf{z}(t))$ is the joint probability density, and $p(x)$ and $p(\mathbf{z}(t))$ are the marginal probability densities.
-
-
-The dynamics of the parameter updates are described by the following equation:
-
-\[ \frac{d\theta(t)}{dt} = -\eta \nabla_\theta L(t) \]
-
-To compute the gradient $\nabla_\theta L(t)$, we start with the expression for the loss function:
-
-\[ L(t) = -I(X; \mathbf{z}(t)) = -\int p(x, \mathbf{z}(t)) \log \frac{p(x, \mathbf{z}(t))}{p(x) p(\mathbf{z}(t))} \, dx \, d\mathbf{z}(t) \]
-
-The gradient of the loss function with respect to the parameters $\theta$ can be expressed as:
-
-\[ \frac{dL(t)}{d\theta} = -\frac{d}{d\theta} \int p(x, \mathbf{z}(t)) \log \frac{p(x, \mathbf{z}(t))}{p(x) p(\mathbf{z}(t))} \, dx \, d\mathbf{z}(t) \]
-
-Using the chain rule, we get:
-
-\[ \frac{dL(t)}{d\theta} = -\int \frac{\partial p(x, \mathbf{z}(t))}{\partial \theta} \log \frac{p(x, \mathbf{z}(t))}{p(x) p(\mathbf{z}(t))} \, dx \, d\mathbf{z}(t) - \int p(x, \mathbf{z}(t)) \frac{\partial}{\partial \theta} \log \frac{p(x, \mathbf{z}(t))}{p(x) p(\mathbf{z}(t))} \, dx \, d\mathbf{z}(t) \]
-
-The first term can be simplified using the logarithm derivative rule:
-
-\[ \frac{dL(t)}{d\theta} = -\int \frac{\partial p(x, \mathbf{z}(t))}{\partial \theta} \log \frac{p(x, \mathbf{z}(t))}{p(x) p(\mathbf{z}(t))} \, dx \, d\mathbf{z}(t) - \int p(x, \mathbf{z}(t)) \frac{1}{p(x, \mathbf{z}(t))} \frac{\partial p(x, \mathbf{z}(t))}{\partial \theta} \, dx \, d\mathbf{z}(t) \]
-
-Simplifying the expression, we get:
-
-\[ \frac{dL(t)}{d\theta} = -\int \frac{\partial p(x, \mathbf{z}(t))}{\partial \theta} \left( \log \frac{p(x, \mathbf{z}(t))}{p(x) p(\mathbf{z}(t))} + 1 \right) \, dx \, d\mathbf{z}(t) \]
-
-This expression shows how the gradient of the loss function, based on mutual information, depends on the parameters $\theta$ and the state of the system $\mathbf{z}(t)$.
-
-\subsection{Example of Continuous Backpropagation with Euclidean Distance}
-
-Consider a more complex loss function based on the Euclidean distance. Let $L(t) = \frac{1}{2} \|\mathbf{z}(t) - \mathbf{y}\|^2$ be the loss function at time $t$, where $\mathbf{z}(t)$ is the state of the system at time $t$, and $\mathbf{y}$ is the target vector. The Euclidean distance is defined as:
-
-\[ L(t) = \frac{1}{2} \|\mathbf{z}(t) - \mathbf{y}\|^2 \]
-
-The dynamics of the parameter updates are described by the following equation:
-
-\[ \frac{d\theta(t)}{dt} = -\eta \nabla_\theta L(t) \]
-
-To compute the gradient $\nabla_\theta L(t)$, we start with the expression for the loss function:
-
-\[ L(t) = \frac{1}{2} \|\mathbf{z}(t) - \mathbf{y}\|^2 \]
-
-The gradient of the loss function with respect to the parameters $\theta$ can be expressed as:
-
-\[ \frac{dL(t)}{d\theta} = \frac{d}{d\theta} \left( \frac{1}{2} \|\mathbf{z}(t) - \mathbf{y}\|^2 \right) \]
-
-Using the chain rule, we get:
-
-\[ \frac{dL(t)}{d\theta} = (\mathbf{z}(t) - \mathbf{y})^\top \frac{\partial \mathbf{z}(t)}{\partial \theta} \]
-
-Now, to compute $\frac{\partial \mathbf{z}(t)}{\partial \theta}$, we use the adjoint equation:
-
-\[ \frac{d\mathbf{a}(t)}{dt} = -\mathbf{a}(t)^\top \frac{\partial f_\theta(\mathbf{z}(t), t)}{\partial \mathbf{z}} \]
-
-with the initial condition:
-
-\[ \mathbf{a}(T) = \mathbf{z}(T) - \mathbf{y} \]
-
-Then, the gradient of the loss function with respect to the parameters $\theta$ can be expressed as:
-
-\[ \frac{dL}{d\theta} = \int_0^T \mathbf{a}(t)^\top \frac{\partial f_\theta(\mathbf{z}(t), t)}{\partial \theta} \, dt \]
-
-
-
-
-\section{Interconnections Between Methods}
-
-The Adjoint Method and Continuous Backpropagation are closely related. Both methods use the gradients of the loss function to update the parameters, but they do so in different contexts. The Adjoint Method focuses on computing gradients through the introduction of an adjoint equation, while Continuous Backpropagation views the training process as a continuous differential equation.
-
-The interconnection between these methods can be seen in the fact that both use the gradient of the loss function to update the parameters. In the Adjoint Method, the gradient is used to determine the direction of search, while in Continuous Backpropagation, the gradient is used to determine the rate of change of the parameters.
-
-\section{Question: Is Time T Real Time?}
-
-In the context of Neural ODEs and optimization methods such as the Adjoint Method and Continuous Backpropagation, time \( T \) is not necessarily real time. Instead, \( T \) represents a parameter that defines the length of the integration interval or the time horizon over which the system dynamics are considered. This parameter can be chosen arbitrarily depending on the task and may not correspond to real time.
-
-For example, in tasks such as time series prediction or physical process modeling, time \( T \) may correspond to real time. However, in other tasks such as image classification or text processing, time \( T \) may be an abstract parameter that defines the depth or complexity of the model.
-
-Thus, time \( T \) in Neural ODEs and related optimization methods is a flexible parameter that can be tuned depending on the specific task and does not necessarily correspond to real time.
-
-\section{Conclusion}
-
-The Adjoint Method and Continuous Backpropagation are two powerful tools for the optimization and training of Neural ODEs. Both methods use the gradient of the loss function to update the parameters, but they do so in different contexts: the Adjoint Method focuses on computing gradients through the introduction of an adjoint equation, while Continuous Backpropagation views the training process as a continuous differential equation. Understanding and utilizing these methods allows for significant improvements in the efficiency and accuracy of machine learning models based on Neural ODEs.
-
+\section{Введение}
+В этой статье мы заинтересованы в решении уравнений Навье-Стокса с использованием
+метода машинного обучения, называемого нейронной сетью, основанной на физике (PINN). PINN включает физические
+законы в архитектуру глубокого обучения, которая ограничивает возможные решения с помощью нейронной
+сети. Использовании закрепленного за Навье-Стокса по-прежнему находится в зачаточном состоянии, и многие
+вопросы для решения, например, наиболее подходящая форма физических законов. В данной статье исследуются
+возможности PINN для решения уравнений Навье-Стокса в двух формулировках (скорость-давление
+и тензор напряжений Коши) для решения трех контрольных задач, а именно: потока Пуазейля, потока
+Куэтта и потока в полости, управляемой крышкой.
+
+\section{Формулировки уравнений Навье-Стокса}
+
+\cite{raissi2017physics} представили общую структуру PINN для моделирования сложных физических систем. Это исследование решило несколько случаев двумерного стационарного несжимаемого потока, включив уравнения Навье-Стокса в PINN. Естественный вопрос: какую формулировку уравнений Навье-Стокса следует использовать? Чтобы ответить на этот вопрос, мы сравнили производительность PINN с формами VP и ST уравнений Навье-Стокса.
+
+\subsection{Форма скорость-давление (VP)}
+
+Форма VP двумерных стационарных несжимаемых уравнений Навье-Стокса имеет вид:
+\begin{equation}
+\rho (u \cdot \nabla) u = -\nabla p + \mu \nabla^2 u \quad \text{в } \Omega
+\end{equation}
+\[
+\nabla \cdot u = 0 \quad \text{в } \Omega
+\]
+\[
+u = u_\Gamma \quad \text{на } \Gamma_D
+\]
+\[
+\partial_n u = 0 \quad \text{на } \Gamma_N
+\]
+где $\nabla$ — оператор набла, $u = (u, v)$ — вектор скорости, $p$ — давление, $\mu$ — вязкость жидкости, $\rho$ — плотность жидкости. Граничные условия необходимы для решения уравнений, где $\Gamma_D$ и $\Gamma_N$ обозначают границы Дирихле и Неймана соответственно. В форме VP решения уравнений Навье-Стокса аппроксимируются глубокой нейронной сетью (DNN), которая принимает пространственные координаты в качестве входов для прогнозирования полей давления и скорости, т.е. $(x, y) \rightarrow (p, u, v)$.
+
+\subsection{Форма тензора напряжений Коши (ST)}
+
+Форма ST двумерных стационарных несжимаемых уравнений Навье-Стокса имеет вид:
+\begin{equation}
+\rho (u \cdot \nabla) u = -\nabla \cdot \sigma \quad \text{в } \Omega
+\end{equation}
+\[
+\sigma = -pI + \mu (\nabla u + \nabla u^T) \quad \text{в } \Omega
+\]
+\[
+\nabla \cdot u = 0 \quad \text{в } \Omega
+\]
+\[
+u = u_\Gamma \quad \text{на } \Gamma_D
+\]
+\[
+\partial_n u = 0 \quad \text{на } \Gamma_N
+\]
+где $\sigma$ — тензор напряжений Коши. Форма ST уменьшает порядок производных по сравнению с формой VP и увеличивает обучаемость DNN. Решения уравнений Навье-Стокса аппроксимируются DNN, которая принимает пространственные координаты в качестве входов и прогнозирует поля давления и тензор напряжений Коши, $(x, y) \rightarrow (p, \sigma)$, которые затем дифференцируются для получения скорости.
+
+\section{Формулировки PINN}
+
+По сути, PINN — это DNN с включенными в формулировку физическими законами. Первые слои в PINN — это стандартная прямая сеть, с входами и выходами, определяемыми пользователем в соответствии с управляющими уравнениями. Обратите внимание, что входы и выходы также зависят от формы управляющих уравнений. Физические законы, которые должны быть удовлетворены, входят в формулировку PINN на последнем слое. Веса PINN обучаются для минимизации функции потерь, которая включает потери данных, уравнений и граничных условий. В этой статье мы используем PINN для решения уравнений Навье-Стокса. Потери данных затем исключаются из уравнения, так как меченные данные недоступны. Наконец, потери уравнений и граничных условий объединяются в так называемые физические потери.
+
+Функция физических потерь, $J_p$, для получения решений как для уравнения (1), так и для уравнения (2), определяется следующим образом:
+\begin{equation}
+J_p = J_g + \alpha J_{BC}
+\end{equation}
+\begin{equation}
+J_g = \frac{1}{N_g} \sum_{i=1}^{N_g} r_g(x_i)^2
+\end{equation}
+\begin{equation}
+J_{BC} = \frac{1}{N_{BC}} \sum_{i=1}^{N_{BC}} (u_i - u_i^{BC})^2
+\end{equation}
+где $J_g$ и $J_{BC}$ — потери управляющих уравнений и граничных условий соответственно. Мы оцениваем остатки управляющих уравнений на множестве точек, называемых точками коллимации. С другой стороны, потери граничных условий оцениваются на множестве граничных точек. Число точек коллимации и граничных точек обозначаются как $N_g$ и $N_{BC}$ соответственно. Затем $r$ — остаток предсказанного значения относительно управляющих уравнений. Наконец, $u$ и $u^{BC}$ — значения из DNN и заданных граничных условий в граничных точках соответственно. Кроме того, у нас также есть вес потерь, $\alpha > 0$, для контроля компромисса между $J_{BC}$ и $J_g$. 
+
+\begin{figure*}
+    \centering
+    \includegraphics[width=0.85\linewidth]{image1.png}
+    \caption{Caption}
+    \label{fig:enter-label}
+\end{figure*}
+Схематическое изображение PINN для решения уравнений (1) и (2) показано на рисунках 1 и 2 соответственно. Решения уравнений Навье-Стокса определяются на основе рисунков 1 и 2 путем принятия пространственных координат в качестве входов и затем прогнозирования соответствующих полей скорости и давления, т.е. $(x, y) \rightarrow (u, v, p)$. Исходные выходы DNN — это $\psi$, $p$ или $\sigma$. Для решения управляющих уравнений мы выполняли автоматическое дифференцирование (AD), используя 'tf.gradients()' из TensorFlow, чтобы найти $u$, $v$ и другие производные термины.
+
+Для обеих формулировок нелинейная функция активации — это гиперболический тангенс (tanh), который часто показывает лучшие результаты, чем логистическая сигмоида в многих приложениях~\cite{goodfellow2016deep}. Также хорошей практикой является использование инициализации весов Xavier Normal или Xavier Uniform и масштабирование входных данных до диапазона от -1 до 1 перед обучением~\cite{rodriguez2022choose}, когда используется функция активации tanh.
+
+Производные соответствующих переменных в управляющих уравнениях вычисляются с использованием автоматического дифференцирования (AD)~\cite{baydin2018automatic}. Затем мы минимизировали функцию потерь, используя стохастический градиентный метод оптимизации ADAM~\cite{kingma2014adam} и метод оптимизации L-BFGS-B~\cite{byrd1995limited}. Основное преимущество использования ADAM — это адаптивная скорость обучения для ускорения сходимости~\cite{kingma2014adam} . Мы используем метод ADAM для получения лучшего набора весов нейронной сети для первых итераций, продолженный L-BFGS-B для получения более высокой точности~\cite{liu1989limited}.
+
+Для автоматического контроля $\alpha$ в уравнении (3) мы также экспериментировали с динамической и адаптивной стратегией весов во время обучения сети, как предложил Wang и др. [12]. Формально, параметры нейронных сетей обучаются следующим образом:
+\begin{equation}
+\theta^{(k+1)} = \theta^{(k)} - \eta \nabla_\theta J_g - \alpha \nabla_\theta J_{BC},
+\end{equation}
+где $\theta$ представляет параметры PINN, а именно веса всех полносвязных слоев, $k$ обозначает шаг итерации, а $\eta$ — скорость обучения. Оценки $\alpha$ могут быть вычислены для каждого шага обучения, например, на $(k+1)$, следующим образом:
+\begin{equation}
+\hat{\alpha}^{(k+1)} = \frac{\max_\theta \{|\nabla_\theta J_g|\}}{|\nabla_\theta \alpha^{(k)} J_{BC}|},
+\end{equation}
+где $\max_\theta \{|\nabla_\theta J_g|\}$ — максимальное значение, вычисленное из $|\nabla_\theta J_g|$, а $|\nabla_\theta \alpha^{(k)} J_{BC}|$ обозначает средние значения $|\nabla_\theta \alpha^{(k)} J_{BC}|$.
+
+Соответственно, коэффициенты взвешивания для следующей итерации обновляются с использованием формы скользящего среднего:
+\begin{equation}
+\alpha^{(k+1)} = (1 - \lambda) \alpha^{(k)} + \lambda \hat{\alpha}^{(k+1)}
+\end{equation}
+Коэффициент $\lambda$ в уравнении (8) — это гиперпараметр, определяющий, как быстро снижаются вклады предыдущих адаптивных весов. Меньшее значение $\lambda$ означает, что предыдущие значения вносят больший вклад в текущие динамические веса, что обеспечит стабильность регулировки во время обучения. В этой статье выбрано $\lambda = 0.1$.
+
+\section{Математическая модель из статьи 2014 года}
+В этой статье разработан новый метод, основанный на нейронной
+сети, для получения решения уравнений
+Навье–Стокса в форме аналитической функции.
+Процедура решения основана на формировании пробного
+решения, состоящего из двух частей. Первая часть непосредственно
+удовлетворяет граничным условиям и, следовательно, не содержит
+настраиваемых параметров. Вторая часть построена таким
+образом, что основное уравнение выполняется внутри области решения
+, в то время как граничные условия остаются неизменными.
+Эта часть включает в себя нейронную сеть с прямой связью, содержащую настраиваемые параметры (веса), которые должны быть
+определены таким образом, чтобы результирующая приблизительная
+функция ошибки была сведена к минимуму. 
+Двумерные уравнения Навье-Стокса, включая уравнения непрерывности и импульса, рассматриваются для несжимаемого ламинарного потока в безразмерной форме:
+\[
+\frac{1}{\text{Re}} \frac{\partial^2 u}{\partial x^2} = u \frac{\partial u}{\partial x} + v \frac{\partial u}{\partial y} + f_1 \quad \text{в } X
+\]
+\[
+\frac{1}{\text{Re}} \frac{\partial^2 v}{\partial y^2} = u \frac{\partial v}{\partial x} + v \frac{\partial v}{\partial y} + f_2 \quad \text{в } X
+\]
+\[
+\frac{\partial u}{\partial x} + \frac{\partial v}{\partial y} = 0 \quad \text{в } X
+\]
+где $X \subset \mathbb{R}^2$ — прямоугольная область, $u(x, y)$ и $v(x, y)$ — продольная и нормальная компоненты поля скорости соответственно, $f_1$ и $f_2$ — компоненты заданной внешней силы (например, гравитации).
+
+Для двумерного потока можно ввести функцию потока $w(x, y)$:
+\begin{equation}
+u = \frac{\partial w(x, y)}{\partial y}, \quad v = -\frac{\partial w(x, y)}{\partial x}
+\end{equation}
+которая непосредственно удовлетворяет уравнению непрерывности. Исключение давления из уравнений импульса с использованием функции потока приводит к уравнению транспорта вихря:
+\begin{equation}
+\frac{1}{\text{Re}} \left( \frac{\partial^2 w}{\partial y^2} \frac{\partial w}{\partial x} - \frac{\partial^2 w}{\partial x^2} \frac{\partial w}{\partial y} \right) = \frac{\partial f_1}{\partial y} - \frac{\partial f_2}{\partial x}
+\end{equation}
+Уравнение (10) имеет единственное решение, если на $\partial X$ заданы два граничных условия.
+
+Рассматриваются следующие два граничных условия на $\partial X$ для $w(x, y)$:
+\begin{equation}
+w(x, y) = g(x, y)
+\end{equation}
+\begin{equation}
+\frac{\partial w(x, y)}{\partial n} = h(x, y)
+\end{equation}
+где $n$ — единичный вектор, нормальный к $\partial X$, $g(x, y)$ и $h(x, y)$ — известные функции.
+
+В следующем разделе представлен метод нейронной сети для решения уравнения (10) с граничными условиями (11).
+
+\section{Описание метода из статьи 2014}
+В этом разделе мы используем многослойную сеть для получения приближенного решения задачи Навье-Стокса. Многослойная сеть строится путем организации всех нейронов, выполняющих одну и ту же функцию, в слои. Эти сети далее классифицируются в зависимости от их механизмов обработки входных и выходных данных. Прямая сеть — это сеть, в которой обработка прогрессивна, однонаправленная. То есть выход нейронов в данном слое служит входом только для нейронов в следующем слое. Этот тип сети состоит из входного слоя, выходного слоя и одного или нескольких скрытых слоев, без взаимосвязей между нейронами в одном и том же слое.
+
+Прямая нейронная сеть популярна в области аппроксимации функций. В аппроксимации функций принято использовать линейную функцию передачи во входном и выходном слоях. Скрытые слои, с другой стороны, требуют нелинейной функции передачи для изменения представления входов. Выход двухслойной сети, $N(\tilde{r}, \tilde{p})$, для заданного входного вектора, $\tilde{r} = (r_1, r_2, \ldots, r_n)$, описывается взвешенной суммой:
+\begin{equation}
+N(\tilde{r}, \tilde{u}, \tilde{v}, w) = \sum_{i=1}^{m} v_i f(z_i)
+\end{equation}
+где $f$ — функция передачи скрытого слоя, а $z_i = \sum_{j=1}^{n} w_{ij} r_j + u_i$ — преобразование переменной. Выход трехслойной сети задается следующим образом:
+\begin{equation}
+N(\tilde{r}, \tilde{u}, \tilde{v}, \tilde{w}) = \sum_{i=1}^{m_1} v_i f_2 \left( \sum_{j=1}^{m_2} w_{ij}^{(2)} f_1(z_j) + u_i \right)
+\end{equation}
+с $z_j = \sum_{k=1}^{n} w_{jk}^{(1)} r_k + u_j$, и $\tilde{w}$ — матрица. Для каждого дополнительного скрытого слоя соответствующий выход сети получается заменой $z$ на $f(z)$ в уравнении (13).
+
+Выход сети в форме (13) называется параметрической формой. Непараметрическая форма выхода:
+\begin{equation}
+N(\tilde{r}, \tilde{v}) = \sum_{i=1}^{n} v_i f(r_i)
+\end{equation}
+Обозначим $X = X \setminus \partial X$. Предполагается, что $f_1, f_2 \in C(X)$ и решение $w(x, y)$ принадлежит $C^k(X)$, пространству непрерывных функций с непрерывными частными производными до $k$-го порядка. Множество допустимых функций
+\begin{equation}
+S = \{ w \in C^k(X), X \subset \mathbb{R}^2, w = g \text{ на } \partial X \}
+\end{equation}
+образует линейное пространство. Кроме того, предполагается, что рассматриваемая область $X$ ограничена, а ее граница $\partial X$ достаточно гладкая (Липшицева).
+
+Согласно выходу трехслойной сети, мы строим множество функций $S$, определяя следующую пробную функцию $w(t)$:
+\begin{equation}
+w(t)(\tilde{r}, W) = A(\tilde{r}) + F(\tilde{r}, N(\tilde{r}, W))
+\end{equation}
+где $N(\tilde{r}, W)$ — однослойная прямая нейронная сеть с параметрами $W$ и двумя входными единицами, получающими входной вектор $\tilde{r}$. Первая часть пробного решения, $A(\tilde{r})$, не содержит регулируемых параметров и предназначена только для удовлетворения граничных условий, тогда как вторая часть, $F$, строится без вклада в граничные условия.
+
+Систематический метод для построения функциональных форм как $A$, так и $F$ для $D = [0, L] \times [0, h]$ описан следующим образом:
+
+Пусть $w(0, y) = f_0(y)$, $w(L, y) = f_1(y)$, $w(x, 0) = g_0(x)$ и $w(x, h) = g_1(x)$. Пробное решение записывается как:
+\[
+w(t)(x, y, W) = A(x, y) + (x - L)(y - h) N(x, y, W)
+\]
+где $A(x, y)$ выбирается так, чтобы удовлетворять граничным условиям (BC’s), а именно:
+\begin{equation}
+\begin{split}
+A(x, y) = & \left(1 - \frac{x}{L}\right) f_0(y) + \frac{x}{L} f_1(y) \\
+& + \left(1 - \frac{y}{h}\right) g_0(x) - \left(1 - \frac{x}{L}\right) g_0(0) - \frac{x}{L} g_0(L) \\
+& + \frac{y}{h} g_1(x) - \left(1 - \frac{x}{L}\right) g_1(0) - \frac{x}{L} g_1(L)
+\end{split}
+\end{equation}
+
+Для получения решения уравнения (10) с граничными условиями (11) и (12) применяется метод коллимации, который предполагает дискретизацию области $X$ и ее границы $\partial X$ в множество точек $\hat{X}$ и $\partial \hat{X}$.
+
+Если $w(t)(\tilde{r}, W)$ обозначает пробное решение с регулируемыми параметрами $W$, задача преобразуется в:
+
+Рассмотрим многослойную сеть с двумя входными единицами, одним скрытым слоем с $M$ единицами передачи функции и линейным выходным слоем. Для заданного входного вектора $\tilde{r} = (x, y)$ выход сети $N(x, y, W) = \sum_{i=1}^{M} m_i r(z_i)$, где $z_i = w_i^{(x)} x + w_i^{(y)} y + b_i$, $w_i^{(x)}$ и $w_i^{(y)}$ обозначают веса от входных единиц $x$ и $y$ к скрытой единице $i$, $m_i$ — вес от скрытой единицы $i$ к выходу, $b_i$ — смещение скрытой единицы $i$, а $r(z)$ — функция передачи. Наиболее часто используемые функции для этой цели — это ступенчатая функция, кусочно-линейная функция, гиперболический тангенс и сигмоидная функция. Однако в этой работе мы выбираем функцию передачи в зависимости от данных задачи.
+ 
+
+\section{Выводы}
+
+В данной работе была рассмотрена проблема моделирования двумерных стационарных несжимаемых потоков с использованием физически информированных нейронных сетей (PINN). Были проанализированы две формулировки уравнений Навье-Стокса: форма скорость-давление (VP) и форма тензора напряжений Коши (ST). Обе формулировки были реализованы с помощью PINN, и их производительность была сравнена.
+
+Основные результаты работы включают:
+
+1. \textbf{Формулировка VP:} Эта формулировка включает уравнения для скорости и давления и требует решения системы дифференциальных уравнений. Она аппроксимируется глубокой нейронной сетью (DNN), которая принимает пространственные координаты в качестве входов и прогнозирует поля давления и скорости.
+
+2. \textbf{Формулировка ST:} Эта формулировка уменьшает порядок производных по сравнению с формой VP и увеличивает обучаемость DNN. Она включает тензор напряжений Коши и также аппроксимируется DNN, которая прогнозирует поля давления и тензор напряжений Коши.
+
+3. \textbf{Метод нейронной сети:} Был представлен метод многослойной нейронной сети для решения уравнений Навье-Стокса. Этот метод включает использование прямой нейронной сети с линейной функцией передачи во входном и выходном слоях и нелинейной функцией передачи в скрытых слоях.
+
+4. \textbf{Математическая модель:} Была рассмотрена математическая модель двумерных уравнений Навье-Стокса, включая уравнения непрерывности и импульса. Для решения этих уравнений была введена функция потока, что упростило задачу и позволило использовать метод коллимации для дискретизации области и ее границы.
+
+В заключение, использование PINN для моделирования двумерных стационарных несжимаемых потоков показало свою эффективность и гибкость. Обе формулировки уравнений Навье-Стокса (VP и ST) могут быть успешно реализованы с помощью PINN, что открывает перспективы для их применения в более сложных задачах гидродинамики.
+Основано на работах~\cite{baymani2015artificial}~\cite{amalinadhi2022physics}.
+
+
+\bibliographystyle{unsrt}
+\bibliography{references}
 \end{document}
