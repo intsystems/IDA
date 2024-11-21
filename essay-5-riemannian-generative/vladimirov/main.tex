@@ -1,0 +1,485 @@
+\documentclass[a4paper,14pt]{article}
+
+%%% Работа с русским языком
+\usepackage{cmap}					% поиск в PDF
+\usepackage{mathtext} 				% русские буквы в формулах
+\usepackage[T2A]{fontenc}			% кодировка
+\usepackage[utf8]{inputenc}			% кодировка исходного текста
+\usepackage[english,russian]{babel}	% локализация и переносы
+\usepackage{indentfirst}
+\usepackage{algorithm,algpseudocode}
+\usepackage{stmaryrd}
+
+\frenchspacing
+
+\newcommand{\bz}{\mathbf{z}}
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\by}{\mathbf{y}}
+\newcommand{\bv}{\mathbf{v}}
+\newcommand{\bw}{\mathbf{w}}
+\newcommand{\ba}{\mathbf{a}}
+\newcommand{\bb}{\mathbf{b}}
+\newcommand{\bp}{\mathbf{p}}
+\newcommand{\bq}{\mathbf{q}}
+\newcommand{\bt}{\mathbf{t}}
+\newcommand{\bu}{\mathbf{u}}
+\newcommand{\bT}{\mathbf{T}}
+\newcommand{\bX}{\mathbf{X}}
+\newcommand{\bZ}{\mathbf{Z}}
+\newcommand{\bS}{\mathbf{S}}
+\newcommand{\bH}{\mathbf{H}}
+\newcommand{\bW}{\mathbf{W}}
+\newcommand{\bY}{\mathbf{Y}}
+\newcommand{\bU}{\mathbf{U}}
+\newcommand{\bQ}{\mathbf{Q}}
+\newcommand{\bP}{\mathbf{P}}
+\newcommand{\bA}{\mathbf{A}}
+\newcommand{\bB}{\mathbf{B}}
+\newcommand{\bC}{\mathbf{C}}
+\newcommand{\bE}{\mathbf{E}}
+\newcommand{\bF}{\mathbf{F}}
+\newcommand{\bomega}{\boldsymbol{\omega}}
+\newcommand{\btheta}{\boldsymbol{\theta}}
+\newcommand{\bgamma}{\boldsymbol{\gamma}}
+\newcommand{\bdelta}{\boldsymbol{\delta}}
+\newcommand{\bPsi}{\boldsymbol{\Psi}}
+\newcommand{\bpsi}{\boldsymbol{\psi}}
+\newcommand{\bxi}{\boldsymbol{\xi}}
+\newcommand{\bchi}{\boldsymbol{\chi}}
+\newcommand{\bzeta}{\boldsymbol{\zeta}}
+\newcommand{\blambda}{\boldsymbol{\lambda}}
+\newcommand{\beps}{\boldsymbol{\varepsilon}}
+\newcommand{\bZeta}{\boldsymbol{Z}}
+% mathcal
+\newcommand{\cX}{\mathcal{X}}
+\newcommand{\cY}{\mathcal{Y}}
+\newcommand{\cW}{\mathcal{W}}
+
+\newcommand{\dH}{\mathbb{H}}
+\newcommand{\dR}{\mathbb{R}}
+% transpose
+\newcommand{\T}{^{\mathsf{T}}}
+
+\renewcommand{\epsilon}{\ensuremath{\varepsilon}}
+\renewcommand{\phi}{\ensuremath{\varphi}}
+\renewcommand{\kappa}{\ensuremath{\varkappa}}
+\renewcommand{\le}{\ensuremath{\leqslant}}
+\renewcommand{\leq}{\ensuremath{\leqslant}}
+\renewcommand{\ge}{\ensuremath{\geqslant}}
+\renewcommand{\geq}{\ensuremath{\geqslant}}
+\renewcommand{\emptyset}{\varnothing}
+
+%%% Дополнительная работа с математикой
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools} % AMS
+\usepackage{icomma} % "Умная" запятая: $0,2$ --- число, $0, 2$ --- перечисление
+
+%% Номера формул
+%\mathtoolsset{showonlyrefs=true} % Показывать номера только у тех формул, на которые есть \eqref{} в тексте.
+%\usepackage{leqno} % Нумереация формул слева
+
+%% Свои команды
+\DeclareMathOperator{\sgn}{\mathop{sgn}}
+
+%% Перенос знаков в формулах (по Львовскому)
+\newcommand*{\hm}[1]{#1\nobreak\discretionary{}
+	{\hbox{$\mathsurround=0pt #1$}}{}}
+
+%%% Работа с картинками
+\usepackage{graphicx}  % Для вставки рисунков
+\setlength\fboxsep{3pt} % Отступ рамки \fbox{} от рисунка
+\setlength\fboxrule{1pt} % Толщина линий рамки \fbox{}
+\usepackage{wrapfig} % Обтекание рисунков текстом
+
+%%% Работа с таблицами
+\usepackage{array,tabularx,tabulary,booktabs} % Дополнительная работа с таблицами
+\usepackage{longtable}  % Длинные таблицы
+\usepackage{multirow} % Слияние строк в таблице
+
+%%% Теоремы
+\theoremstyle{plain} % Это стиль по умолчанию, его можно не переопределять.
+\newtheorem{theorem}{Теорема}[section]
+\newtheorem{proposition}[theorem]{Утверждение}
+
+\theoremstyle{definition} % "Определение"
+\newtheorem{corollary}{Следствие}[theorem]
+\newtheorem{problem}{Задача}[section]
+
+\theoremstyle{remark} % "Примечание"
+\newtheorem*{nonum}{Решение}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\theoremstyle{remark}
+\newtheorem*{properties}{Properties}
+
+\theoremstyle{remark}
+\newtheorem{example}{Example}[section]
+
+%%% Программирование
+\usepackage{etoolbox} % логические операторы
+
+%%% Страница
+\usepackage{extsizes} % Возможность сделать 14-й шрифт
+\usepackage{geometry} % Простой способ задавать поля
+\geometry{top=15mm}
+\geometry{bottom=25mm}
+\geometry{left=25mm}
+\geometry{right=10mm}
+
+\usepackage{setspace} % Интерлиньяж
+
+\usepackage{lastpage} % Узнать, сколько всего страниц в документе.
+
+\usepackage{soul} % Модификаторы начертания
+
+\usepackage{hyperref}
+\usepackage[usenames,dvipsnames,svgnames,table,rgb]{xcolor}
+\hypersetup{				% Гиперссылки
+	unicode=true,           % русские буквы в раздела PDF
+	pdftitle={Заголовок},   % Заголовок
+	pdfauthor={Автор},      % Автор
+	pdfsubject={Тема},      % Тема
+	pdfcreator={Создатель}, % Создатель
+	pdfproducer={Производитель}, % Производитель
+	pdfkeywords={keyword1} {key2} {key3}, % Ключевые слова
+	colorlinks=true,       	% false: ссылки в рамках; true: цветные ссылки
+	linkcolor=red,          % внутренние ссылки
+	citecolor=black,        % на библиографию
+	filecolor=magenta,      % на файлы
+	urlcolor=cyan           % на URL
+}
+
+\usepackage{csquotes} % Еще инструменты для ссылок
+\usepackage{tikz} % Работа с графикой
+
+\usepackage[style=authoryear,maxcitenames=2,backend=biber,sorting=nty]{biblatex}
+\addbibresource{references.bib}
+
+\usepackage{multicol} % Несколько колонок
+
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+
+
+\author{Vladimirov Eduard, group М05-304а}
+\title{\textbf{Scoring-based Riemannian models}}
+\date{\today}
+
+\begin{document}
+	\maketitle
+	
+	\section{Introduction}
+
+	Score-based generative models (SGMs) represent a powerful class of probabilistic frameworks that enable high-quality data generation by combining stochastic diffusion processes and score estimation. These models operate by progressively perturbing data into a noise-dominated state through a forward diffusion process and subsequently denoising it by reversing this process. While traditionally defined in Euclidean spaces, SGMs struggle to handle data supported on Riemannian manifolds, where intrinsic geometrical constraints play a critical role.
+	
+	Riemannian manifolds naturally arise in many scientific domains, such as robotics, geoscience, protein modeling, and high-energy physics. These data distributions often lie on curved spaces with non-Euclidean geometry, making traditional SGMs suboptimal. To address these challenges, \textit{Scoring-Based Riemannian Models (RSGMs)} extend the principles of SGMs to Riemannian manifolds, incorporating the underlying geometry into both the forward and reverse processes. This geometric adaptation allows the model to capture the manifold-supported distributions effectively.
+	
+	\subsection{How do we extract and use the distribution?}
+	
+	The key innovation in RSGMs lies in the \textit{score estimation} on Riemannian manifolds. The score function, defined as the gradient of the log-density of the data distribution, is approximated through denoising score matching tailored to the manifold's structure. Additionally, the \textit{geodesic random walks} and the use of the manifold's exponential map allow efficient sampling and reverse-time diffusion processes. These steps ensure that the learned distribution remains faithful to the manifold's geometry, enabling robust modeling and synthesis.
+	
+	This essay explores the theoretical foundation of scoring-based Riemannian models, their methodological extensions to Riemannian settings, and their empirical performance on real-world and synthetic datasets. By leveraging tools from differential geometry, these models offer a scalable and accurate approach for generative modeling on curved data spaces.
+
+	\section{Euclidean Score-Based Generative Modelling}
+	
+	Score-based generative models (SGMs) provide a robust framework for probabilistic modeling and data generation. They leverage the concept of stochastic diffusion processes to transform data into noise and then reverse this transformation to generate new samples. In Euclidean spaces, SGMs rely on forward and reverse diffusion processes defined using stochastic differential equations (SDEs) and neural approximations of score functions. This section elaborates on the details of Euclidean SGMs.
+	
+	\subsection{Forward Diffusion Process}
+	
+	The forward process gradually adds noise to the data, transforming its distribution into a simple and tractable reference distribution. Mathematically, the forward process \( (X_t)_{t \geq 0} \) is defined by the Ornstein–Uhlenbeck (OU) process:
+	\[
+	dX_t = -\frac{1}{2} X_t \, dt + \sqrt{2} \, dB_t, \quad X_0 \sim p_0,
+	\]
+	where:
+	\begin{itemize}
+		\item \( X_t \) is the noisy version of the data at time \( t \),
+		\item \( B_t \) is a standard Brownian motion in \( \mathbb{R}^d \),
+		\item \( p_0 \) is the data distribution.
+	\end{itemize}
+	
+	\subsubsection{Key Properties of the Forward Process}
+	\begin{enumerate}
+		\item \textbf{Convergence to Gaussian:} As \( t \to \infty \), the process \( X_t \) converges geometrically to a standard Gaussian distribution, \( \mathcal{N}(0, I_d) \), where \( I_d \) is the \( d \)-dimensional identity matrix. \\
+		\textit{Note}: The term \textit{geometric convergence} refers to the property of a stochastic process where the distance between its distribution and a limiting distribution decreases exponentially over time.
+		
+		\[
+		\| p_t - N(0, I_d) \| \leq Ce^{-\lambda t},
+		\]
+		
+		\item \textbf{Transition Density:} The transition density of the OU process is explicitly given by:
+		\[
+		p_t(x | x_0) = \mathcal{N}\left(x; e^{-t/2} x_0, (1 - e^{-t}) I_d\right).
+		\]
+	\end{enumerate}
+	
+	\subsection{Reverse Diffusion Process}
+	
+	The reverse diffusion process seeks to undo the noise added in the forward process to generate new samples from the data distribution \( p_0 \). The time-reversed SDE is given by:
+	\[
+	dY_t = \left\{ Y_t + 2 \nabla \log p_{T-t}(Y_t) \right\} \, dt + \sqrt{2} \, dB_t,
+	\]
+	where:
+	\begin{itemize}
+		\item \( Y_t \) is the denoised version of the data at time \( t \),
+		\item \( \nabla \log p_t(x) \) is the \textit{score function}, or the gradient of the log-density of the forward process at time \( t \),
+		\item \( p_{T-t} \) is the time-reversed marginal density of the forward process.
+	\end{itemize}
+	
+	By construction, the law of \( Y_{T-t} \) is equal to the law of \( X_t \) for \( t \in [0, T] \) and, in particular, \( Y_T \sim p_0 \). Hence, if one could sample from \( (Y_t)_{t \in [0, T]} \), then its final distribution would be the data distribution \( p_0 \). Unfortunately, we cannot sample exactly from \((2)\) as \( p_T \) and the scores \( (\nabla \log p_t(x))_{t \in [0, T]} \) are intractable. 
+	
+	\subsection{Score Estimation Using Denoising Score Matching}
+	
+	The score function is approximated using \textit{denoising score matching}, which minimizes the difference between the true score and a neural network-based approximation \( s_\theta(t, x) \). The denoising score matching loss is defined as:
+	\[
+	\mathcal{L}_t(\theta) = \mathbb{E}_{p_0, p_t} \left[ \| s_\theta(t, x) - \nabla \log p_t(x) \|^2 \right].
+	\]
+	
+	Using properties of the OU process, this loss can be reformulated as:
+	\[
+	\mathcal{L}_t(\theta) = \mathbb{E}_{p_0, p_t} \left[ \| s_\theta(t, x) - \nabla \log p_{t|0}(x | x_0) \|^2 \right],
+	\]
+	where \( p_{t|0}(x | x_0) \) is the transition density of the OU process.
+	
+	The total loss used to train the score network is:
+	\[
+	\mathcal{L}(\theta) = \int_0^T \lambda_t \mathcal{L}_t(\theta) \, dt,
+	\]
+	where \( \lambda_t > 0 \) is a weighting function.
+	
+	\subsection{Sampling Using the Reverse SDE}
+	
+	To generate new samples, the reverse SDE is solved numerically using the Euler-Maruyama scheme:
+	\[
+	Y_{n+1} = Y_n + \gamma \left\{ Y_n + 2 s_\theta(T - n\gamma, Y_n) \right\} + \sqrt{2 \gamma} Z_{n+1},
+	\]
+	where:
+	\begin{itemize}
+		\item \( \gamma \) is the discretization step size,
+		\item \( Z_{n+1} \sim \mathcal{N}(0, I_d) \) is standard Gaussian noise.
+	\end{itemize}
+	
+	The algorithm begins with a sample \( Y_0 \sim \mathcal{N}(0, I_d) \) and iteratively updates \( Y_n \). The final state \( Y_N \) approximates a sample from the data distribution \( p_0 \).
+	
+	\section{Preliminaries in Differential Geometry}
+	
+	This section introduces the fundamental concepts from differential geometry essential for extending score-based generative models to Riemannian manifolds.
+	
+	\begin{definition}[Vector Field]
+		A \textit{vector field} on a manifold \( \mathcal{M} \) is a smooth assignment of a tangent vector to each point on the manifold. Formally, a vector field \( V \) is a smooth map:
+		\[
+		V: \mathcal{M} \to T\mathcal{M},
+		\]
+		where \( T\mathcal{M} \) is the tangent bundle of \( \mathcal{M} \), such that for every point \( p \in \mathcal{M} \), \( V(p) \in T_p\mathcal{M} \), the tangent space at \( p \). In local coordinates \( (x^1, \dots, x^n) \), the vector field can be expressed as:
+		\[
+		V = \sum_{i=1}^n V^i(x) \frac{\partial}{\partial x^i},
+		\]
+		where \( V^i(x) \) are smooth functions, and \( \frac{\partial}{\partial x^i} \) are the coordinate basis vectors.
+	\end{definition}
+	
+	\begin{definition}[Riemannian Gradient]
+		The \textit{Riemannian gradient} \( \nabla f \) of a smooth function \( f : \mathcal{M} \to \mathbb{R} \) on a Riemannian manifold \( \mathcal{M} \) is defined such that for any point \( x \in \mathcal{M} \) and any tangent vector \( v \in T_x\mathcal{M} \):
+		\[
+		\langle \nabla f, v \rangle_g = df(v),
+		\]
+		where:
+		\begin{itemize}
+			\item \( \langle \cdot, \cdot \rangle_g \) is the inner product induced by the Riemannian metric \( g \),
+			\item \( df(v) \) is the directional derivative of \( f \) along \( v \), defined as:
+			\[
+			df(v) = v(f) = \frac{d}{dt} f(\gamma(t)) \bigg|_{t=0},
+			\]
+			with \( \gamma(t) \) being a smooth curve such that \( \gamma(0) = x \) and \( \dot{\gamma}(0) = v \).
+		\end{itemize}
+	\end{definition}
+	
+	\begin{definition}[Exponential Map]
+		The \textit{exponential map} at a point \( p \in \mathcal{M} \), denoted \( \exp_p: T_p\mathcal{M} \to \mathcal{M} \), maps a tangent vector \( v \in T_p\mathcal{M} \) to the point on the manifold reached by traveling along the geodesic starting at \( p \) in the direction of \( v \) for a distance \( \|v\|_g \). Formally:
+		\[
+		\exp_p(v) = \gamma_v(1),
+		\]
+		where \( \gamma_v(t) \) is the geodesic with initial conditions \( \gamma_v(0) = p \) and \( \dot{\gamma}_v(0) = v \).
+	\end{definition}
+	
+	\begin{definition}[Logarithmic Map]
+		The \textit{logarithmic map} is the inverse of the exponential map. For \( x \in \mathcal{M} \), the logarithmic map at \( p \in \mathcal{M} \), denoted \( \log_p: \mathcal{M} \to T_p\mathcal{M} \), maps \( x \) to the tangent vector \( v \in T_p\mathcal{M} \) such that:
+		\[
+		\exp_p(v) = x.
+		\]
+		The logarithmic map satisfies:
+		\[
+		v = \log_p(x) \implies v = d_\mathcal{M}(p, x) \cdot \frac{\dot{\gamma}_v(0)}{\|\dot{\gamma}_v(0)\|_g},
+		\]
+		where \( d_\mathcal{M}(p, x) \) is the geodesic distance.
+	\end{definition}
+	
+	\begin{definition}[Geodesic Distance]
+		The \textit{geodesic distance} \( d_\mathcal{M}(x, y) \) between two points \( x, y \in \mathcal{M} \) is the length of the shortest geodesic connecting \( x \) and \( y \). Formally:
+		\[
+		d_\mathcal{M}(x, y) = \inf_{\gamma \in \mathcal{C}(x, y)} \int_0^1 \sqrt{g(\dot{\gamma}(t), \dot{\gamma}(t))} \, dt,
+		\]
+		where \( \mathcal{C}(x, y) \) is the set of all smooth curves \( \gamma: [0, 1] \to \mathcal{M} \) with \( \gamma(0) = x \) and \( \gamma(1) = y \).
+	\end{definition}
+	
+	\section{Riemannian Score-Based Generative Modelling}
+	
+	\subsection{Noising Processes on Manifolds}
+	
+	In Riemannian score-based generative modelling, the forward diffusion process, also called the \textit{noising process}, is generalized to Riemannian manifolds. This process adds noise to data in such a way that the intrinsic geometry of the manifold is preserved. The goal of the noising process is to perturb data distributions supported on a Riemannian manifold \( \mathcal{M} \) into a simple, tractable reference distribution, such as a Riemannian normal distribution. Below, we describe the details of noising processes on manifolds.
+	
+	\subsubsection{Forward Process Definition}
+	
+	The forward process \( (X_t)_{t \geq 0} \) on the manifold \( \mathcal{M} \) is governed by a stochastic differential equation (SDE):
+	\[
+	dX_t = f(X_t) \, dt + g(X_t) \, dB_t^\mathcal{M},
+	\]
+	where:
+	\begin{itemize}
+		\item \( X_t \in \mathcal{M} \) is the random process evolving on the manifold,
+		\item \( B_t^\mathcal{M} \) is the Brownian motion intrinsic to the manifold \( \mathcal{M} \),
+		\item \( f(X_t) \) is the drift term, chosen to control the mean behavior of the process,
+		\item \( g(X_t) \) is the diffusion coefficient, ensuring appropriate noise injection.
+	\end{itemize}
+	
+	The forward process ensures that as \( t \to \infty \), the distribution of \( X_t \) converges to a stationary distribution, typically a Riemannian normal distribution centered at the origin of the manifold.
+	
+	\subsubsection{Geometric Properties of the Forward Process}
+	
+	The design of the noising process on \( \mathcal{M} \) respects the manifold's curvature and metric structure:
+	\begin{enumerate}
+		\item \textbf{Riemannian Metric:} The noising process accounts for the Riemannian metric \( g \), which defines distances and angles on \( \mathcal{M} \).
+		\item \textbf{Geodesics and Exponential Map:} The random perturbations are projected onto the manifold using the exponential map \( \exp_x: T_x\mathcal{M} \to \mathcal{M} \). This ensures that noise is added tangentially to the manifold at each point.
+		\item \textbf{Brownian Motion:} The diffusion term \( g(X_t) \, dB_t^\mathcal{M} \) represents intrinsic Brownian motion on the manifold, preserving its geometry.
+	\end{enumerate}
+	
+	\subsubsection{Transition Density}
+	
+	The transition density \( p_{t|0}(x | x_0) \) of the forward process characterizes the probability of reaching \( x \in \mathcal{M} \) at time \( t \), given an initial point \( x_0 \in \mathcal{M} \). For many manifolds, this density can be expressed as:
+	\[
+	p_{t|0}(x | x_0) \propto \exp\left(-\frac{d_\mathcal{M}(x, x_0)^2}{2\gamma_t^2}\right),
+	\]
+	where:
+	\begin{itemize}
+		\item \( d_\mathcal{M}(x, x_0) \) is the geodesic distance between \( x \) and \( x_0 \),
+		\item \( \gamma_t \) is a time-dependent scale parameter.
+	\end{itemize}
+	
+	This density ensures that the noising process respects the manifold's curvature by basing its behavior on geodesic distances.
+	
+	\subsubsection{Stationary Distribution}
+	
+	The forward process is designed such that, as \( t \to \infty \), the random variable \( X_t \) converges to a stationary distribution on \( \mathcal{M} \), often a Riemannian normal distribution:
+	\[
+	p_\infty(x) \propto \exp\left(-\frac{d_\mathcal{M}(x, \mu)^2}{2\gamma^2}\right),
+	\]
+	where \( \mu \) is the mean location on \( \mathcal{M} \).
+	
+	\subsection{Time-Reversal on Riemannian Manifolds}
+	
+	The forward diffusion process is defined by the following SDE on the manifold \( \mathcal{M} \):
+	\[
+	dX_t = f(X_t) \, dt +  dB_t^\mathcal{M},
+	\]
+	
+	
+	The authors rigorously demonstrated that the reverse process \( (Y_t)_{t \in [0, T]} \) is also a diffusion process, governed by the following reverse-time SDE:
+	\[
+	dY_t = \big[-f(Y_t) + \nabla \log p_{T-t}(Y_t) \big] \, dt +  d\bar{B}_t^\mathcal{M},
+	\]
+	
+	This result is significant because it generalizes the time-reversal relationship from Euclidean spaces to Riemannian manifolds while ensuring that the intrinsic geometry is preserved.
+	
+	\subsection{Approximate Sampling of Diffusions}
+	
+	Obtaining samples from SDEs on a manifold is non-trivial in general. If \( \mathcal{M} \) is isometrically embedded into \( \mathbb{R}^p \) (with \( p \geq d \)), one can define \( (B_t^\mathcal{M})_{t \geq 0} \) as a \( \mathbb{R}^p \)-valued process (see Appendix C.3). However, this approach is \textit{extrinsic}, as it requires the knowledge of the projection operator to place points back on the manifold at each step, which can accumulate errors.
+	
+	Here, we consider an \textit{intrinsic} approach based on Geodesic Random Walks (GRWs). GRWs can approximate \textit{any} well-behaved diffusion on \( \mathcal{M} \).
+	
+	Hence, we introduce GRWs in a general framework and consider a discrete-time process \( (X_n)_{n \in \mathbb{N}} \), which approximates the diffusion \( (X_t)_{t \geq 0} \) defined by:
+	\[
+	dX_t = b(t, X_t) \, dt + \sigma(t, X_t) \, dB_t^\mathcal{M}.
+	\]
+	
+	This generalization is key to sampling the backward diffusion process.
+	
+		\begin{algorithm}[H]
+		\caption{GRW (Geodesic Random Walk)}
+		\label{alg:GRW}
+		\begin{algorithmic}[1]
+			\Require \( T, N, X_0, b, \sigma, P \)
+			\State \( \gamma = T / N \) \Comment{Step size}
+			\For{ \( k = 0, \dots, N-1 \) }
+			\State \( Z_{k+1} \sim \mathcal{N}(0, I_d) \) \Comment{Sample a Gaussian in the tangent space of \( X_k \)}
+			\State \( W_{k+1} = \gamma b(k \gamma, X_k) + \sqrt{\gamma} \sigma(k \gamma, X_k) Z_{k+1} \) \Comment{Compute Euler-Maruyama step}
+			\State \( X_{k+1} = \exp_{X_k}(W_{k+1}) \) \Comment{Move along the geodesic}
+			\EndFor
+			\State \Return \( \{ X_k \}_{k=0}^N \)
+		\end{algorithmic}
+	\end{algorithm}
+
+	Algorithm~\ref{alg:GRW} approximately simulates the diffusion \( (X_t)_{t \in [0, T]} \) using GRWs.
+	
+	\subsection{Score Approximation on Riemannian Manifolds}
+	The authors provides a framework for \textit{score approximation} \( \nabla \log p_t \) on Riemannian manifolds, which is essential for Riemannian Score-Based Generative Models (RSGMs). The key elements include the following:
+	
+	\begin{enumerate}
+		\item \textbf{Denoising Score Matching (DSM):}  
+		The score \( \nabla \log p_t \) is intractable, so it is approximated using a parametric family of vector fields \( s_\theta(t, x) \). The DSM loss function is defined as:
+		\[
+		\ell_{t|s}(s_t) = \int_\mathcal{M} \| \nabla_{x_t} \log p_{t|s}(x_t | x_s) - s_t(x_t) \|^2 d\mathbb{P}_{s|t}(x_s, x_t),
+		\]
+		which penalizes the deviation between the true score \( \nabla_{x_t} \log p_{t|s} \) and its approximation \( s_t \).
+		
+		\item \textbf{Implicit Score Matching Loss:}  
+		An alternative loss function \( \ell_t^{\text{im}}(s_t) \) is derived to avoid the need for explicit transition densities:
+		\[
+		\ell_t^{\text{im}}(s_t) = \int_\mathcal{M} \bigg( \frac{1}{2} \| s_t(x_t) \|^2 + \text{div}(s_t)(x_t) \bigg) dp_t(x_t).
+		\]
+		This formulation simplifies computation while remaining effective.
+		
+		\item \textbf{Parametrization of Scores on Manifolds:}  
+		Since tangent spaces \( T_x \mathcal{M} \) are locally isomorphic to \( \mathbb{R}^d \), the score function is parameterized as:
+		\[
+		s_\theta(t, x) = \sum_{i=1}^n s_\theta^i(t, x) E_i(x),
+		\]
+		where \( \{ E_i(x) \}_{i=1}^n \) are vector fields spanning the tangent bundle of \( \mathcal{M} \), and \( n > d \). The parameters \( \theta \) are learned using a neural network.
+		
+		\item \textbf{Algorithm 2: RSGM Training and Sampling:}  
+		The entire procedure for Riemannian Score-Based Generative Modeling is summarized in Algorithm 2 below.
+		
+		\begin{algorithm}[H]
+			\caption{RSGM (Riemannian Score-Based Generative Model)}
+			\label{alg:RSGM}
+			\begin{algorithmic}[1]
+				\Require \( \epsilon, T, N, \{ X_0^m \}_{m=1}^M, \text{loss}, \theta, \text{bwd}, P \)
+				\State /// \textbf{TRAINING} ///
+				\For{\( n = 0, \dots, N_{\text{iter}} - 1 \)}
+				\State \( X_0 \sim (1 / M) \sum_{m=1}^M \delta_{X_0^m} \) \Comment{Random mini-batch from dataset}
+				\State \( t \sim \mathcal{U}([\epsilon, T]) \) \Comment{Uniform sampling between \( \epsilon \) and \( T \)}
+				\State \( X_t = \text{GRW}(T, N, X_0, b, \sigma, \text{Id}, P) \) \Comment{Approximate forward diffusion with Algorithm 1}
+				\State \( \ell(\theta_n) = \ell(t, N, X_0, X_t, \text{loss}, s_\theta) \) \Comment{Compute score matching loss}
+				\State \( \theta_{n+1} = \text{optimizer\_update}(\theta_n, \ell(\theta_n)) \) \Comment{ADAM optimizer step}
+				\EndFor
+				\State \( \theta^* = \theta_{N_{\text{epoch}}} \)
+				\State /// \textbf{SAMPLING} ///
+				\State \( Y_0 \sim p_{\text{ref}} \) \Comment{Sample from uniform distribution}
+				\State \( b^*(t, x) = -b(T - t, x) + s_\theta^*(T - t, x) \, \text{for any } t \in [0, T], x \in \mathcal{M} \) \Comment{Reverse process drift}
+				\State \( \{ Y_k^N \}_{k=0}^N = \text{GRW}(T, N, Y_0, b^*, \sigma, P) \) \Comment{Approximate reverse diffusion with Algorithm 1}
+				\State \Return \( \theta^*, \{ Y_k^N \}_{k=0}^N \)
+			\end{algorithmic}
+		\end{algorithm}
+	\end{enumerate}
+	
+	By combining these components, the authors define a robust framework for score-based generative modeling on Riemannian manifolds. The use of DSM losses, parametric score functions, and geodesic random walks ensures accurate sampling and training in non-Euclidean spaces.
+	
+	
+	\section{TODO}
+	\begin{enumerate}
+		\item Brownian motion in manifolds
+		\item 
+	\end{enumerate}
+	
+	\nocite{*}
+	\printbibliography
+	
+\end{document}
