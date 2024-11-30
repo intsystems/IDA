@@ -69,6 +69,7 @@
 \renewcommand{\geq}{\ensuremath{\geqslant}}
 \renewcommand{\emptyset}{\varnothing}
 
+
 %%% Дополнительная работа с математикой
 \usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools} % AMS
 \usepackage{icomma} % "Умная" запятая: $0,2$ --- число, $0, 2$ --- перечисление
@@ -323,6 +324,28 @@
 	
 	\section{Riemannian Score-Based Generative Modelling}
 	
+	\begin{table}[htbp]
+		\centering
+		\scriptsize % Reduced font size for the table
+		\caption{Differences between SGM on Euclidean spaces and RSGM on Riemannian manifolds.}
+		\begin{tabular}{@{}lllc@{}}
+			\toprule
+			\textbf{Ingredient \textbackslash Space} & \textbf{Euclidean} & \textbf{‘Generic’ Manifold} & \textbf{Compact Manifold} \\ 
+			\midrule
+			Forward process $dX_t =$                & $-\frac{1}{2}X_t \,dt + dB_t^\mathcal{M}$ 
+			& $-\frac{1}{2}\nabla_X U(X_t)\,dt + dB_t^\mathcal{M}$ 
+			& $dB_t^\mathcal{M}$ \\ 
+			Easy-to-sample distribution             & Gaussian           & Wrapped Gaussian            & Uniform \\ 
+			Time reversal                           & Cattiaux et al. (2021) 
+			& Theorem 3.1        & Theorem 3.1 \\ 
+			Sampling forward process                & Direct             & Geodesic Random Walk (Algorithm 1) 
+			& Geodesic Random Walk (Algorithm 1) \\ 
+			Sampling backward process               & Euler–Maruyama     & Geodesic Random Walk (Algorithm 1) 
+			& Geodesic Random Walk (Algorithm 1) \\ 
+			\bottomrule
+		\end{tabular}
+	\end{table}
+	
 	\subsection{Noising Processes on Manifolds}
 	
 	In Riemannian score-based generative modelling, the forward diffusion process, also called the \textit{noising process}, is generalized to Riemannian manifolds. This process adds noise to data in such a way that the intrinsic geometry of the manifold is preserved. The goal of the noising process is to perturb data distributions supported on a Riemannian manifold \( \mathcal{M} \) into a simple, tractable reference distribution, such as a Riemannian normal distribution. Below, we describe the details of noising processes on manifolds.
@@ -402,7 +425,7 @@
 	
 	This generalization is key to sampling the backward diffusion process.
 	
-		\begin{algorithm}[H]
+	\begin{algorithm}[H]
 		\caption{GRW (Geodesic Random Walk)}
 		\label{alg:GRW}
 		\begin{algorithmic}[1]
@@ -469,14 +492,84 @@
 			\end{algorithmic}
 		\end{algorithm}
 	\end{enumerate}
+
+	\begin{table}[htbp]
+		\centering
+		\scriptsize % Reduce font size for the table
+		\caption{Computational complexity of score matching losses w.r.t. score network forward and backward passes. $\varepsilon$ is a random variable on $T_{X_t}\mathcal{M}$ such that $\mathbb{E}[\varepsilon] = 0$ and $\mathbb{E}[\varepsilon\varepsilon^\top] = \text{Id}$.}
+		\begin{tabular}{@{}llp{6cm}cc@{}}
+			\toprule
+			\textbf{Loss} & \textbf{Approximation} & \textbf{Loss function} & \textbf{Requirements} & \textbf{Complexity} \\ 
+			& & & $p_{t|0}$ \ \ $\exp_{X_t}^{-1}$ & \\ 
+			\midrule
+			\multirow{3}{*}{$\ell_{t|0}$ (DSM)} 
+			& None 
+			& $\frac{1}{2} \mathbb{E} \left[\|s(X_t) - \nabla \log p_{t|0}(X_t|X_0)\|^2\right]$ 
+			& $\checkmark$ \quad $\times$ 
+			& $\mathcal{O}(1)$ \\ 
+			\cmidrule(lr){2-5}
+			& Truncation (7) 
+			& $\frac{1}{2} \mathbb{E} \left[\|s(X_t) - S_{J,t}(X_0, X_t)\|^2\right]$ 
+			& asymptotic expansion 
+			& $\mathcal{O}(1)$ \\ 
+			\cmidrule(lr){2-5}
+			& Varhadan (8) 
+			& $\frac{1}{2} \mathbb{E} \left[\|s(X_t) - \exp_{X_t}^{-1}(X_0)/t\|^2\right]$ 
+			& $\times$ \quad $\checkmark$ 
+			& $\mathcal{O}(1)$ \\ 
+			\midrule
+			$\ell_{t|s}$ (DSM) & Varhadan (8) 
+			& $\frac{1}{2} \mathbb{E} \left[\|s(X_t) - \exp_{X_t}^{-1}(X_s)/(t-s)\|^2\right]$ 
+			& $\times$ \quad $\checkmark$ 
+			& $\mathcal{O}(1)$ \\ 
+			\midrule
+			\multirow{2}{*}{$\ell_t^{\text{im}}$ (ISM)} 
+			& Deterministic 
+			& $\mathbb{E} \left[\frac{1}{2} \|s(X_t)\|^2 + \text{div}(s)(X_t)\right]$ 
+			& $\times$ \quad $\times$ 
+			& $\mathcal{O}(d)$ \\ 
+			\cmidrule(lr){2-5}
+			& Stochastic 
+			& $\mathbb{E} \left[\frac{1}{2} \|s(X_t)\|^2 + \varepsilon^\top \partial s(X_t) \varepsilon \right]$ 
+			& $\times$ \quad $\times$ 
+			& $\mathcal{O}(1)$ \\ 
+			\bottomrule
+		\end{tabular}
+	\end{table}
+	
 	
 	By combining these components, the authors define a robust framework for score-based generative modeling on Riemannian manifolds. The use of DSM losses, parametric score functions, and geodesic random walks ensures accurate sampling and training in non-Euclidean spaces.
 	
+	\section{Details}
 	
-	\section{TODO}
+	\subsection{Log-Likelihood Estimation}
+	
+	The NLL of a data point \( x \) under the model \( p_\theta(x) \) can be computed using the change-of-variables formula:
+	\[
+	\log p_{\text{data}}(x) = \log p_T(x_T) - \int_0^T \text{div}(s_\theta(t, y)) \, dt,
+	\]
+	where:
+	\begin{itemize}
+		\item \( p_T(x_T) \) is the density of the reference distribution (e.., Gaussian \( \mathcal{N}(0, I) \)),
+		\item The divergence term \( \text{div}(s_\theta(t, y)) \) accounts for the probability flow along the trajectory.
+	\end{itemize}
+	
+	The log-density \( \log p_T(x_T) \) is straightforward to compute for standard reference distributions.
+	
+	
+	The steps to estimate the NLL are as follows:
 	\begin{enumerate}
-		\item Brownian motion in manifolds
-		\item 
+		\item \textbf{Initialize Noisy Samples:} Start with \( x_T \sim p_T \), where \( p_T \) is the reference distribution (e.g., Gaussian).
+		\item \textbf{Backward Integration:} Use a numerical solver (e.g., Runge-Kutta) to integrate the Probability Flow ODE backward from \( T \) to 0:
+		\[
+		\frac{dy}{dt} = -f(y) + s_\theta(T - t, y),
+		\]
+		where the score function \( \nabla \log p_{T-t}(y) \) is used at each step.
+		\item \textbf{Compute Log-Likelihood:} For each reconstructed sample:
+		\[
+		\log p_{\text{data}}(x) = \log p_T(x_T) - \int_0^T \text{div}(s_\theta(t, y)) \, dt,
+		\]
+		where the integral can be approximated numerically (e.g., using the trapezoidal rule).
 	\end{enumerate}
 	
 	\nocite{*}
