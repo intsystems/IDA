@@ -6,6 +6,8 @@
 
 [Telegram chat](https://t.me/+XyXmEXRlrXB9dZKD)
 
+[YouTube playlist](https://www.youtube.com/watch?v=XKG6MDhji0A&list=PLk4h7dmY2eYHFaDEOoxO21B--GBpgiFGg)
+
 ## Topics to discuss
 1. State Space Models, Convolution, SSA, SSM (Spectral Submanifolds)
 2. Neural and Controlled ODE, Neural PDE, Geometric Learning
