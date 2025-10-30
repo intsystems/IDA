@@ -1,6 +1,6 @@
 presentation and code for FPCA talk
 
-[Collab notebook](https://colab.research.google.com/github/intsystems/IDA/tree/main-2025/student_talks/FPCA_Latypov/FPCA.ipynb)
+[Collab notebook](https://colab.research.google.com/github/intsystems/IDA/blob/main-2025/student_talks/FPCA_Latypov/FPCA.ipynb)
 
 Several sources:
 
