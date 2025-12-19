@@ -16,3 +16,12 @@
 5. Riemmannian models; time series generation
 6. AI for science: mathematical modelling principles
 
+## Student talks
+| Student        | Title                                                                  | Links                                                                                                                                                                                                                                                                           |
+| :------------- | :--------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Dorin Daniil | Применение римановой геометрии для классификации пространственно-временных рядов | [Slides](https://github.com/intsystems/IDA/blob/main-2025/student_talks/riemann_geometry_dorin/riemannian_geometry.pdf), [Code](https://github.com/intsystems/IDA/blob/main-2025/student_talks/riemann_geometry_dorin/pyriemann.ipynb) |
+
+## Student talks: physics informed learning
+| Student        | Title                                                                  | Links                                                                                                                                                                                                                                                                           |
+| :------------- | :--------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Dorin Daniil | Решение двумерных задач Римана в газовой динамике | [Slides](https://github.com/intsystems/IDA/blob/main-2025/student_talks_physics/dorin_Euler_Multi_quadrants_Riemann_problems/Euler_Multi_quadrants_Riemann_problems.pdf) |
